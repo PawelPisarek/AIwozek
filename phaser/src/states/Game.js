@@ -11,55 +11,67 @@ export default class extends Phaser.State {
     this.game.physics.startSystem(Phaser.Physics.ARCADE);
 
 
-    this.aliens = this.game.add.group();
-    this.aliens.enableBody = true;
+    //this.packages = this.game.add.group();
+    //this.packages.enableBody = true;
 
-    for (var i = 0; i < 50; i++)
-    {
-      var s = this.aliens.create(this.game.world.randomX, this.game.world.randomY, 'baddie');
-      s.name = 'alien' + s;
-      s.body.collideWorldBounds = true;
-      s.body.bounce.setTo(0.8, 0.8);
-      s.body.velocity.setTo(10 + Math.random() * 40, 10 + Math.random() * 40);
-    }
+    this.package = this.game.add.sprite(this.game.world.randomX, this.game.world.randomY, 'package');
+    this.package.name = 'package';
+    this.package.size = {};
+    this.package.size['width'] = 10;
+    this.package.size['height'] = 20;
+    this.package.size['length'] = 30;
 
-    this.car = this.game.add.sprite(400, 300, 'car');
-    this.car.name = 'car';
-    this.car.anchor.set(0.5);
+    this.game.physics.enable(this.package, Phaser.Physics.ARCADE);
+    this.package.body.collideWorldBounds = true;
+    this.package.body.bounce.setTo(0.8, 0.8);
 
-    this.game.physics.enable(this.car, Phaser.Physics.ARCADE);
+    this.forklift = this.game.add.sprite(400, 300, 'forkliftEmpty');
+    this.forklift.name = 'forklift';
+    this.forklift.anchor.set(0.5);
 
-    this.car.body.collideWorldBounds = true;
-    this.car.body.bounce.set(0.8);
-    this.car.body.allowRotation = true;
-    this.car.body.immovable = true;
+    this.game.physics.enable(this.forklift, Phaser.Physics.ARCADE);
 
+    this.forklift.body.collideWorldBounds = true;
+    this.forklift.body.bounce.set(0.8);
+    this.forklift.body.allowRotation = true;
+    this.forklift.body.immovable = true;
     this.cursors = this.game.input.keyboard.createCursorKeys();
 
     this.spaceKey = this.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
-    this.spaceKey.onDown.add(this.togglePause, this);
+    this.spaceKey.onDown.add(this.dropPackage, this);
 
   }
 
   update(){
-    this.game.physics.arcade.collide(this.car, this.aliens);
+    if(this.game.physics.arcade.collide(this.forklift, this.package))
+    {
+      this.forklift.loadTexture('forkliftFull', 0);
+      this.forklift.carrying={};
+      this.forklift.carrying['width']=this.package.size['width'];
+      this.forklift.carrying['length']=this.package.size['length'];
+      this.forklift.carrying['height']=this.package.size['height'];
+      this.forklift.full = true;
+      this.package.alpha = 0;
 
-    this.car.body.velocity.x = 0;
-    this.car.body.velocity.y = 0;
-    this.car.body.angularVelocity = 0;
+    }
+
+
+    this.forklift.body.velocity.x = 0;
+    this.forklift.body.velocity.y = 0;
+    this.forklift.body.angularVelocity = 0;
 
     if (this.cursors.left.isDown)
     {
-      this.car.body.angularVelocity = -200;
+      this.forklift.body.angularVelocity = -200;
     }
     else if (this.cursors.right.isDown)
     {
-      this.car.body.angularVelocity = 200;
+      this.forklift.body.angularVelocity = 200;
     }
 
     if (this.cursors.up.isDown)
     {
-      this.car.body.velocity.copyFrom(this.game.physics.arcade.velocityFromAngle(this.car.angle, 300));
+      this.forklift.body.velocity.copyFrom(this.game.physics.arcade.velocityFromAngle(this.forklift.angle, 300));
     }
   }
   togglePause() {
@@ -67,9 +79,32 @@ export default class extends Phaser.State {
     this.game.physics.arcade.isPaused = (this.game.physics.arcade.isPaused) ? false : true;
 
   }
+
+  dropPackage()
+  {
+    if(this.forklift.full === true)
+    {
+      this.package = this.game.add.sprite(this.forklift.position.x+20, this.forklift.position.y, 'package');
+      this.package.name = 'package';
+      this.package.size = {};
+      this.package.size['width'] = this.forklift.carrying['width'];
+      this.package.size['height'] = this.forklift.carrying['height'];
+      this.package.size['length'] = this.forklift.carrying['length'];
+
+      this.game.physics.enable(this.package, Phaser.Physics.ARCADE);
+      this.package.body.collideWorldBounds = true;
+      this.package.body.bounce.setTo(0.8, 0.8);
+      this.forklift.loadTexture('forkliftEmpty', 0);
+      this.forklift.full = false;
+      this.forklift.carrying = null;
+    }
+
+  }
+
   render () {
     if (__DEV__) {
-      this.game.debug.spriteInfo(this.car, 32, 32)
+      this.game.debug.spriteInfo(this.forklift, 32, 32)
+      this.game.debug.text('na spacje zrzut paczki', 180, 180)
     }
   }
 
