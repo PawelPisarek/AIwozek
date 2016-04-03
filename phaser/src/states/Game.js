@@ -33,35 +33,34 @@ export default class extends Phaser.State {
     {
       var packager = this.packages.create(this.game.world.randomX, this.game.world.randomY, 'package');
       packager.body.setRectangle(32, 32);
-      packager.propertiesy={};
-      packager.propertiesy['width']=20;
-      packager.propertiesy['length']=20;
-      packager.propertiesy['height']=60;
-      packager.propertiesy['category']='AGD';
+      packager.propertiesy = {
+        width: 20,
+        length: 20,
+        height: 60,
+        category: 'AGD'
+      };
 
       packager.body.setCollisionGroup(this.collidesPPS.packageCollisionGroup);
 
       packager.body.collides([this.collidesPPS.packageCollisionGroup, this.collidesPPS.playerCollisionGroup, this.collidesPPS.shelfCollisionGroup]);
     }
-    this.shelf1 = new Shelf({
+    let shelf1 = new Shelf({
       game: this.game,
       x: 200,
       y: 200,
       asset: 'shelf',
       collides: this.collidesPPS
     });
-    this.game.add.existing(this.shelf1);
 
-    this.shelf2 = new Shelf({
+    let shelf2 = new Shelf({
       game: this.game,
       x: 600,
       y: 200,
       asset: 'shelf',
       collides: this.collidesPPS
     });
-    this.game.add.existing(this.shelf2);
 
-    this.shelf3 = new Shelf({
+    let shelf3 = new Shelf({
       game: this.game,
       x: 200,
       y: 500,
@@ -69,9 +68,7 @@ export default class extends Phaser.State {
       collides: this.collidesPPS
     });
 
-    this.game.add.existing(this.shelf3);
-
-    this.shelf4 = new Shelf({
+    let shelf4 = new Shelf({
       game: this.game,
       x: 600,
       y: 500,
@@ -79,7 +76,7 @@ export default class extends Phaser.State {
       collides: this.collidesPPS
     });
 
-    this.game.add.existing(this.shelf4);
+    [shelf1, shelf2, shelf3, shelf4].forEach((shelf)=>this.game.add.existing(shelf));
 
 
     this.player = new Player({
