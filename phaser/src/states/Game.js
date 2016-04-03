@@ -1,6 +1,7 @@
 import Phaser from 'phaser'
 import Shelf from '../sprites/Shelf';
 import PlayerPackageShelfCollisionGroup from '../CollisionGroup/PlayerPackageShelfCollisionGroup'
+import Player from '../sprites/Player'
 import {setResponsiveWidth} from '../utils'
 
 export default class extends Phaser.State {
@@ -22,8 +23,8 @@ export default class extends Phaser.State {
     });
 
     this.game.physics.p2.updateBoundsCollisionGroup();
+    
     this.packages = this.game.add.group();
-
     this.packages.enableBody = true;
     this.packages.physicsBodyType = Phaser.Physics.P2JS;
 
@@ -79,18 +80,17 @@ export default class extends Phaser.State {
     });
 
     this.game.add.existing(this.shelf4);
-    
-    this.forklift = this.game.add.sprite(400, 300, 'forkliftEmpty');
-    this.forklift.name = 'forklift';
-    this.forklift.full = false;
 
-    this.game.physics.p2.enable(this.forklift, false);
 
-    this.forklift.body.setRectangle(32, 32);
-    this.forklift.body.fixedRotation = true;
-    this.forklift.body.setCollisionGroup(this.collidesPPS.playerCollisionGroup);
-    this.forklift.body.collides(this.collidesPPS.packageCollisionGroup, this.hitPackage, this);
-    this.forklift.body.collides(this.collidesPPS.shelfCollisionGroup);
+    this.player = new Player({
+      game: this.game,
+      x: 400,
+      y: 300,
+      asset: 'forkliftEmpty',
+      collides: this.collidesPPS
+    });
+
+    this.game.add.existing(this.player);
     this.cursors = this.game.input.keyboard.createCursorKeys();
 
     this.spaceKey = this.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
@@ -99,28 +99,6 @@ export default class extends Phaser.State {
 
   }
 
-  update(){
-
-    this.forklift.body.setZeroVelocity();
-
-    if (this.cursors.left.isDown)
-    {
-      this.forklift.body.moveLeft(200);
-    }
-    else if (this.cursors.right.isDown)
-    {
-      this.forklift.body.moveRight(200);
-    }
-
-    if (this.cursors.up.isDown)
-    {
-      this.forklift.body.moveUp(200);
-    }
-    else if (this.cursors.down.isDown)
-    {
-      this.forklift.body.moveDown(200);
-    }
-  }
   togglePause() {
 
     this.game.physics.arcade.isPaused = (this.game.physics.arcade.isPaused) ? false : true;
@@ -129,39 +107,25 @@ export default class extends Phaser.State {
 
   dropPackage()
   {
-    if(this.forklift.full === true)
+    if(this.player.full === true)
     {
-      var newPackager = this.packages.create(this.forklift.position.x+60, this.forklift.position.y, 'package');
+      let newPackager = this.packages.create(this.player.position.x+60, this.player.position.y, 'package');
       newPackager.body.setRectangle(32, 32);
-      newPackager.propertiesy = this.forklift.carrying;
+      newPackager.propertiesy = this.player.carrying;
       console.log('zrzucono paczke: width: '+newPackager.propertiesy['width']+' length: '+newPackager.propertiesy['length']+' height: '+newPackager.propertiesy['height']+' category: '+newPackager.propertiesy['category']);
       newPackager.body.setCollisionGroup(this.collidesPPS.packageCollisionGroup);
       newPackager.body.collides([this.collidesPPS.packageCollisionGroup, this.collidesPPS.playerCollisionGroup, this.collidesPPS.shelfCollisionGroup]);
-      this.forklift.loadTexture('forkliftEmpty', 0);
-      this.forklift.full = false;
-      this.forklift.carrying = null;
+      this.player.loadTexture('forkliftEmpty', 0);
+      this.player.full = false;
+      this.player.carrying = null;
     }
 
-  }
-
-  hitPackage(body1, body2)
-  {
-    if(this.forklift.full === false)
-    {
-      this.forklift.full=true;
-      this.forklift.loadTexture('forkliftFull', 0);
-      this.forklift.carrying=body2.sprite.propertiesy;
-      console.log('zabrano paczke: width: '+body2.sprite.propertiesy['width']+' length: '+body2.sprite.propertiesy['length']+' height: '+body2.sprite.propertiesy['height']+' category: '+body2.sprite.propertiesy['category']);
-      body2.sprite.alpha = 0;
-      body2.destroy();
-    }
   }
 
   render () {
     if (__DEV__) {
-      this.game.debug.spriteInfo(this.forklift, 32, 32);
+      this.game.debug.spriteInfo(this.player, 32, 32);
       this.game.debug.text('na spacje zrzut paczki', 180, 180)
     }
   }
-
 }

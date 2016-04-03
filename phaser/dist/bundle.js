@@ -8781,6 +8781,10 @@
 
 	var _PlayerPackageShelfCollisionGroup2 = _interopRequireDefault(_PlayerPackageShelfCollisionGroup);
 
+	var _Player = __webpack_require__(/*! ../sprites/Player */ 295);
+
+	var _Player2 = _interopRequireDefault(_Player);
+
 	var _utils = __webpack_require__(/*! ../utils */ 291);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -8822,8 +8826,8 @@
 	      });
 
 	      this.game.physics.p2.updateBoundsCollisionGroup();
-	      this.packages = this.game.add.group();
 
+	      this.packages = this.game.add.group();
 	      this.packages.enableBody = true;
 	      this.packages.physicsBodyType = _phaser2.default.Physics.P2JS;
 
@@ -8878,39 +8882,19 @@
 
 	      this.game.add.existing(this.shelf4);
 
-	      this.forklift = this.game.add.sprite(400, 300, 'forkliftEmpty');
-	      this.forklift.name = 'forklift';
-	      this.forklift.full = false;
+	      this.player = new _Player2.default({
+	        game: this.game,
+	        x: 400,
+	        y: 300,
+	        asset: 'forkliftEmpty',
+	        collides: this.collidesPPS
+	      });
 
-	      this.game.physics.p2.enable(this.forklift, false);
-
-	      this.forklift.body.setRectangle(32, 32);
-	      this.forklift.body.fixedRotation = true;
-	      this.forklift.body.setCollisionGroup(this.collidesPPS.playerCollisionGroup);
-	      this.forklift.body.collides(this.collidesPPS.packageCollisionGroup, this.hitPackage, this);
-	      this.forklift.body.collides(this.collidesPPS.shelfCollisionGroup);
+	      this.game.add.existing(this.player);
 	      this.cursors = this.game.input.keyboard.createCursorKeys();
 
 	      this.spaceKey = this.input.keyboard.addKey(_phaser2.default.Keyboard.SPACEBAR);
 	      this.spaceKey.onDown.add(this.dropPackage, this);
-	    }
-	  }, {
-	    key: 'update',
-	    value: function update() {
-
-	      this.forklift.body.setZeroVelocity();
-
-	      if (this.cursors.left.isDown) {
-	        this.forklift.body.moveLeft(200);
-	      } else if (this.cursors.right.isDown) {
-	        this.forklift.body.moveRight(200);
-	      }
-
-	      if (this.cursors.up.isDown) {
-	        this.forklift.body.moveUp(200);
-	      } else if (this.cursors.down.isDown) {
-	        this.forklift.body.moveDown(200);
-	      }
 	    }
 	  }, {
 	    key: 'togglePause',
@@ -8921,35 +8905,23 @@
 	  }, {
 	    key: 'dropPackage',
 	    value: function dropPackage() {
-	      if (this.forklift.full === true) {
-	        var newPackager = this.packages.create(this.forklift.position.x + 60, this.forklift.position.y, 'package');
+	      if (this.player.full === true) {
+	        var newPackager = this.packages.create(this.player.position.x + 60, this.player.position.y, 'package');
 	        newPackager.body.setRectangle(32, 32);
-	        newPackager.propertiesy = this.forklift.carrying;
+	        newPackager.propertiesy = this.player.carrying;
 	        console.log('zrzucono paczke: width: ' + newPackager.propertiesy['width'] + ' length: ' + newPackager.propertiesy['length'] + ' height: ' + newPackager.propertiesy['height'] + ' category: ' + newPackager.propertiesy['category']);
 	        newPackager.body.setCollisionGroup(this.collidesPPS.packageCollisionGroup);
 	        newPackager.body.collides([this.collidesPPS.packageCollisionGroup, this.collidesPPS.playerCollisionGroup, this.collidesPPS.shelfCollisionGroup]);
-	        this.forklift.loadTexture('forkliftEmpty', 0);
-	        this.forklift.full = false;
-	        this.forklift.carrying = null;
-	      }
-	    }
-	  }, {
-	    key: 'hitPackage',
-	    value: function hitPackage(body1, body2) {
-	      if (this.forklift.full === false) {
-	        this.forklift.full = true;
-	        this.forklift.loadTexture('forkliftFull', 0);
-	        this.forklift.carrying = body2.sprite.propertiesy;
-	        console.log('zabrano paczke: width: ' + body2.sprite.propertiesy['width'] + ' length: ' + body2.sprite.propertiesy['length'] + ' height: ' + body2.sprite.propertiesy['height'] + ' category: ' + body2.sprite.propertiesy['category']);
-	        body2.sprite.alpha = 0;
-	        body2.destroy();
+	        this.player.loadTexture('forkliftEmpty', 0);
+	        this.player.full = false;
+	        this.player.carrying = null;
 	      }
 	    }
 	  }, {
 	    key: 'render',
 	    value: function render() {
 	      if (true) {
-	        this.game.debug.spriteInfo(this.forklift, 32, 32);
+	        this.game.debug.spriteInfo(this.player, 32, 32);
 	        this.game.debug.text('na spacje zrzut paczki', 180, 180);
 	      }
 	    }
@@ -9067,6 +9039,104 @@
 	}();
 
 	exports.default = ShelfCollisionGroup;
+
+/***/ },
+/* 295 */
+/*!*******************************!*\
+  !*** ./src/sprites/Player.js ***!
+  \*******************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _phaser = __webpack_require__(/*! phaser */ 287);
+
+	var _phaser2 = _interopRequireDefault(_phaser);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var _class = function (_Phaser$Sprite) {
+	    _inherits(_class, _Phaser$Sprite);
+
+	    function _class(_ref) {
+	        var game = _ref.game;
+	        var x = _ref.x;
+	        var y = _ref.y;
+	        var asset = _ref.asset;
+	        var collides = _ref.collides;
+
+	        _classCallCheck(this, _class);
+
+	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(_class).call(this, game, x, y, asset, collides));
+
+	        _this.game = game;
+	        _this.name = 'forklift';
+	        _this.full = false;
+
+	        _this.game.physics.p2.enable(_this, false);
+
+	        _this.body.setRectangle(32, 32);
+	        _this.body.fixedRotation = true;
+	        _this.body.setCollisionGroup(collides.playerCollisionGroup);
+	        _this.body.collides(collides.packageCollisionGroup, _this.hitPackage, _this);
+	        _this.body.collides(collides.shelfCollisionGroup);
+	        return _this;
+	    }
+
+	    _createClass(_class, [{
+	        key: 'update',
+	        value: function update() {
+
+	            this.body.setZeroVelocity();
+
+	            if (this.game.input.keyboard.isDown(_phaser2.default.Keyboard.LEFT)) {
+	                this.body.moveLeft(200);
+	                if (this.scale.x == 1) {
+	                    this.scale.x = -1;
+	                }
+	            } else if (this.game.input.keyboard.isDown(_phaser2.default.Keyboard.RIGHT)) {
+	                this.body.moveRight(200);
+	                if (this.scale.x == -1) {
+	                    this.scale.x = 1;
+	                }
+	            }
+
+	            if (this.game.input.keyboard.isDown(_phaser2.default.Keyboard.UP)) {
+	                this.body.moveUp(200);
+	            } else if (this.game.input.keyboard.isDown(_phaser2.default.Keyboard.DOWN)) {
+	                this.body.moveDown(200);
+	            }
+	        }
+	    }, {
+	        key: 'hitPackage',
+	        value: function hitPackage(body1, body2) {
+	            if (this.full === false) {
+	                this.full = true;
+	                this.loadTexture('forkliftFull', 0);
+	                this.carrying = body2.sprite.propertiesy;
+	                console.log('zabrano paczke: width: ' + body2.sprite.propertiesy['width'] + ' length: ' + body2.sprite.propertiesy['length'] + ' height: ' + body2.sprite.propertiesy['height'] + ' category: ' + body2.sprite.propertiesy['category']);
+	                body2.sprite.alpha = 0;
+	                body2.destroy();
+	            }
+	        }
+	    }]);
+
+	    return _class;
+	}(_phaser2.default.Sprite);
+
+	exports.default = _class;
 
 /***/ }
 /******/ ]);
