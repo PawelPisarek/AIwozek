@@ -17,3 +17,31 @@ export const setResponsiveWidth = (sprite, percent, parent) => {
   sprite.width = parent.width / (100 / percent)
   sprite.height = sprite.texture.height - (sprite.texture.height * percentWidth / 100)
 }
+import GraphNode from './logic/GraphNode'
+
+export const distance = (obj, obj2)=> {
+  // import GraphNode from '../GraphNode'
+  // let obj= {x:2,y:5};
+  // let obj2= {x:5,y:9};
+  if (!(obj  instanceof GraphNode)){
+    // console.log("obiekt nie znajduje się na liscie");
+    return false;
+  }
+  if (!(obj2 instanceof GraphNode)){
+    // return "obiekt nie znajduje się na liscie";
+    return false;
+  }
+  var obj = obj.pos;
+  var obj2 = obj2.pos;
+  return (Math.sqrt((obj2.x - obj.x) * (obj2.x - obj.x) + (obj2.y - obj.y) * (obj2.y - obj.y)));
+}
+export const  findGraphNode = (arr,obj) =>{
+
+  for (var i = 0, len = arr.length; i < len; i++) {
+    if (JSON.stringify(arr[i].pos)===JSON.stringify(obj))
+    {
+      return arr[i]
+    }
+  }
+  return false;
+}

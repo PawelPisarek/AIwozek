@@ -2,7 +2,11 @@ import Phaser from 'phaser'
 import Shelf from '../sprites/Shelf';
 import PlayerPackageShelfCollisionGroup from '../CollisionGroup/PlayerPackageShelfCollisionGroup'
 import Player from '../sprites/Player'
-import {setResponsiveWidth} from '../utils'
+import GraphNode from '../logic/GraphNode'
+import Graph from '../logic/Graph'
+import neighborGraph from '../logic/neighborGraph'
+import {distance} from '../utils'
+import {findGraphNode} from '../utils'
 
 export default class extends Phaser.State {
   init () {}
@@ -52,6 +56,8 @@ export default class extends Phaser.State {
       collides: this.collidesPPS
     });
 
+    this.astar();
+
     let shelf2 = new Shelf({
       game: this.game,
       x: 600,
@@ -94,6 +100,135 @@ export default class extends Phaser.State {
     this.spaceKey.onDown.add(this.dropPackage, this);
 
 
+  }
+
+  DodajemyPoleStartoweLubWęzełdoListyOtwartych(obj) {
+
+    this.ListaOtwartych.push(obj);
+    this.start = obj;
+  }
+  neighbor_nodes(node,taget){
+
+
+    let neighborNodes = new neighborGraph({nodes: this.graph.nodes, node: node});
+    [
+      {x: neighborNodes.center.x - 1, y: neighborNodes.center.y},
+      {x: neighborNodes.center.x + 1, y: neighborNodes.center.y},
+      {x: neighborNodes.center.x, y: neighborNodes.center.y - 1},
+      {x: neighborNodes.center.x, y: neighborNodes.center.y + 1}
+    ].forEach((neighbor)=> {
+
+      neighbor = findGraphNode(this.graph.nodes, neighbor);
+      if (distance(neighborNodes.center, neighbor) !== false) {
+        neighborNodes.add({node: neighbor.pos, distance: distance(neighborNodes.center, neighbor)})
+      }
+    });
+    neighborNodes.toString();
+    return neighborNodes;
+  }
+  SzukamyPolaONajniższejWartościFnaLiścieOtwartychCzynimyJeAktualnymPolem(obj,taget){
+    console.log("SzukamyPolaONajniższejWartościFnaLiścieOtwartychCzynimyJeAktualnymPolem");
+    // console.log(this.neighbor_nodes(obj));
+    let neighbotNodes = this.neighbor_nodes(obj,taget);
+    console.log(neighbotNodes);
+
+    var points = neighbotNodes.nodes;
+    points.sort(function(a, b){return a.distance-b.distance});
+    console.log(points[0]);
+    obj=points[0];
+    console.log(obj);
+
+
+  }
+  AktualnePolePrzesuwamyDoListyZamkniętych(){
+    console.log("AktualnePolePrzesuwamyDoListyZamkniętych");
+  }
+
+  DlaKażdegoZ8PrzyległychPólDoPolaAktualnegoZSprawdzamy(){
+    console.log("DlaKażdegoZ8PrzyległychPólDoPolaAktualnegoZSprawdzamy");
+
+  }
+  JeśliNIEMOŻNAGoPrzejśćLubJestJużNaLiścieZamkniętychIgnorujemyJeWInnymPrzypadkuSprawdzamy(){
+    console.log("JeśliNIEMOŻNAGoPrzejśćLubJestJużNaLiścieZamkniętychIgnorujemyJeWInnymPrzypadkuSprawdzamy");
+  }
+
+  JeśliPoleNieJestJeszczeNaLiścieOtwartychDodajemyJeDoNiejAktualnePoleZPrzypisujemyMuXnJakoPoleRodzicaIZapisujemyJegoWartościFGiH(){
+    console.log("JeśliPoleNieJestJeszczeNaLiścieOtwartychDodajemyJeDoNiejAktualnePoleZPrzypisujemyMuXnJakoPoleRodzicaIZapisujemyJegoWartościFGiH");
+  }
+
+  JeśliPoleByłoJużNaLiścieOtwartychSprawdzamyCzyAktualnaScieżkaDoTegopolaProwadzącaprzezZJestLepszaKrótszaPoprzezPorównanieJegoWartościGdlaStarejiAktualnejŚcieżkiMniejszaWartośćGoznaczaŻeŚcieżkaJestKrótszaJeśliTakZmieniamyPrzypisaniePoleRodzicaNaAktualnePoleZiPrzeliczamyWartościGiFdlaPolaJeśliWaszaListaOtwartychJestPosortowanaPodKątemWartościFTrzebaJąPonowniePrzesortowaćPoWprowadzonejZmianie(){
+    console.log("JeśliPoleByłoJużNaLiścieOtwartychSprawdzamyCzyAktualnaScieżkaDoTegopolaProwadzącaprzezZJestLepszaKrótszaPoprzezPorównanieJegoWartościGdlaStarejiAktualnejŚcieżkiMniejszaWartośćGoznaczaŻeŚcieżkaJestKrótszaJeśliTakZmieniamyPrzypisaniePoleRodzicaNaAktualnePoleZiPrzeliczamyWartościGiFdlaPolaJeśliWaszaListaOtwartychJestPosortowanaPodKątemWartościFTrzebaJąPonowniePrzesortowaćPoWprowadzonejZmianie");
+  }
+
+  ZatrzymujemySieGdy(){
+    console.log("ZatrzymujemySieGdy");
+  }
+
+  DodanoPoleDoceloweDoListyZamkniętychWTymPrzypadkuŚcieżkaZostałaOdnaleziona(){
+    console.log("DodanoPoleDoceloweDoListyZamkniętychWTymPrzypadkuŚcieżkaZostałaOdnaleziona");
+  }
+  ListaOtwartychJestPustaNieIStnieje(){
+    console.log("ListaOtwartychJestPustaNieIStnieje");
+  }
+  ZapisujemyŚcieżkęKroczącWKierunkuOdPolaDocelowegoPktBDoStartowegoPktAPrzeskakujemyZKolejnychPólNaImPrzypisanePolaRodzicówAżDoOsiągnięciaPolaStartowegoToJestWaszaŚcieżka(){
+    console.log("ZapisujemyŚcieżkęKroczącWKierunkuOdPolaDocelowegoPktBDoStartowegoPktAPrzeskakujemyZKolejnychPólNaImPrzypisanePolaRodzicówAżDoOsiągnięciaPolaStartowegoToJestWaszaŚcieżka");
+  }
+  astar(){
+
+    console.log("DodajemyPoleStartoweLubWęzełdoListyOtwartych");
+     this.graph = new Graph();
+    // for (var i = 0; i < this.graph.widthBoard; i++) {
+    //   for (var j = 0; j < this.graph.heightBoard; j++) {
+    //     this.graph.add(new GraphNode({x: i, y: j, type: "sasdasd"}));
+    //   }
+    // }
+    this.graph.add(new GraphNode({x: 0, y: 0, type: "sasdasd"}));
+    this.graph.add(new GraphNode({x: 0, y: 1, type: "sasdasd"}));
+    this.graph.add(new GraphNode({x: 0, y: 2, type: "sasdasd"}));
+    this.graph.add(new GraphNode({x: 0, y: 3, type: "sasdasd"}));
+    this.graph.add(new GraphNode({x: 1, y: 0, type: "sasdasd"}));
+    this.graph.add(new GraphNode({x: 1, y: 1, type: "start"}));
+    this.graph.add(new GraphNode({x: 1, y: 2, type: "sasdasd"}));
+    this.graph.add(new GraphNode({x: 1, y: 3, type: "sasdasd"}));
+    this.graph.add(new GraphNode({x: 2, y: 0, type: "sasdasd"}));
+    this.graph.add(new GraphNode({x: 2, y: 1, type: "sasdasd"}));
+    this.graph.add(new GraphNode({x: 2, y: 2, type: "sasdasd"}));
+    this.graph.add(new GraphNode({x: 2, y: 3, type: "sasdasd"}));
+    this.graph.add(new GraphNode({x: 3, y: 0, type: "sasdasd"}));
+    this.graph.add(new GraphNode({x: 3, y: 1, type: "sasdasd"}));
+    this.graph.add(new GraphNode({x: 3, y: 2, type: "sasdasd"}));
+    this.graph.add(new GraphNode({x: 3, y: 3, type: "sasdasd"}));
+
+
+    // console.log(this.graph);
+    this.graph.toString();
+    
+    this.ListaOtwartych = [];
+    let obj = {x: 0, y: 0};
+    let taget={x: 3, y: 3};
+    this.DodajemyPoleStartoweLubWęzełdoListyOtwartych(obj);
+
+    // PowtarzamyNastępujące()
+
+        this.SzukamyPolaONajniższejWartościFnaLiścieOtwartychCzynimyJeAktualnymPolem(obj,taget);
+
+        this.AktualnePolePrzesuwamyDoListyZamkniętych(obj);
+
+        this.DlaKażdegoZ8PrzyległychPólDoPolaAktualnegoZSprawdzamy();
+
+          this.JeśliNIEMOŻNAGoPrzejśćLubJestJużNaLiścieZamkniętychIgnorujemyJeWInnymPrzypadkuSprawdzamy();
+
+          this.JeśliPoleNieJestJeszczeNaLiścieOtwartychDodajemyJeDoNiejAktualnePoleZPrzypisujemyMuXnJakoPoleRodzicaIZapisujemyJegoWartościFGiH();
+
+          this.JeśliPoleByłoJużNaLiścieOtwartychSprawdzamyCzyAktualnaScieżkaDoTegopolaProwadzącaprzezZJestLepszaKrótszaPoprzezPorównanieJegoWartościGdlaStarejiAktualnejŚcieżkiMniejszaWartośćGoznaczaŻeŚcieżkaJestKrótszaJeśliTakZmieniamyPrzypisaniePoleRodzicaNaAktualnePoleZiPrzeliczamyWartościGiFdlaPolaJeśliWaszaListaOtwartychJestPosortowanaPodKątemWartościFTrzebaJąPonowniePrzesortowaćPoWprowadzonejZmianie()
+
+        this.ZatrzymujemySieGdy();
+
+          this.DodanoPoleDoceloweDoListyZamkniętychWTymPrzypadkuŚcieżkaZostałaOdnaleziona()
+
+          this.ListaOtwartychJestPustaNieIStnieje()
+
+    this.ZapisujemyŚcieżkęKroczącWKierunkuOdPolaDocelowegoPktBDoStartowegoPktAPrzeskakujemyZKolejnychPólNaImPrzypisanePolaRodzicówAżDoOsiągnięciaPolaStartowegoToJestWaszaŚcieżka();
   }
 
   togglePause() {
