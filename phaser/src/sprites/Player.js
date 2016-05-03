@@ -62,8 +62,8 @@ export default class extends Phaser.Sprite {
             [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
             [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
         ]);
-         this.start = graph.grid[0][0];
-        var end = graph.grid[40][46]; //40-46
+         this.start = graph.grid[40][46];
+        var end = graph.grid[0][0]; //40-46
         this.result = astar.search(graph, this.start, end);
 
 
@@ -105,6 +105,14 @@ export default class extends Phaser.Sprite {
             }
             if (punkt.y > this.start.y) {
                 this.body.moveRight(999);
+
+            }
+            if (punkt.x < this.start.x) {
+                this.body.moveUp(1139);
+
+            }
+            if (punkt.y < this.start.y) {
+                this.body.moveLeft(999);
 
             }
             this.start=punkt;

@@ -81,8 +81,8 @@ export default class extends Phaser.State {
 
     this.player = new Player({
       game: this.game,
-      x: 0,
-      y: 0,
+      x: 765,
+      y: 720,
       asset: 'forkliftEmpty',
       collides: this.collidesPPS
     });
