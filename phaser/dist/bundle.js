@@ -9188,6 +9188,9 @@
 	                    if (punkt.x > _forklift_y) {
 	                        this.body.moveRight(999);
 	                        // console.log('prawo');
+	                        if (this.scale.x == -1) {
+	                            this.scale.x = 1;
+	                        }
 	                    }
 	                    if (punkt.y < _forklift_x) {
 	                        this.body.moveUp(1139);
@@ -9196,6 +9199,9 @@
 	                    if (punkt.x < _forklift_y) {
 	                        this.body.moveLeft(999);
 	                        // console.log('lewo');
+	                        if (this.scale.x == 1) {
+	                            this.scale.x = -1;
+	                        }
 	                    }
 	                }
 	            }
