@@ -93,17 +93,41 @@ export default class extends Phaser.Sprite {
         }
         if (this.game.input.activePointer.isDown) {
 
-            var mouse_x = Math.ceil(this.game.input.mousePointer.x / 20)-1;
-            var mouse_y = Math.ceil(this.game.input.mousePointer.y / 20)-1;
-            var forklift_x = Math.ceil(this.body.x / 20)-1;
-            var forklift_y = Math.ceil(this.body.y / 20)-1;
+            let mouse_x = Math.ceil(this.game.input.mousePointer.x / 20)-1;
+            let mouse_y = Math.ceil(this.game.input.mousePointer.y / 20)-1;
+            let forklift_x = Math.ceil(this.body.x / 20)-1;
+            let forklift_y = Math.ceil(this.body.y / 20)-1;
             console.log("start: " + forklift_x + " " + forklift_y + " | end: " + mouse_x + " " + mouse_y);
-            var start = this.graph.grid[forklift_x][forklift_y];
-            var end = this.graph.grid[mouse_x][mouse_y]; //40-46
-            console.log(end);
+            let start = this.graph.grid[forklift_x][forklift_y];
+            let end = this.graph.grid[mouse_x][mouse_y]; //40-46
             this.result = astar.search(this.graph, start, end);
-            //console.log(this.result);
-            this.stepsNumber=this.result.length;
+            // console.log(this.result);
+            let path = {x: forklift_x, y: forklift_y};
+            let result = [];
+            this.result.forEach((graph) => {
+                if (graph.y > path.x) {
+                    path.x = graph.y;
+                    path.y = graph.x;
+                    result.push('dol');
+                }
+                if (graph.x > path.y) {
+                    path.x = graph.y;
+                    path.y = graph.x;
+                    result.push('prawo');
+                }
+                if (graph.y < path.x) {
+                    path.x = graph.y;
+                    path.y = graph.x;
+                    result.push('gora');
+                }
+                if (graph.x < path.y) {
+                    path.x = graph.y;
+                    path.y = graph.x;
+                    result.push('lewo');
+                }
+            });
+            result.shift();
+            console.log(result);
         }
 
         if(this.game.input.keyboard.isDown(Phaser.Keyboard.P))
@@ -112,24 +136,24 @@ export default class extends Phaser.Sprite {
 
             if(punkt != null)
             {
-                var forklift_y = Math.ceil(this.body.x / 20)-1;
-                var forklift_x = Math.ceil(this.body.y / 20)-1;
-                console.log("punkt x: "+punkt.x+" y: "+punkt.y+" wozek: "+forklift_x+" "+forklift_y);
+                let forklift_y = Math.ceil(this.body.x / 20)-1;
+                let forklift_x = Math.ceil(this.body.y / 20)-1;
+                // console.log("punkt x: "+punkt.x+" y: "+punkt.y+" wozek: "+forklift_x+" "+forklift_y);
                 if (punkt.y > forklift_x) {
                     this.body.moveDown(1139);
-                    console.log('dol');
+                    // console.log('dol');
                 }
                 if (punkt.x > forklift_y) {
                     this.body.moveRight(999);
-                    console.log('prawo');
+                    // console.log('prawo');
                 }
                 if (punkt.y < forklift_x) {
                     this.body.moveUp(1139);
-                    console.log('gora');
+                    // console.log('gora');
                 }
                 if (punkt.x < forklift_y) {
                     this.body.moveLeft(999);
-                    console.log('lewo');
+                    // console.log('lewo');
                 }
 
             }

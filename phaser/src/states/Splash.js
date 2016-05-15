@@ -17,7 +17,6 @@ export default class extends Phaser.State {
     this.load.image('package', 'assets/images/package.png')
     this.load.image('forkliftEmpty', 'assets/images/forklift_empty.png')
     this.load.image('forkliftFull', 'assets/images/forklift_full.png')
-    this.load.image('tiles', 'assets/images/tiles.png')
     this.load.physics('shelfPolygon', 'assets/images/shelfPolygon.json');
   }
 
