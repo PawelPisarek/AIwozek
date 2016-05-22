@@ -141,6 +141,8 @@ export default class extends Phaser.Sprite {
             this.loadTexture('forkliftFull', 0);
             this.carrying = body2.sprite.propertiesy;
             console.log('zabrano paczke: width: ' + body2.sprite.propertiesy['width'] + ' length: ' + body2.sprite.propertiesy['length'] + ' height: ' + body2.sprite.propertiesy['height'] + ' category: ' + body2.sprite.propertiesy['category']);
+            var classify = myPerceptron.activate([body2.sprite.propertiesy['width'], body2.sprite.propertiesy['length'], body2.sprite.propertiesy['height']]);
+            console.log('paczka została sklasyfikowala jako: ', classify > 0.5 ? 'Duża' : 'Mała');
             body2.sprite.alpha = 0;
             body2.destroy();
         }
