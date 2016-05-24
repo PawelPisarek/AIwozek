@@ -34,9 +34,9 @@ export default class extends Phaser.State {
       var packager = this.packages.create(this.game.world.randomX, this.game.world.randomY, 'package');
       packager.body.setRectangle(32, 32);
       packager.propertiesy = {
-        width: 20,
-        length: 20,
-        height: 60,
+        width: Math.random() * 9 + 1,
+        length: Math.random() * 9 + 1,
+        height: Math.random() * 9 + 1,
         category: 'AGD'
       };
 
