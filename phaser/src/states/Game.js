@@ -3,6 +3,7 @@ import Shelf from '../sprites/Shelf';
 import PlayerPackageShelfCollisionGroup from '../CollisionGroup/PlayerPackageShelfCollisionGroup'
 import Player from '../sprites/Player'
 import {setResponsiveWidth} from '../utils'
+import {TEST1,TEST2,TEST3} from '../oil'
 
 export default class extends Phaser.State {
   init () {}
@@ -23,22 +24,31 @@ export default class extends Phaser.State {
     });
 
     this.game.physics.p2.updateBoundsCollisionGroup();
-    
+
+
+
+
+
     this.packages = this.game.add.group();
     this.packages.enableBody = true;
     this.packages.physicsBodyType = Phaser.Physics.P2JS;
 
-
+    this.packagesCoords=[];
     for (var i = 0; i < 4; i++)
     {
-      var packager = this.packages.create(this.game.world.randomX, this.game.world.randomY, 'package');
+      var randomX = this.game.world.randomX;
+      var randomY = this.game.world.randomY;
+
+      var packager = this.packages.create(randomX, randomY, 'package');
       packager.body.setRectangle(32, 32);
       packager.propertiesy = {
         width: 20,
         length: 20,
         height: 60,
-        category: 'AGD'
+        category: 'AGD',
       };
+
+      this.packagesCoords.push([Math.ceil(randomX / 20)-1, Math.ceil(randomY / 20)-1]);
 
       packager.body.setCollisionGroup(this.collidesPPS.packageCollisionGroup);
 
@@ -75,6 +85,11 @@ export default class extends Phaser.State {
       asset: 'shelf',
       collides: this.collidesPPS
     });
+    this.racksCoords=[];
+    this.racksCoords.push([Math.ceil(159 / 20)-1, Math.ceil(159 / 20)-1]);
+    this.racksCoords.push([Math.ceil(559 / 20)-1, Math.ceil(159 / 20)-1]);
+    this.racksCoords.push([Math.ceil(159 / 20)-1, Math.ceil(559 / 20)-1]);
+    this.racksCoords.push([Math.ceil(559 / 20)-1, Math.ceil(459 / 20)-1]);
 
     [shelf1, shelf2, shelf3, shelf4].forEach((shelf)=>this.game.add.existing(shelf));
 
@@ -84,7 +99,9 @@ export default class extends Phaser.State {
       x: 765,
       y: 720,
       asset: 'forkliftEmpty',
-      collides: this.collidesPPS
+      collides: this.collidesPPS,
+      packageArr: this.packagesCoords,
+      rackArr: this.racksCoords
     });
 
     this.game.add.existing(this.player);
@@ -95,6 +112,7 @@ export default class extends Phaser.State {
 
 
   }
+
 
   togglePause() {
 
