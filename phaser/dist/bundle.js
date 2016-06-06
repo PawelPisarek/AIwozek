@@ -9272,49 +9272,62 @@
 
 	        this.numberOfProperties = 4;
 	        // let properties = ["red", "labelled", "middleweight", "solid"];
-	        // let brownArea = ["?", "labelled", "?", "?"];
-	        // let redArea = ["brown", "wooden", "?", "?"];
-	        // if (this.hypothesisDoesCover(properties, brownArea)) {
+	        // let hazardBigFridgeArea = ["?", "labelled", "?", "?"];
+	        // let hazardSmallFridge = ["brown", "wooden", "?", "?"];
+	        // if (this.hypothesisDoesCover(properties, hazardBigFridgeArea)) {
 	        //     console.log("Brown");
 	        // }
-	        // if (this.hypothesisDoesCover(properties, redArea)) {
+	        // if (this.hypothesisDoesCover(properties, hazardSmallFridge)) {
 	        //     console.log("Red");
 	        // }
-	        var prepareBlueAreaLearningSet = [{ key: ["white", "metal", "light", "liquid"], value: true }, { key: ["yellow", "metal", "light", "liquid"], value: true }, { key: ["red", "paper", "light", "liquid"], value: false }, { key: ["gray", "metal", "light", "solid"], value: false }, { key: ["gray", "metal", "heavy", "liquid"], value: true }];
+	        var bigAreaLearningSet = [{ key: ["big", "no", "no", "big"], value: true }, { key: ["big", "no", "no", "small"], value: false }];
 
-	        var prepareGreenAreaLearningSet = [{ key: ["white", "transparent", "light", "solid"], value: true }, { key: ["yellow", "transparent", "light", "solid"], value: true }, { key: ["red", "paper", "light", "liquid"], value: false }, { key: ["gray", "metal", "light", "liquid"], value: false }, { key: ["gray", "paper", "heavy", "solid"], value: false }, { key: ["red", "transparent", "light", "solid"], value: true }];
+	        var prepareBigFridgeAreaLearningSet = [{ key: ["big", "yes", "no", "big-fridge"], value: true }, { key: ["big", "no", "no", "hazard-big"], value: false }];
 
-	        var prepareBrownAreaLearningSet = [{ key: ["white", "labelled", "light", "solid"], value: true }, { key: ["yellow", "labelled", "light", "solid"], value: true }, { key: ["red", "labelled", "light", "liquid"], value: true }, { key: ["gray", "metal", "light", "liquid"], value: false }, { key: ["gray", "paper", "heavy", "solid"], value: false }, { key: ["red", "labelled", "light", "solid"], value: true }, { key: ["red", "labelled", "heavy", "solid"], value: true }];
+	        var prepareHazardBigLearningSet = [{ key: ["big", "no", "yes", "hazard-big"], value: true }, { key: ["big", "no", "no", "hazard-big"], value: false }];
 
-	        var prepareYellowAreaLearningSet = [{ key: ["white", "paper", "light", "solid"], value: true }, { key: ["yellow", "paper", "light", "solid"], value: true }, { key: ["red", "paper", "light", "liquid"], value: true }, { key: ["gray", "metal", "light", "liquid"], value: false }, { key: ["gray", "paper", "heavy", "solid"], value: false }, { key: ["red", "paper", "light", "solid"], value: true }];
+	        var prepareSmallFridgeAreaLearningSet = [{ key: ["small", "yes", "no", "small-fridge"], value: true }, { key: ["big", "yes", "no", "small-fridge"], value: false }];
 
-	        var prepareRedAreaLearningSet = [{ key: ["brown", "wooden", "heavy", "solid"], value: true }, { key: ["yellow", "metal", "heavy", "solid"], value: false }, { key: ["gray", "metal", "light", "solid"], value: false }, { key: ["yellow", "metal", "light", "liquid"], value: false }, { key: ["brown", "wooden", "heavy", "solid"], value: true }, { key: ["brown", "wooden", "light", "liquid"], value: true }, { key: ["red", "metal", "heavy", "solid"], value: false }];
+	        var prepareSmallAreaLearningSet = [{ key: ["small", "no", "no", "small"], value: true }, { key: ["big", "yes", "no", "small-fridge"], value: false }];
 
-	        var prepareBlackAreaLearningSet = [{ key: ["gray", "metal", "heavy", "solid"], value: true }, { key: ["yellow", "metal", "heavy", "solid"], value: true }, { key: ["gray", "metal", "light", "solid"], value: false }, { key: ["gray", "metal", "heavy", "liquid"], value: false }, { key: ["gray", "wood", "heavy", "solid"], value: false }, { key: ["red", "metal", "heavy", "solid"], value: true }];
+	        var hazardBigFridgeAreaLearningSet = [{ key: ["big", "yes", "yes", "hazard-big-fridge"], value: true }, { key: ["big", "no", "no", "big"], value: false }];
+
+	        var hazardSmallAreaLearningSet = [{ key: ["small", "no", "yes", "hazard-small"], value: true }, { key: ["big", "no", "no", "hazard-small"], value: false }];
+
+	        var hazardSmallFridgeAreaLearningSet = [{ key: ["small", "yes", "yes", "hazard-small-fridge"], value: true }, { key: ["big", "yes", "yes", "hazard-small"], value: false }];
 
 	        // console.log(this.lookup(prepareBlackAreaLearningSet, ["gray", "metal", "heavy", "solid"]));
 
-	        // let blackArea = this.learnArea(prepareBlackAreaLearningSet);
-	        // console.log("Black area ", blackArea);
-	        this.blackArea = this.learnArea(prepareBlackAreaLearningSet);
-	        this.blueArea = this.learnArea(prepareBlueAreaLearningSet);
-	        this.greenArea = this.learnArea(prepareGreenAreaLearningSet);
-	        this.brownArea = this.learnArea(prepareBrownAreaLearningSet);
-	        this.yellowArea = this.learnArea(prepareYellowAreaLearningSet);
-	        this.redArea = this.learnArea(prepareRedAreaLearningSet);
+	        // let bigArea = this.learnArea(prepareBlackAreaLearningSet);
+	        // console.log("Black area ", bigArea);
+	        this.bigArea = this.learnArea(bigAreaLearningSet);
+	        this.hazardBigFridgeArea = this.learnArea(hazardBigFridgeAreaLearningSet);
+	        this.bigFridgeArea = this.learnArea(prepareBigFridgeAreaLearningSet);
+	        this.smallFridgeArea = this.learnArea(prepareSmallFridgeAreaLearningSet);
+	        this.smallArea = this.learnArea(prepareSmallAreaLearningSet);
+	        this.hazardBigArea = this.learnArea(prepareHazardBigLearningSet);
+	        this.hazardSmallFridge = this.learnArea(hazardSmallFridgeAreaLearningSet);
+	        this.hazardSmallArea = this.learnArea(hazardSmallAreaLearningSet);
 
-	        console.log("Black area ", this.blackArea);
-	        console.log("Blue area ", this.blueArea);
-	        console.log("Green area ", this.greenArea);
-	        console.log("Brown area ", this.brownArea);
-	        console.log("Yellow area ", this.yellowArea);
-	        console.log("Red area ", this.redArea);
+	        console.log("big area ", this.bigArea);
+	        console.log("hazard-big-fridge area ", this.hazardBigFridgeArea);
+	        console.log("Blue area ", this.bigFridgeArea);
+	        console.log("Green area ", this.smallArea);
+	        console.log("Yellow area ", this.hazardSmallArea);
+	        console.log("Red area ", this.hazardSmallFridge);
 
-	        var green = ["blue", "transparent", "light", "solid"];
-	        var brown = ["red", "labelled", "middleweight", "solid"];
-	        var blue = ["yellow", "metal", "middleweight", "liquid"];
-	        var red = ["brown", "wooden", "heavy", "solid"];
-	        this.findDestinationPlace(blue);
+	        var training_data = [{ "size": "big", "fridge": "yes", "hazard": "no", "shelf": "big-fridge" }, { "size": "big", "fridge": "no", "hazard": "no", "shelf": "big" }, { "size": "small", "fridge": "yes", "hazard": "no", "shelf": "small-fridge" }, { "size": "small", "fridge": "no", "hazard": "no", "shelf": "small" }, { "size": "big", "fridge": "yes", "hazard": "yes", "shelf": "hazard-big-fridge" }, { "size": "big", "fridge": "no", "hazard": "yes", "shelf": "hazard-big" }, { "size": "small", "fridge": "yes", "hazard": "yes", "shelf": "hazard-small-fridge" }, { "size": "small", "fridge": "no", "hazard": "yes", "shelf": "hazard-small" }];
+
+	        var big = ["big", "no", "no", "big"];
+	        var hazardbigfridge = ["big", "yes", "yes", "hazard-big-fridge"];
+	        var bigFridge = ["big", "yes", "no", "big-fridge"];
+	        var smallFridge = ["small", "yes", "no", "small-fridge"];
+	        var small = ["small", "no", "no", "small"];
+	        var hazardBig = ["big", "no", "yes", "hazard-big"];
+	        var hazardSmallFridge = ["small", "yes", "yes", "hazard-small-fridge"];
+	        var hazardSmall = ["small", "no", "yes", "hazard-small"];
+
+	        this.findDestinationPlace(hazardSmall);
 	    }
 
 	    _createClass(CandidateElimination, [{
@@ -9322,12 +9335,14 @@
 	        value: function findDestinationPlace(properties) {
 	            console.log("Current case properties: " + properties);
 
-	            if (this.hypothesisDoesCover(properties, this.blackArea)) console.log("Black");
-	            if (this.hypothesisDoesCover(properties, this.blueArea)) console.log("Blue");
-	            if (this.hypothesisDoesCover(properties, this.greenArea)) console.log("Green");
-	            if (this.hypothesisDoesCover(properties, this.yellowArea)) console.log("Yellow");
-	            if (this.hypothesisDoesCover(properties, this.brownArea)) console.log("Brown");
-	            if (this.hypothesisDoesCover(properties, this.redArea)) console.log("Red");
+	            if (this.hypothesisDoesCover(properties, this.bigArea)) console.log("big");
+	            if (this.hypothesisDoesCover(properties, this.hazardBigFridgeArea)) console.log("hazard-big-fridge");
+	            if (this.hypothesisDoesCover(properties, this.bigFridgeArea)) console.log("bigFridge");
+	            if (this.hypothesisDoesCover(properties, this.smallFridgeArea)) console.log("smallFridge");
+	            if (this.hypothesisDoesCover(properties, this.smallArea)) console.log("small");
+	            if (this.hypothesisDoesCover(properties, this.hazardBigArea)) console.log("hazardBig");
+	            if (this.hypothesisDoesCover(properties, this.hazardSmallFridge)) console.log("hazardSmallFridge");
+	            if (this.hypothesisDoesCover(properties, this.hazardSmallArea)) console.log("hazardSmall");
 	        }
 	    }, {
 	        key: "lookup",
