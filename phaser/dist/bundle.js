@@ -9270,7 +9270,7 @@
 	    function CandidateElimination() {
 	        _classCallCheck(this, CandidateElimination);
 
-	        this.numberOfProperties = 4;
+	        this.numberOfProperties = 3;
 	        // let properties = ["red", "labelled", "middleweight", "solid"];
 	        // let hazardBigFridgeArea = ["?", "labelled", "?", "?"];
 	        // let hazardSmallFridge = ["brown", "wooden", "?", "?"];
@@ -9280,21 +9280,21 @@
 	        // if (this.hypothesisDoesCover(properties, hazardSmallFridge)) {
 	        //     console.log("Red");
 	        // }
-	        var bigAreaLearningSet = [{ key: ["big", "no", "no", "big"], value: true }, { key: ["big", "no", "no", "small"], value: false }];
+	        var bigAreaLearningSet = [{ key: ["big", "no", "no"], value: true }, { key: ["big", "no", "true"], value: false }];
 
-	        var prepareBigFridgeAreaLearningSet = [{ key: ["big", "yes", "no", "big-fridge"], value: true }, { key: ["big", "no", "no", "hazard-big"], value: false }];
+	        var prepareBigFridgeAreaLearningSet = [{ key: ["big", "yes", "no"], value: true }, { key: ["big", "no", "no"], value: false }];
 
-	        var prepareHazardBigLearningSet = [{ key: ["big", "no", "yes", "hazard-big"], value: true }, { key: ["big", "no", "no", "hazard-big"], value: false }];
+	        var prepareHazardBigLearningSet = [{ key: ["big", "no", "yes"], value: true }, { key: ["big", "no", "no"], value: false }];
 
-	        var prepareSmallFridgeAreaLearningSet = [{ key: ["small", "yes", "no", "small-fridge"], value: true }, { key: ["big", "yes", "no", "small-fridge"], value: false }];
+	        var prepareSmallFridgeAreaLearningSet = [{ key: ["small", "yes", "no"], value: true }, { key: ["small", "yes", "yes"], value: false }];
 
-	        var prepareSmallAreaLearningSet = [{ key: ["small", "no", "no", "small"], value: true }, { key: ["big", "yes", "no", "small-fridge"], value: false }];
+	        var prepareSmallAreaLearningSet = [{ key: ["small", "no", "no"], value: true }, { key: ["big", "no", "no"], value: false }];
 
-	        var hazardBigFridgeAreaLearningSet = [{ key: ["big", "yes", "yes", "hazard-big-fridge"], value: true }, { key: ["big", "no", "no", "big"], value: false }];
+	        var hazardBigFridgeAreaLearningSet = [{ key: ["big", "yes", "yes"], value: true }, { key: ["small", "yes", "yes"], value: false }];
 
-	        var hazardSmallAreaLearningSet = [{ key: ["small", "no", "yes", "hazard-small"], value: true }, { key: ["big", "no", "no", "hazard-small"], value: false }];
+	        var hazardSmallAreaLearningSet = [{ key: ["small", "no", "yes"], value: true }, { key: ["big", "no", "yes"], value: false }];
 
-	        var hazardSmallFridgeAreaLearningSet = [{ key: ["small", "yes", "yes", "hazard-small-fridge"], value: true }, { key: ["big", "yes", "yes", "hazard-small"], value: false }];
+	        var hazardSmallFridgeAreaLearningSet = [{ key: ["small", "yes", "yes"], value: true }, { key: ["big", "yes", "yes"], value: false }];
 
 	        // console.log(this.lookup(prepareBlackAreaLearningSet, ["gray", "metal", "heavy", "solid"]));
 
@@ -9311,21 +9311,23 @@
 
 	        console.log("big area ", this.bigArea);
 	        console.log("hazard-big-fridge area ", this.hazardBigFridgeArea);
-	        console.log("Blue area ", this.bigFridgeArea);
-	        console.log("Green area ", this.smallArea);
-	        console.log("Yellow area ", this.hazardSmallArea);
-	        console.log("Red area ", this.hazardSmallFridge);
+	        console.log("bigFridgeArea area ", this.bigFridgeArea);
+	        console.log("smallFridgeArea area ", this.smallFridgeArea);
+	        console.log("smallArea area ", this.smallArea);
+	        console.log("hazardBigArea area ", this.hazardBigArea);
+	        console.log("hazardSmallFridge area ", this.hazardSmallFridge);
+	        console.log("hazardSmallArea area ", this.hazardSmallArea);
 
 	        var training_data = [{ "size": "big", "fridge": "yes", "hazard": "no", "shelf": "big-fridge" }, { "size": "big", "fridge": "no", "hazard": "no", "shelf": "big" }, { "size": "small", "fridge": "yes", "hazard": "no", "shelf": "small-fridge" }, { "size": "small", "fridge": "no", "hazard": "no", "shelf": "small" }, { "size": "big", "fridge": "yes", "hazard": "yes", "shelf": "hazard-big-fridge" }, { "size": "big", "fridge": "no", "hazard": "yes", "shelf": "hazard-big" }, { "size": "small", "fridge": "yes", "hazard": "yes", "shelf": "hazard-small-fridge" }, { "size": "small", "fridge": "no", "hazard": "yes", "shelf": "hazard-small" }];
 
-	        var big = ["big", "no", "no", "big"];
-	        var hazardbigfridge = ["big", "yes", "yes", "hazard-big-fridge"];
-	        var bigFridge = ["big", "yes", "no", "big-fridge"];
-	        var smallFridge = ["small", "yes", "no", "small-fridge"];
-	        var small = ["small", "no", "no", "small"];
-	        var hazardBig = ["big", "no", "yes", "hazard-big"];
-	        var hazardSmallFridge = ["small", "yes", "yes", "hazard-small-fridge"];
-	        var hazardSmall = ["small", "no", "yes", "hazard-small"];
+	        var big = ["big", "no", "no"];
+	        var hazardbigfridge = ["big", "yes", "yes"];
+	        var bigFridge = ["big", "yes", "no"];
+	        var smallFridge = ["small", "yes", "no"];
+	        var small = ["small", "no", "no"];
+	        var hazardBig = ["big", "no", "yes"];
+	        var hazardSmallFridge = ["small", "yes", "yes"];
+	        var hazardSmall = ["small", "no", "yes"];
 
 	        this.findDestinationPlace(hazardSmall);
 	    }
@@ -9401,7 +9403,10 @@
 	        }
 	    }, {
 	        key: "parseNegativeExample",
-	        value: function parseNegativeExample(blackAreaLearningSet, example, generalHypothesis, specificHypothesis) {}
+	        value: function parseNegativeExample(blackAreaLearningSet, example, generalHypothesis, specificHypothesis) {
+
+	            if (undefined !== example) ;
+	        }
 	    }, {
 	        key: "parsePositiveExample",
 	        value: function parsePositiveExample(blackAreaLearningSet, example, generalHypothesis, specificHypothesis) {
@@ -9427,7 +9432,9 @@
 	        }
 	    }, {
 	        key: "deleteMoreGeneralHypothesis",
-	        value: function deleteMoreGeneralHypothesis(specificHypothesis, hypothesis) {}
+	        value: function deleteMoreGeneralHypothesis(specificHypothesis, hypothesis) {
+	            if (hypothesis !== null) ;
+	        }
 	    }, {
 	        key: "findPossibleMinimalGeneralizations",
 	        value: function findPossibleMinimalGeneralizations(hypothesis, example) {

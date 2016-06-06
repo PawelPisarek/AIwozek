@@ -1,7 +1,7 @@
 export class CandidateElimination {
 
     constructor() {
-        this.numberOfProperties = 4;
+        this.numberOfProperties = 3;
         // let properties = ["red", "labelled", "middleweight", "solid"];
         // let hazardBigFridgeArea = ["?", "labelled", "?", "?"];
         // let hazardSmallFridge = ["brown", "wooden", "?", "?"];
@@ -13,48 +13,47 @@ export class CandidateElimination {
         // }
         let bigAreaLearningSet = [
 
-            {key:   ["big", "no", "no", "big"], value: true},
-            {key:   ["big", "no", "no", "small"], value: false}
+            {key:   ["big", "no", "no"], value: true},
+            {key:   ["big", "no", "true"], value: false}
         ];
 
         let prepareBigFridgeAreaLearningSet = [
-            {key: ["big", "yes", "no", "big-fridge"], value: true},
-            {key: ["big", "no", "no", "hazard-big"], value: false}
+            {key: ["big", "yes", "no"], value: true},
+            {key: ["big", "no", "no"], value: false}
         ];
 
         let prepareHazardBigLearningSet = [
-            {key: ["big", "no", "yes", "hazard-big"], value: true},
-            {key: ["big", "no", "no", "hazard-big"], value: false}
+            {key: ["big", "no", "yes"], value: true},
+            {key: ["big", "no", "no"], value: false}
         ];
 
         let prepareSmallFridgeAreaLearningSet = [
-            {key:  ["small", "yes", "no", "small-fridge"], value: true},
-            {key:  ["big", "yes", "no", "small-fridge"], value: false}
+            {key:  ["small", "yes", "no"], value: true},
+            {key:  ["small", "yes", "yes"], value: false}
         ];
 
         let prepareSmallAreaLearningSet = [
-            {key:  ["small", "no", "no", "small"], value: true},
-            {key:  ["big", "yes", "no", "small-fridge"], value: false}
+            {key:  ["small", "no", "no"], value: true},
+            {key:   ["big", "no", "no"], value: false}
         ];
 
-
         let hazardBigFridgeAreaLearningSet = [
-            {key: ["big", "yes", "yes", "hazard-big-fridge"], value: true},
-            {key: ["big", "no", "no", "big"], value: false}
+            {key: ["big", "yes", "yes"], value: true},
+            {key: ["small", "yes", "yes"], value: false}
         ];
 
 
         let hazardSmallAreaLearningSet = [
 
-            {key: ["small", "no", "yes", "hazard-small"], value: true},
-            {key: ["big", "no", "no", "hazard-small"], value: false}
+            {key: ["small", "no", "yes"], value: true},
+            {key: ["big", "no", "yes"], value: false}
         ];
 
 
         let hazardSmallFridgeAreaLearningSet = [
 
-            {key: ["small", "yes", "yes", "hazard-small-fridge"], value: true},
-            {key: ["big", "yes", "yes", "hazard-small"], value: false}
+            {key: ["small", "yes", "yes"], value: true},
+            {key: ["big", "yes", "yes"], value: false}
         ];
 
         // console.log(this.lookup(prepareBlackAreaLearningSet, ["gray", "metal", "heavy", "solid"]));
@@ -74,10 +73,12 @@ export class CandidateElimination {
 
         console.log("big area ", this.bigArea);
         console.log("hazard-big-fridge area ", this.hazardBigFridgeArea);
-        console.log("Blue area ", this.bigFridgeArea);
-        console.log("Green area ", this.smallArea);
-        console.log("Yellow area ", this.hazardSmallArea);
-        console.log("Red area ", this.hazardSmallFridge);
+        console.log("bigFridgeArea area ", this.bigFridgeArea);
+        console.log("smallFridgeArea area ", this.smallFridgeArea);
+        console.log("smallArea area ", this.smallArea);
+        console.log("hazardBigArea area ", this.hazardBigArea);
+        console.log("hazardSmallFridge area ", this.hazardSmallFridge);
+        console.log("hazardSmallArea area ", this.hazardSmallArea);
 
 
         var training_data = [
@@ -94,14 +95,14 @@ export class CandidateElimination {
 
 
 
-        let big = ["big", "no", "no", "big"];
-        let hazardbigfridge = ["big", "yes", "yes", "hazard-big-fridge"];
-        let bigFridge = ["big", "yes", "no", "big-fridge"];
-        let smallFridge = ["small", "yes", "no", "small-fridge"];
-        let small = ["small", "no", "no", "small"];
-        let hazardBig = ["big", "no", "yes", "hazard-big"];
-        let hazardSmallFridge = ["small", "yes", "yes", "hazard-small-fridge"];
-        let hazardSmall = ["small", "no", "yes", "hazard-small"];
+        let big = ["big", "no", "no"];
+        let hazardbigfridge = ["big", "yes", "yes"];
+        let bigFridge = ["big", "yes", "no"];
+        let smallFridge = ["small", "yes", "no"];
+        let small = ["small", "no", "no"];
+        let hazardBig = ["big", "no", "yes"];
+        let hazardSmallFridge = ["small", "yes", "yes"];
+        let hazardSmall = ["small", "no", "yes"];
 
         this.findDestinationPlace(hazardSmall);
 
@@ -180,7 +181,7 @@ export class CandidateElimination {
 
     parseNegativeExample(blackAreaLearningSet, example, generalHypothesis, specificHypothesis) {
 
-
+        if (undefined !==example);
     }
 
     parsePositiveExample(blackAreaLearningSet, example, generalHypothesis, specificHypothesis) {
@@ -205,6 +206,7 @@ export class CandidateElimination {
     }
 
     deleteMoreGeneralHypothesis(specificHypothesis, hypothesis) {
+        if (hypothesis !== null);
 
     }
 
