@@ -8836,9 +8836,9 @@
 	        var packager = this.packages.create(this.game.world.randomX, this.game.world.randomY, 'package');
 	        packager.body.setRectangle(32, 32);
 	        packager.propertiesy = {
-	          width: 20,
-	          length: 20,
-	          height: 60,
+	          width: Math.random() * 9 + 1,
+	          length: Math.random() * 9 + 1,
+	          height: Math.random() * 9 + 1,
 	          category: 'AGD'
 	        };
 
@@ -9061,6 +9061,8 @@
 
 	var _oil = __webpack_require__(/*! ../oil */ 296);
 
+	var _ce = __webpack_require__(/*! ../CandidateEliminationLerinig/ce */ 297);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -9105,6 +9107,8 @@
 	        graphics.drawRect(170, 320, 30, 60);
 	        graphics.endFill();
 	        _this.graph = new Graph(_oil.TEST3);
+
+	        var ce = new _ce.CandidateElimination();
 
 	        return _this;
 	    }
@@ -9170,7 +9174,7 @@
 	                        }
 	                    });
 	                    result.shift();
-	                    console.log(result);
+	                    // console.log(result);
 	                })();
 	            }
 
@@ -9214,6 +9218,8 @@
 	                this.loadTexture('forkliftFull', 0);
 	                this.carrying = body2.sprite.propertiesy;
 	                console.log('zabrano paczke: width: ' + body2.sprite.propertiesy['width'] + ' length: ' + body2.sprite.propertiesy['length'] + ' height: ' + body2.sprite.propertiesy['height'] + ' category: ' + body2.sprite.propertiesy['category']);
+	                var classify = myPerceptron.activate([body2.sprite.propertiesy['width'], body2.sprite.propertiesy['length'], body2.sprite.propertiesy['height']]);
+	                console.log('paczka została sklasyfikowala jako: ', classify > 0.5 ? 'Duża' : 'Mała');
 	                body2.sprite.alpha = 0;
 	                body2.destroy();
 	            }
@@ -9242,6 +9248,243 @@
 	var TEST2 = exports.TEST2 = [[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], [1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 100, 100, 100, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1], [1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1], [1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1], [1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1], [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], [1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1], [1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1], [1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1], [1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1], [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]];
 
 	var TEST3 = exports.TEST3 = [[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], [1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 10, 10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1], [1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1], [1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1], [1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1], [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], [1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1], [1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1], [1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1], [1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1], [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]];
+
+/***/ },
+/* 297 */
+/*!***********************************************!*\
+  !*** ./src/CandidateEliminationLerinig/ce.js ***!
+  \***********************************************/
+/***/ function(module, exports) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	var CandidateElimination = exports.CandidateElimination = function () {
+	    function CandidateElimination() {
+	        _classCallCheck(this, CandidateElimination);
+
+	        this.numberOfProperties = 4;
+	        // let properties = ["red", "labelled", "middleweight", "solid"];
+	        // let brownArea = ["?", "labelled", "?", "?"];
+	        // let redArea = ["brown", "wooden", "?", "?"];
+	        // if (this.hypothesisDoesCover(properties, brownArea)) {
+	        //     console.log("Brown");
+	        // }
+	        // if (this.hypothesisDoesCover(properties, redArea)) {
+	        //     console.log("Red");
+	        // }
+	        var prepareBlueAreaLearningSet = [{ key: ["white", "metal", "light", "liquid"], value: true }, { key: ["yellow", "metal", "light", "liquid"], value: true }, { key: ["red", "paper", "light", "liquid"], value: false }, { key: ["gray", "metal", "light", "solid"], value: false }, { key: ["gray", "metal", "heavy", "liquid"], value: true }];
+
+	        var prepareGreenAreaLearningSet = [{ key: ["white", "transparent", "light", "solid"], value: true }, { key: ["yellow", "transparent", "light", "solid"], value: true }, { key: ["red", "paper", "light", "liquid"], value: false }, { key: ["gray", "metal", "light", "liquid"], value: false }, { key: ["gray", "paper", "heavy", "solid"], value: false }, { key: ["red", "transparent", "light", "solid"], value: true }];
+
+	        var prepareBrownAreaLearningSet = [{ key: ["white", "labelled", "light", "solid"], value: true }, { key: ["yellow", "labelled", "light", "solid"], value: true }, { key: ["red", "labelled", "light", "liquid"], value: true }, { key: ["gray", "metal", "light", "liquid"], value: false }, { key: ["gray", "paper", "heavy", "solid"], value: false }, { key: ["red", "labelled", "light", "solid"], value: true }, { key: ["red", "labelled", "heavy", "solid"], value: true }];
+
+	        var prepareYellowAreaLearningSet = [{ key: ["white", "paper", "light", "solid"], value: true }, { key: ["yellow", "paper", "light", "solid"], value: true }, { key: ["red", "paper", "light", "liquid"], value: true }, { key: ["gray", "metal", "light", "liquid"], value: false }, { key: ["gray", "paper", "heavy", "solid"], value: false }, { key: ["red", "paper", "light", "solid"], value: true }];
+
+	        var prepareRedAreaLearningSet = [{ key: ["brown", "wooden", "heavy", "solid"], value: true }, { key: ["yellow", "metal", "heavy", "solid"], value: false }, { key: ["gray", "metal", "light", "solid"], value: false }, { key: ["yellow", "metal", "light", "liquid"], value: false }, { key: ["brown", "wooden", "heavy", "solid"], value: true }, { key: ["brown", "wooden", "light", "liquid"], value: true }, { key: ["red", "metal", "heavy", "solid"], value: false }];
+
+	        var prepareBlackAreaLearningSet = [{ key: ["gray", "metal", "heavy", "solid"], value: true }, { key: ["yellow", "metal", "heavy", "solid"], value: true }, { key: ["gray", "metal", "light", "solid"], value: false }, { key: ["gray", "metal", "heavy", "liquid"], value: false }, { key: ["gray", "wood", "heavy", "solid"], value: false }, { key: ["red", "metal", "heavy", "solid"], value: true }];
+
+	        // console.log(this.lookup(prepareBlackAreaLearningSet, ["gray", "metal", "heavy", "solid"]));
+
+	        // let blackArea = this.learnArea(prepareBlackAreaLearningSet);
+	        // console.log("Black area ", blackArea);
+	        this.blackArea = this.learnArea(prepareBlackAreaLearningSet);
+	        this.blueArea = this.learnArea(prepareBlueAreaLearningSet);
+	        this.greenArea = this.learnArea(prepareGreenAreaLearningSet);
+	        this.brownArea = this.learnArea(prepareBrownAreaLearningSet);
+	        this.yellowArea = this.learnArea(prepareYellowAreaLearningSet);
+	        this.redArea = this.learnArea(prepareRedAreaLearningSet);
+
+	        console.log("Black area ", this.blackArea);
+	        console.log("Blue area ", this.blueArea);
+	        console.log("Green area ", this.greenArea);
+	        console.log("Brown area ", this.brownArea);
+	        console.log("Yellow area ", this.yellowArea);
+	        console.log("Red area ", this.redArea);
+
+	        var green = ["blue", "transparent", "light", "solid"];
+	        var brown = ["red", "labelled", "middleweight", "solid"];
+	        var blue = ["yellow", "metal", "middleweight", "liquid"];
+	        var red = ["brown", "wooden", "heavy", "solid"];
+	        this.findDestinationPlace(blue);
+	    }
+
+	    _createClass(CandidateElimination, [{
+	        key: "findDestinationPlace",
+	        value: function findDestinationPlace(properties) {
+	            console.log("Current case properties: " + properties);
+
+	            if (this.hypothesisDoesCover(properties, this.blackArea)) console.log("Black");
+	            if (this.hypothesisDoesCover(properties, this.blueArea)) console.log("Blue");
+	            if (this.hypothesisDoesCover(properties, this.greenArea)) console.log("Green");
+	            if (this.hypothesisDoesCover(properties, this.yellowArea)) console.log("Yellow");
+	            if (this.hypothesisDoesCover(properties, this.brownArea)) console.log("Brown");
+	            if (this.hypothesisDoesCover(properties, this.redArea)) console.log("Red");
+	        }
+	    }, {
+	        key: "lookup",
+	        value: function lookup(tab, key) {
+	            try {
+	                var lookup = {};
+	                for (var i = 0, len = tab.length; i < len; i++) {
+	                    lookup[tab[i].key] = tab[i];
+	                }
+	                return lookup[key].value;
+	            } catch (e) {
+	                return 'not found ' + key;
+	            }
+	        }
+	    }, {
+	        key: "learnArea",
+	        value: function learnArea(blackAreaLearningSet) {
+	            var _this = this;
+
+	            var generalHypothesis = [];
+	            var specificHypothesis = [];
+
+	            var zgeneralHypothesis = [];
+	            var zspecificHypothesis = [];
+
+	            for (var i = 0; i < 4; i++) {
+	                zgeneralHypothesis.push("?");
+	                zspecificHypothesis.push("0");
+	            }
+
+	            generalHypothesis.push(zgeneralHypothesis);
+	            specificHypothesis.push(zspecificHypothesis);
+
+	            blackAreaLearningSet.forEach(function (example) {
+	                _this.parseExample(blackAreaLearningSet, example, generalHypothesis, specificHypothesis);
+	            });
+
+	            /*
+	             console.log(generalHypothesis[0]);
+	             console.log(specificHypothesis[0]);
+	             */
+
+	            return specificHypothesis[0];
+	        }
+	    }, {
+	        key: "parseExample",
+	        value: function parseExample(blackAreaLearningSet, example, generalHypothesis, specificHypothesis) {
+
+	            if (this.exampleIsPositive(example, blackAreaLearningSet)) {
+
+	                this.parsePositiveExample(blackAreaLearningSet, example, generalHypothesis, specificHypothesis);
+	            } else {
+
+	                this.parseNegativeExample(blackAreaLearningSet, example, generalHypothesis, specificHypothesis);
+	            }
+	        }
+	    }, {
+	        key: "parseNegativeExample",
+	        value: function parseNegativeExample(blackAreaLearningSet, example, generalHypothesis, specificHypothesis) {}
+	    }, {
+	        key: "parsePositiveExample",
+	        value: function parsePositiveExample(blackAreaLearningSet, example, generalHypothesis, specificHypothesis) {
+	            var _this2 = this;
+
+	            generalHypothesis.forEach(function (hypothesis) {
+	                if (!_this2.hypothesisDoesCover(example, hypothesis)) {
+
+	                    console.log(hypothesis + "  doesn't cover", example.key, " so it's deleted (general positive)");
+	                } else {
+	                    console.log(hypothesis + "  does cover", example.key, " (general positive)");
+	                }
+	            });
+
+	            specificHypothesis.forEach(function (hypothesis) {
+	                if (!_this2.hypothesisDoesCover(example, hypothesis)) {
+	                    console.log(hypothesis + "  doesn't cover", example.key, " so it's deleted (specific positive)");
+	                    _this2.removeHypothesis(specificHypothesis, hypothesis);
+	                    _this2.addMinimalGeneralizations(specificHypothesis, hypothesis, generalHypothesis, example);
+	                    _this2.deleteMoreGeneralHypothesis(specificHypothesis, hypothesis);
+	                }
+	            });
+	        }
+	    }, {
+	        key: "deleteMoreGeneralHypothesis",
+	        value: function deleteMoreGeneralHypothesis(specificHypothesis, hypothesis) {}
+	    }, {
+	        key: "findPossibleMinimalGeneralizations",
+	        value: function findPossibleMinimalGeneralizations(hypothesis, example) {
+
+	            var possibleGeneralizations = [];
+
+	            var current = [];
+	            for (var i = 0; i < this.numberOfProperties; i++) {
+	                if (!(hypothesis[i] === example.key[i]) && !(hypothesis[i] === "0")) {
+	                    current.push("?");
+	                } else {
+
+	                    current.push(example.key[i]);
+	                }
+	            }
+
+	            possibleGeneralizations.push(current);
+
+	            return possibleGeneralizations;
+	        }
+	    }, {
+	        key: "addMinimalGeneralizations",
+	        value: function addMinimalGeneralizations(specificHypothesis, hypothesis, generalHypothesis, example) {
+	            var _this3 = this;
+
+	            var possibleMinimalGeneralizations = this.findPossibleMinimalGeneralizations(hypothesis, example);
+
+	            possibleMinimalGeneralizations.forEach(function (possibleGeneralization) {
+
+	                if (_this3.generalHasMoreGeneralHypothesis(possibleGeneralization, generalHypothesis)) {
+
+	                    specificHypothesis.push(possibleGeneralization);
+	                }
+	            });
+	        }
+	    }, {
+	        key: "generalHasMoreGeneralHypothesis",
+	        value: function generalHasMoreGeneralHypothesis(possibleGeneralization, generalHypothesis) {
+	            return true;
+	        }
+	    }, {
+	        key: "removeHypothesis",
+	        value: function removeHypothesis(specificHypothesis, hypothesis) {
+	            var index = specificHypothesis.indexOf(hypothesis);
+	            if (index > -1) {
+	                specificHypothesis.splice(index, 1);
+	            }
+
+	            // specificHypothesis.remove(hypothesis);
+	        }
+	    }, {
+	        key: "exampleIsPositive",
+	        value: function exampleIsPositive(example, learningSet) {
+
+	            return this.lookup(learningSet, example.key);
+	        }
+	    }, {
+	        key: "hypothesisDoesCover",
+	        value: function hypothesisDoesCover(example, hypothesis) {
+
+	            for (var i = 0; i < 4; i++) {
+	                if (!(hypothesis[i] === example[i]) && !(hypothesis[i] === "?")) {
+
+	                    return false;
+	                }
+	            }
+	            return true;
+	        }
+	    }]);
+
+	    return CandidateElimination;
+	}();
 
 /***/ }
 /******/ ]);

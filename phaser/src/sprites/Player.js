@@ -1,5 +1,6 @@
 import Phaser from 'phaser'
-import {TEST1,TEST2,TEST3} from '../oil'
+import {TEST1, TEST2, TEST3} from '../oil'
+import {CandidateElimination} from '../CandidateEliminationLerinig/ce'
 
 export default class extends Phaser.Sprite {
 
@@ -29,6 +30,7 @@ export default class extends Phaser.Sprite {
         graphics.endFill();
         this.graph = new Graph(TEST3);
 
+        let ce = new CandidateElimination();
 
 
     }
@@ -94,7 +96,7 @@ export default class extends Phaser.Sprite {
                 }
             });
             result.shift();
-            console.log(result);
+            // console.log(result);
         }
 
         if(this.game.input.keyboard.isDown(Phaser.Keyboard.P))
