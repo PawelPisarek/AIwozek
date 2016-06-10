@@ -39,7 +39,7 @@ export default class extends Phaser.State {
       var randomX = this.game.world.randomX;
       var randomY = this.game.world.randomY;
 
-      var packager = this.packages.create(randomX, randomY, 'package');
+      var packager = this.packages.create(randomX, randomY, 'package'+(i+1));
       packager.body.setRectangle(32, 32);
       packager.propertiesy = {
         width: 20,
@@ -52,7 +52,7 @@ export default class extends Phaser.State {
 
       packager.body.setCollisionGroup(this.collidesPPS.packageCollisionGroup);
 
-      packager.body.collides([this.collidesPPS.packageCollisionGroup, this.collidesPPS.playerCollisionGroup, this.collidesPPS.shelfCollisionGroup]);
+      packager.body.collides([this.collidesPPS.playerCollisionGroup, this.collidesPPS.shelfCollisionGroup]);
     }
     let shelf1 = new Shelf({
       game: this.game,

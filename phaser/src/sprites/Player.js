@@ -12,6 +12,11 @@ export default class extends Phaser.Sprite {
 
         this.packagesCoords=packageArr;
         this.racksCoords=rackArr;
+        var modTest=TEST3;
+        for(var i=0; i<this.packagesCoords.length; i++)
+        {
+            modTest[this.packagesCoords[i][0]][this.packagesCoords[i][1]] = 100;
+        }
 
         this.game.physics.p2.enable(this, false);
 
@@ -30,7 +35,7 @@ export default class extends Phaser.Sprite {
         graphics.beginFill(0x000000, 0.5);
         graphics.drawRect(170, 320, 30,60);
         graphics.endFill();
-        this.graph = new Graph(TEST3);
+        this.graph = new Graph(modTest);
 
         var graph={};
         graph[0]={};

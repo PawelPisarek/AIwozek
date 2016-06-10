@@ -8854,6 +8854,10 @@
 	      //
 	      this.load.image('shelf', 'assets/images/shelf.png');
 	      this.load.image('package', 'assets/images/package.png');
+	      this.load.image('package1', 'assets/images/package1.png');
+	      this.load.image('package2', 'assets/images/package2.png');
+	      this.load.image('package3', 'assets/images/package3.png');
+	      this.load.image('package4', 'assets/images/package4.png');
 	      this.load.image('forkliftEmpty', 'assets/images/forklift_empty.png');
 	      this.load.image('forkliftFull', 'assets/images/forklift_full.png');
 	      this.load.physics('shelfPolygon', 'assets/images/shelfPolygon.json');
@@ -8988,7 +8992,7 @@
 	        var randomX = this.game.world.randomX;
 	        var randomY = this.game.world.randomY;
 
-	        var packager = this.packages.create(randomX, randomY, 'package');
+	        var packager = this.packages.create(randomX, randomY, 'package' + (i + 1));
 	        packager.body.setRectangle(32, 32);
 	        packager.propertiesy = {
 	          width: 20,
@@ -9001,7 +9005,7 @@
 
 	        packager.body.setCollisionGroup(this.collidesPPS.packageCollisionGroup);
 
-	        packager.body.collides([this.collidesPPS.packageCollisionGroup, this.collidesPPS.playerCollisionGroup, this.collidesPPS.shelfCollisionGroup]);
+	        packager.body.collides([this.collidesPPS.playerCollisionGroup, this.collidesPPS.shelfCollisionGroup]);
 	      }
 	      var shelf1 = new _Shelf2.default({
 	        game: this.game,
@@ -9255,6 +9259,10 @@
 
 	        _this.packagesCoords = packageArr;
 	        _this.racksCoords = rackArr;
+	        var modTest = _oil.TEST3;
+	        for (var i = 0; i < _this.packagesCoords.length; i++) {
+	            modTest[_this.packagesCoords[i][0]][_this.packagesCoords[i][1]] = 100;
+	        }
 
 	        _this.game.physics.p2.enable(_this, false);
 
@@ -9273,7 +9281,7 @@
 	        graphics.beginFill(0x000000, 0.5);
 	        graphics.drawRect(170, 320, 30, 60);
 	        graphics.endFill();
-	        _this.graph = new Graph(_oil.TEST3);
+	        _this.graph = new Graph(modTest);
 
 	        var graph = {};
 	        graph[0] = {};
