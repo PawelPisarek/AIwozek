@@ -3,6 +3,7 @@ import Shelf from '../sprites/Shelf';
 import PlayerPackageShelfCollisionGroup from '../CollisionGroup/PlayerPackageShelfCollisionGroup'
 import Player from '../sprites/Player'
 import {setResponsiveWidth} from '../utils'
+import {TEST1,TEST2,TEST3} from '../oil'
 
 export default class extends Phaser.State {
   init () {}
@@ -10,8 +11,210 @@ export default class extends Phaser.State {
 
   create () {
     this.game.physics.startSystem(Phaser.Physics.P2JS);
+	//POCZATEK KODU Z DRZEWEM
+	var DecisionTree = require('decision-tree');
 
+	var training_data = [
+		{"size":"tiny", "color":"black", "refrigerated":"yes", "hazardous":"yes", "food":"yes", "shelf":"hazard"},
+		{"size":"tiny", "color":"black", "refrigerated":"yes", "hazardous":"yes", "food":"no", "shelf":"hazard"},
+		{"size":"tiny", "color":"black", "refrigerated":"yes", "hazardous":"no", "food":"yes", "shelf":"food"},
+		{"size":"tiny", "color":"black", "refrigerated":"yes", "hazardous":"no", "food":"no", "shelf":"small"},
+		{"size":"tiny", "color":"black", "refrigerated":"no", "hazardous":"yes", "food":"yes", "shelf":"hazard"},
+		{"size":"tiny", "color":"black", "refrigerated":"no", "hazardous":"yes", "food":"no", "shelf":"hazard"},
+		{"size":"tiny", "color":"black", "refrigerated":"no", "hazardous":"no", "food":"yes", "shelf":"food"},
+		{"size":"tiny", "color":"black", "refrigerated":"no", "hazardous":"no", "food":"no", "shelf":"small"},
+		{"size":"tiny", "color":"red", "refrigerated":"yes", "hazardous":"yes", "food":"yes", "shelf":"hazard"},
+		{"size":"tiny", "color":"red", "refrigerated":"yes", "hazardous":"yes", "food":"no", "shelf":"hazard"},
+		{"size":"tiny", "color":"red", "refrigerated":"yes", "hazardous":"no", "food":"yes", "shelf":"food"},
+		{"size":"tiny", "color":"red", "refrigerated":"yes", "hazardous":"no", "food":"no", "shelf":"small"},
+		{"size":"tiny", "color":"red", "refrigerated":"no", "hazardous":"yes", "food":"yes", "shelf":"hazard"},
+		{"size":"tiny", "color":"red", "refrigerated":"no", "hazardous":"yes", "food":"no", "shelf":"hazard"},
+		{"size":"tiny", "color":"red", "refrigerated":"no", "hazardous":"no", "food":"yes", "shelf":"food"},
+		{"size":"tiny", "color":"red", "refrigerated":"no", "hazardous":"no", "food":"no", "shelf":"small"},
+		{"size":"tiny", "color":"yellow", "refrigerated":"yes", "hazardous":"yes", "food":"yes", "shelf":"hazard"},
+		{"size":"tiny", "color":"yellow", "refrigerated":"yes", "hazardous":"yes", "food":"no", "shelf":"hazard"},
+		{"size":"tiny", "color":"yellow", "refrigerated":"yes", "hazardous":"no", "food":"yes", "shelf":"food"},
+		{"size":"tiny", "color":"yellow", "refrigerated":"yes", "hazardous":"no", "food":"no", "shelf":"small"},
+		{"size":"tiny", "color":"yellow", "refrigerated":"no", "hazardous":"yes", "food":"yes", "shelf":"hazard"},
+		{"size":"tiny", "color":"yellow", "refrigerated":"no", "hazardous":"yes", "food":"no", "shelf":"hazard"},
+		{"size":"tiny", "color":"yellow", "refrigerated":"no", "hazardous":"no", "food":"yes", "shelf":"food"},
+		{"size":"tiny", "color":"yellow", "refrigerated":"no", "hazardous":"no", "food":"no", "shelf":"small"},
+		{"size":"tiny", "color":"blue", "refrigerated":"yes", "hazardous":"yes", "food":"yes", "shelf":"hazard"},
+		{"size":"tiny", "color":"blue", "refrigerated":"yes", "hazardous":"yes", "food":"no", "shelf":"hazard"},
+		{"size":"tiny", "color":"blue", "refrigerated":"yes", "hazardous":"no", "food":"yes", "shelf":"food"},
+		{"size":"tiny", "color":"blue", "refrigerated":"yes", "hazardous":"no", "food":"no", "shelf":"small"},
+		{"size":"tiny", "color":"blue", "refrigerated":"no", "hazardous":"yes", "food":"yes", "shelf":"hazard"},
+		{"size":"tiny", "color":"blue", "refrigerated":"no", "hazardous":"yes", "food":"no", "shelf":"hazard"},
+		{"size":"tiny", "color":"blue", "refrigerated":"no", "hazardous":"no", "food":"yes", "shelf":"food"},
+		{"size":"tiny", "color":"blue", "refrigerated":"no", "hazardous":"no", "food":"no", "shelf":"small"},
+		{"size":"tiny", "color":"green", "refrigerated":"yes", "hazardous":"yes", "food":"yes", "shelf":"hazard"},
+		{"size":"tiny", "color":"green", "refrigerated":"yes", "hazardous":"yes", "food":"no", "shelf":"hazard"},
+		{"size":"tiny", "color":"green", "refrigerated":"yes", "hazardous":"no", "food":"yes", "shelf":"food"},
+		{"size":"tiny", "color":"green", "refrigerated":"yes", "hazardous":"no", "food":"no", "shelf":"small"},
+		{"size":"tiny", "color":"green", "refrigerated":"no", "hazardous":"yes", "food":"yes", "shelf":"hazard"},
+		{"size":"tiny", "color":"green", "refrigerated":"no", "hazardous":"yes", "food":"no", "shelf":"hazard"},
+		{"size":"tiny", "color":"green", "refrigerated":"no", "hazardous":"no", "food":"yes", "shelf":"food"},
+		{"size":"tiny", "color":"green", "refrigerated":"no", "hazardous":"no", "food":"no", "shelf":"small"},
+		{"size":"small", "color":"black", "refrigerated":"yes", "hazardous":"yes", "food":"yes", "shelf":"hazard"},
+		{"size":"small", "color":"black", "refrigerated":"yes", "hazardous":"yes", "food":"no", "shelf":"hazard"},
+		{"size":"small", "color":"black", "refrigerated":"yes", "hazardous":"no", "food":"yes", "shelf":"food"},
+		{"size":"small", "color":"black", "refrigerated":"yes", "hazardous":"no", "food":"no", "shelf":"small"},
+		{"size":"small", "color":"black", "refrigerated":"no", "hazardous":"yes", "food":"yes", "shelf":"hazard"},
+		{"size":"small", "color":"black", "refrigerated":"no", "hazardous":"yes", "food":"no", "shelf":"hazard"},
+		{"size":"small", "color":"black", "refrigerated":"no", "hazardous":"no", "food":"yes", "shelf":"food"},
+		{"size":"small", "color":"black", "refrigerated":"no", "hazardous":"no", "food":"no", "shelf":"small"},
+		{"size":"small", "color":"red", "refrigerated":"yes", "hazardous":"yes", "food":"yes", "shelf":"hazard"},
+		{"size":"small", "color":"red", "refrigerated":"yes", "hazardous":"yes", "food":"no", "shelf":"hazard"},
+		{"size":"small", "color":"red", "refrigerated":"yes", "hazardous":"no", "food":"yes", "shelf":"food"},
+		{"size":"small", "color":"red", "refrigerated":"yes", "hazardous":"no", "food":"no", "shelf":"small"},
+		{"size":"small", "color":"red", "refrigerated":"no", "hazardous":"yes", "food":"yes", "shelf":"hazard"},
+		{"size":"small", "color":"red", "refrigerated":"no", "hazardous":"yes", "food":"no", "shelf":"hazard"},
+		{"size":"small", "color":"red", "refrigerated":"no", "hazardous":"no", "food":"yes", "shelf":"food"},
+		{"size":"small", "color":"red", "refrigerated":"no", "hazardous":"no", "food":"no", "shelf":"small"},
+		{"size":"small", "color":"yellow", "refrigerated":"yes", "hazardous":"yes", "food":"yes", "shelf":"hazard"},
+		{"size":"small", "color":"yellow", "refrigerated":"yes", "hazardous":"yes", "food":"no", "shelf":"hazard"},
+		{"size":"small", "color":"yellow", "refrigerated":"yes", "hazardous":"no", "food":"yes", "shelf":"food"},
+		{"size":"small", "color":"yellow", "refrigerated":"yes", "hazardous":"no", "food":"no", "shelf":"small"},
+		{"size":"small", "color":"yellow", "refrigerated":"no", "hazardous":"yes", "food":"yes", "shelf":"hazard"},
+		{"size":"small", "color":"yellow", "refrigerated":"no", "hazardous":"yes", "food":"no", "shelf":"hazard"},
+		{"size":"small", "color":"yellow", "refrigerated":"no", "hazardous":"no", "food":"yes", "shelf":"food"},
+		{"size":"small", "color":"yellow", "refrigerated":"no", "hazardous":"no", "food":"no", "shelf":"small"},
+		{"size":"small", "color":"blue", "refrigerated":"yes", "hazardous":"yes", "food":"yes", "shelf":"hazard"},
+		{"size":"small", "color":"blue", "refrigerated":"yes", "hazardous":"yes", "food":"no", "shelf":"hazard"},
+		{"size":"small", "color":"blue", "refrigerated":"yes", "hazardous":"no", "food":"yes", "shelf":"food"},
+		{"size":"small", "color":"blue", "refrigerated":"yes", "hazardous":"no", "food":"no", "shelf":"small"},
+		{"size":"small", "color":"blue", "refrigerated":"no", "hazardous":"yes", "food":"yes", "shelf":"hazard"},
+		{"size":"small", "color":"blue", "refrigerated":"no", "hazardous":"yes", "food":"no", "shelf":"hazard"},
+		{"size":"small", "color":"blue", "refrigerated":"no", "hazardous":"no", "food":"yes", "shelf":"food"},
+		{"size":"small", "color":"blue", "refrigerated":"no", "hazardous":"no", "food":"no", "shelf":"small"},
+		{"size":"small", "color":"green", "refrigerated":"yes", "hazardous":"yes", "food":"yes", "shelf":"hazard"},
+		{"size":"small", "color":"green", "refrigerated":"yes", "hazardous":"yes", "food":"no", "shelf":"hazard"},
+		{"size":"small", "color":"green", "refrigerated":"yes", "hazardous":"no", "food":"yes", "shelf":"food"},
+		{"size":"small", "color":"green", "refrigerated":"yes", "hazardous":"no", "food":"no", "shelf":"small"},
+		{"size":"small", "color":"green", "refrigerated":"no", "hazardous":"yes", "food":"yes", "shelf":"hazard"},
+		{"size":"small", "color":"green", "refrigerated":"no", "hazardous":"yes", "food":"no", "shelf":"hazard"},
+		{"size":"small", "color":"green", "refrigerated":"no", "hazardous":"no", "food":"yes", "shelf":"food"},
+		{"size":"small", "color":"green", "refrigerated":"no", "hazardous":"no", "food":"no", "shelf":"small"},
+		{"size":"big", "color":"black", "refrigerated":"yes", "hazardous":"yes", "food":"yes", "shelf":"hazard"},
+		{"size":"big", "color":"black", "refrigerated":"yes", "hazardous":"yes", "food":"no", "shelf":"hazard"},
+		{"size":"big", "color":"black", "refrigerated":"yes", "hazardous":"no", "food":"yes", "shelf":"food"},
+		{"size":"big", "color":"black", "refrigerated":"yes", "hazardous":"no", "food":"no", "shelf":"big"},
+		{"size":"big", "color":"black", "refrigerated":"no", "hazardous":"yes", "food":"yes", "shelf":"hazard"},
+		{"size":"big", "color":"black", "refrigerated":"no", "hazardous":"yes", "food":"no", "shelf":"hazard"},
+		{"size":"big", "color":"black", "refrigerated":"no", "hazardous":"no", "food":"yes", "shelf":"food"},
+		{"size":"big", "color":"black", "refrigerated":"no", "hazardous":"no", "food":"no", "shelf":"big"},
+		{"size":"big", "color":"red", "refrigerated":"yes", "hazardous":"yes", "food":"yes", "shelf":"hazard"},
+		{"size":"big", "color":"red", "refrigerated":"yes", "hazardous":"yes", "food":"no", "shelf":"hazard"},
+		{"size":"big", "color":"red", "refrigerated":"yes", "hazardous":"no", "food":"yes", "shelf":"food"},
+		{"size":"big", "color":"red", "refrigerated":"yes", "hazardous":"no", "food":"no", "shelf":"big"},
+		{"size":"big", "color":"red", "refrigerated":"no", "hazardous":"yes", "food":"yes", "shelf":"hazard"},
+		{"size":"big", "color":"red", "refrigerated":"no", "hazardous":"yes", "food":"no", "shelf":"hazard"},
+		{"size":"big", "color":"red", "refrigerated":"no", "hazardous":"no", "food":"yes", "shelf":"food"},
+		{"size":"big", "color":"red", "refrigerated":"no", "hazardous":"no", "food":"no", "shelf":"big"},
+		{"size":"big", "color":"yellow", "refrigerated":"yes", "hazardous":"yes", "food":"yes", "shelf":"hazard"},
+		{"size":"big", "color":"yellow", "refrigerated":"yes", "hazardous":"yes", "food":"no", "shelf":"hazard"},
+		{"size":"big", "color":"yellow", "refrigerated":"yes", "hazardous":"no", "food":"yes", "shelf":"food"},
+		{"size":"big", "color":"yellow", "refrigerated":"yes", "hazardous":"no", "food":"no", "shelf":"big"},
+		{"size":"big", "color":"yellow", "refrigerated":"no", "hazardous":"yes", "food":"yes", "shelf":"hazard"},
+		{"size":"big", "color":"yellow", "refrigerated":"no", "hazardous":"yes", "food":"no", "shelf":"hazard"},
+		{"size":"big", "color":"yellow", "refrigerated":"no", "hazardous":"no", "food":"yes", "shelf":"food"},
+		{"size":"big", "color":"yellow", "refrigerated":"no", "hazardous":"no", "food":"no", "shelf":"big"},
+		{"size":"big", "color":"blue", "refrigerated":"yes", "hazardous":"yes", "food":"yes", "shelf":"hazard"},
+		{"size":"big", "color":"blue", "refrigerated":"yes", "hazardous":"yes", "food":"no", "shelf":"hazard"},
+		{"size":"big", "color":"blue", "refrigerated":"yes", "hazardous":"no", "food":"yes", "shelf":"food"},
+		{"size":"big", "color":"blue", "refrigerated":"yes", "hazardous":"no", "food":"no", "shelf":"big"},
+		{"size":"big", "color":"blue", "refrigerated":"no", "hazardous":"yes", "food":"yes", "shelf":"hazard"},
+		{"size":"big", "color":"blue", "refrigerated":"no", "hazardous":"yes", "food":"no", "shelf":"hazard"},
+		{"size":"big", "color":"blue", "refrigerated":"no", "hazardous":"no", "food":"yes", "shelf":"food"},
+		{"size":"big", "color":"blue", "refrigerated":"no", "hazardous":"no", "food":"no", "shelf":"big"},
+		{"size":"big", "color":"green", "refrigerated":"yes", "hazardous":"yes", "food":"yes", "shelf":"hazard"},
+		{"size":"big", "color":"green", "refrigerated":"yes", "hazardous":"yes", "food":"no", "shelf":"hazard"},
+		{"size":"big", "color":"green", "refrigerated":"yes", "hazardous":"no", "food":"yes", "shelf":"food"},
+		{"size":"big", "color":"green", "refrigerated":"yes", "hazardous":"no", "food":"no", "shelf":"big"},
+		{"size":"big", "color":"green", "refrigerated":"no", "hazardous":"yes", "food":"yes", "shelf":"hazard"},
+		{"size":"big", "color":"green", "refrigerated":"no", "hazardous":"yes", "food":"no", "shelf":"hazard"},
+		{"size":"big", "color":"green", "refrigerated":"no", "hazardous":"no", "food":"yes", "shelf":"food"},
+		{"size":"big", "color":"green", "refrigerated":"no", "hazardous":"no", "food":"no", "shelf":"big"},
+		{"size":"huge", "color":"black", "refrigerated":"yes", "hazardous":"yes", "food":"yes", "shelf":"hazard"},
+		{"size":"huge", "color":"black", "refrigerated":"yes", "hazardous":"yes", "food":"no", "shelf":"hazard"},
+		{"size":"huge", "color":"black", "refrigerated":"yes", "hazardous":"no", "food":"yes", "shelf":"food"},
+		{"size":"huge", "color":"black", "refrigerated":"yes", "hazardous":"no", "food":"no", "shelf":"big"},
+		{"size":"huge", "color":"black", "refrigerated":"no", "hazardous":"yes", "food":"yes", "shelf":"hazard"},
+		{"size":"huge", "color":"black", "refrigerated":"no", "hazardous":"yes", "food":"no", "shelf":"hazard"},
+		{"size":"huge", "color":"black", "refrigerated":"no", "hazardous":"no", "food":"yes", "shelf":"food"},
+		{"size":"huge", "color":"black", "refrigerated":"no", "hazardous":"no", "food":"no", "shelf":"big"},
+		{"size":"huge", "color":"red", "refrigerated":"yes", "hazardous":"yes", "food":"yes", "shelf":"hazard"},
+		{"size":"huge", "color":"red", "refrigerated":"yes", "hazardous":"yes", "food":"no", "shelf":"hazard"},
+		{"size":"huge", "color":"red", "refrigerated":"yes", "hazardous":"no", "food":"yes", "shelf":"food"},
+		{"size":"huge", "color":"red", "refrigerated":"yes", "hazardous":"no", "food":"no", "shelf":"big"},
+		{"size":"huge", "color":"red", "refrigerated":"no", "hazardous":"yes", "food":"yes", "shelf":"hazard"},
+		{"size":"huge", "color":"red", "refrigerated":"no", "hazardous":"yes", "food":"no", "shelf":"hazard"},
+		{"size":"huge", "color":"red", "refrigerated":"no", "hazardous":"no", "food":"yes", "shelf":"food"},
+		{"size":"huge", "color":"red", "refrigerated":"no", "hazardous":"no", "food":"no", "shelf":"big"},
+		{"size":"huge", "color":"yellow", "refrigerated":"yes", "hazardous":"yes", "food":"yes", "shelf":"hazard"},
+		{"size":"huge", "color":"yellow", "refrigerated":"yes", "hazardous":"yes", "food":"no", "shelf":"hazard"},
+		{"size":"huge", "color":"yellow", "refrigerated":"yes", "hazardous":"no", "food":"yes", "shelf":"food"},
+		{"size":"huge", "color":"yellow", "refrigerated":"yes", "hazardous":"no", "food":"no", "shelf":"big"},
+		{"size":"huge", "color":"yellow", "refrigerated":"no", "hazardous":"yes", "food":"yes", "shelf":"hazard"},
+		{"size":"huge", "color":"yellow", "refrigerated":"no", "hazardous":"yes", "food":"no", "shelf":"hazard"},
+		{"size":"huge", "color":"yellow", "refrigerated":"no", "hazardous":"no", "food":"yes", "shelf":"food"},
+		{"size":"huge", "color":"yellow", "refrigerated":"no", "hazardous":"no", "food":"no", "shelf":"big"},
+		{"size":"huge", "color":"blue", "refrigerated":"yes", "hazardous":"yes", "food":"yes", "shelf":"hazard"},
+		{"size":"huge", "color":"blue", "refrigerated":"yes", "hazardous":"yes", "food":"no", "shelf":"hazard"},
+		{"size":"huge", "color":"blue", "refrigerated":"yes", "hazardous":"no", "food":"yes", "shelf":"food"},
+		{"size":"huge", "color":"blue", "refrigerated":"yes", "hazardous":"no", "food":"no", "shelf":"big"},
+		{"size":"huge", "color":"blue", "refrigerated":"no", "hazardous":"yes", "food":"yes", "shelf":"hazard"},
+		{"size":"huge", "color":"blue", "refrigerated":"no", "hazardous":"yes", "food":"no", "shelf":"hazard"},
+		{"size":"huge", "color":"blue", "refrigerated":"no", "hazardous":"no", "food":"yes", "shelf":"food"},
+		{"size":"huge", "color":"blue", "refrigerated":"no", "hazardous":"no", "food":"no", "shelf":"big"},
+		{"size":"huge", "color":"green", "refrigerated":"yes", "hazardous":"yes", "food":"yes", "shelf":"hazard"},
+		{"size":"huge", "color":"green", "refrigerated":"yes", "hazardous":"yes", "food":"no", "shelf":"hazard"},
+		{"size":"huge", "color":"green", "refrigerated":"yes", "hazardous":"no", "food":"yes", "shelf":"food"},
+		{"size":"huge", "color":"green", "refrigerated":"yes", "hazardous":"no", "food":"no", "shelf":"big"},
+		{"size":"huge", "color":"green", "refrigerated":"no", "hazardous":"yes", "food":"yes", "shelf":"hazard"},
+		{"size":"huge", "color":"green", "refrigerated":"no", "hazardous":"yes", "food":"no", "shelf":"hazard"},
+		{"size":"huge", "color":"green", "refrigerated":"no", "hazardous":"no", "food":"yes", "shelf":"food"},
+		{"size":"huge", "color":"green", "refrigerated":"no", "hazardous":"no", "food":"no", "shelf":"big"}
 
+	];
+	
+	var test_data = [
+		{"size":"tiny", "color":"red", "refrigerated":"yes", "hazardous":"no", "food":"no", "shelf":"small"},
+		{"size":"huge", "color":"blue", "refrigerated":"no", "hazardous":"no", "food":"no", "shelf":"big"},
+		{"size":"tiny", "color":"green", "refrigerated":"no", "hazardous":"yes", "food":"no", "shelf":"hazard"},
+		{"size":"small", "color":"black", "refrigerated":"no", "hazardous":"no", "food":"yes", "shelf":"food"}
+	];
+	
+	
+	var class_name = "shelf";
+	var features = ["size", "color", "refrigerated","hazardous","food"];
+	
+	var dt = new DecisionTree(training_data, class_name, features);
+
+	var predicted_class = dt.predict({
+		size: "small",
+		color: "no",
+		ed: "yes",
+		hazardous: "no",
+		food: "yes"
+	});
+	
+	var accuracy = dt.evaluate(test_data);
+	var treeModel = dt.toJSON();
+	
+	console.log('##############################');
+	console.log(treeModel);
+	console.log('###############################');
+	console.log(accuracy);
+	console.log('##############################');
+	console.log(predicted_class);
+	console.log('##############################');
+	//console.log(dt);
+	//console.log('##############################');
+	
+	//KONIEC KODU Z DRZEWEM
+	
+	
     this.game.physics.p2.setImpactEvents(true);
 
     this.game.physics.p2.restitution = 0.8;
@@ -19,31 +222,54 @@ export default class extends Phaser.State {
     this.collidesPPS = new PlayerPackageShelfCollisionGroup({
       playerCollisionGroup: this.game.physics.p2.createCollisionGroup(),
       packageCollisionGroup: this.game.physics.p2.createCollisionGroup(),
-      shelfCollisionGroup: this.game.physics.p2.createCollisionGroup()
+      shelfCollisionGroup: this.game.physics.p2.createCollisionGroup(),
+	  playerFullCollisionGroup: this.game.physics.p2.createCollisionGroup()
     });
 
     this.game.physics.p2.updateBoundsCollisionGroup();
-    
+
+
+
+
+
     this.packages = this.game.add.group();
     this.packages.enableBody = true;
     this.packages.physicsBodyType = Phaser.Physics.P2JS;
 
-
+    this.packagesCoords=[];
     for (var i = 0; i < 4; i++)
     {
-      var packager = this.packages.create(this.game.world.randomX, this.game.world.randomY, 'package');
-      packager.body.setRectangle(32, 32);
+      var random = this.recursiveRandomCoordsSearch();
+	  var randomX = random[0];
+	  var randomY = random[1];
+
+	  if(randomX <= 32)
+		  randomX+=32;
+	  else if(randomX >= 768)
+		  randomX-=32;
+
+	  if(randomY <= 32)
+		  randomY+=32;
+	  else if(randomY >= 768)
+		  randomX-=32;
+
+	  console.log(randomX+" "+randomY);
+      var packager = this.packages.create(randomX, randomY, 'package');
+      packager.body.setRectangle(19, 19);
       packager.propertiesy = {
-        width: Math.random() * 9 + 1,
-        length: Math.random() * 9 + 1,
-        height: Math.random() * 9 + 1,
-        category: 'AGD'
+        width: 20,
+        length: 20,
+        height: 60,
+        category: 'AGD',
       };
 
+      this.packagesCoords.push([Math.floor(randomX / 20), Math.floor(randomY / 20)]);
+	  console.log((Math.ceil(randomX / 20))+" "+(Math.ceil(randomY / 20)));
       packager.body.setCollisionGroup(this.collidesPPS.packageCollisionGroup);
 
-      packager.body.collides([this.collidesPPS.packageCollisionGroup, this.collidesPPS.playerCollisionGroup, this.collidesPPS.shelfCollisionGroup]);
+      packager.body.collides([ this.collidesPPS.playerCollisionGroup, this.collidesPPS.shelfCollisionGroup]);
     }
+	
     let shelf1 = new Shelf({
       game: this.game,
       x: 200,
@@ -56,7 +282,7 @@ export default class extends Phaser.State {
       game: this.game,
       x: 600,
       y: 200,
-      asset: 'shelf',
+      asset: 'fridge',
       collides: this.collidesPPS
     });
 
@@ -64,7 +290,7 @@ export default class extends Phaser.State {
       game: this.game,
       x: 200,
       y: 500,
-      asset: 'shelf',
+      asset: 'hazard',
       collides: this.collidesPPS
     });
 
@@ -72,19 +298,26 @@ export default class extends Phaser.State {
       game: this.game,
       x: 600,
       y: 500,
-      asset: 'shelf',
+      asset: 'haz-fri',
       collides: this.collidesPPS
     });
+    this.racksCoords=[];
+    this.racksCoords.push([Math.ceil(159 / 20)-1, Math.ceil(159 / 20)-1]);
+    this.racksCoords.push([Math.ceil(559 / 20)-1, Math.ceil(159 / 20)-1]);
+    this.racksCoords.push([Math.ceil(159 / 20)-1, Math.ceil(559 / 20)-1]);
+    this.racksCoords.push([Math.ceil(559 / 20)-1, Math.ceil(459 / 20)-1]);
 
     [shelf1, shelf2, shelf3, shelf4].forEach((shelf)=>this.game.add.existing(shelf));
 
 
     this.player = new Player({
       game: this.game,
-      x: 765,
-      y: 720,
+      x: 750,
+      y: 710,
       asset: 'forkliftEmpty',
-      collides: this.collidesPPS
+      collides: this.collidesPPS,
+      packageArr: this.packagesCoords,
+      rackArr: this.racksCoords
     });
 
     this.game.add.existing(this.player);
@@ -95,6 +328,7 @@ export default class extends Phaser.State {
 
 
   }
+
 
   togglePause() {
 
@@ -119,10 +353,52 @@ export default class extends Phaser.State {
 
   }
 
+  recursiveRandomCoordsSearch()
+  {
+	  console.log("new try");
+	  var pickedX = this.game.world.randomX;
+	  var pickedY = this.game.world.randomY;
+
+	  if(pickedX <= 20)
+		  return this.recursiveRandomCoordsSearch();
+	  else if(pickedY <= 200)
+		  return this.recursiveRandomCoordsSearch();
+	  else if(pickedX >= 780)
+		  return this.recursiveRandomCoordsSearch();
+	  else if(pickedY >= 780)
+		  return this.recursiveRandomCoordsSearch();
+	  else if(pickedX >= 145 && pickedX <=255 && pickedY >= 68 && pickedY <= 332)
+		  return this.recursiveRandomCoordsSearch();
+	  else if(pickedX >= 545 && pickedX <= 655 && pickedY >= 68 && pickedY <= 332 )
+		  return this.recursiveRandomCoordsSearch();
+	  else if(pickedX >= 145 && pickedX <= 255 && pickedY >= 368 && pickedY <= 632)
+		  return this.recursiveRandomCoordsSearch();
+	  else if(pickedX >= 545 && pickedX <= 655 && pickedY >= 368 && pickedY <= 632)
+		  return this.recursiveRandomCoordsSearch();
+	  else
+	  {
+		  if(pickedX%20 < 10)
+			  pickedX-=pickedX%20;
+		  else if(pickedX%20 >=10)
+			  pickedX+=20-(pickedX%20);
+
+		  if(pickedY%20 < 10)
+			  pickedY-=pickedY%20;
+		  else if(pickedY%20 >=10)
+			  pickedY+=20-(pickedY%20);
+
+		  return [pickedX+10, pickedY+10];
+	  }
+
+
+  }
+
   render () {
     if (__DEV__) {
       this.game.debug.spriteInfo(this.player, 32, 32);
-      this.game.debug.text('na spacje zrzut paczki', 180, 180)
-    }
+	  this.game.debug.text('na spacje zrzut paczki', 180, 180)
+	}
   }
+
+
 }
