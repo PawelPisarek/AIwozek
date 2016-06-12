@@ -33,6 +33,12 @@ export default class extends Phaser.State {
     this.packages.enableBody = true;
     this.packages.physicsBodyType = Phaser.Physics.P2JS;
 
+
+	var firstpack = {size: "big", color: "red", "refrigerated": "yes", hazardous: "yes", food: "no"};
+	var secondpack = {size: "small", color: "blue", "refrigerated": "no", hazardous: "no", food: "yes"};
+	var thirdpack = {size: "big", color: "green", "refrigerated": "yes", hazardous: "no", food: "no"};
+	var fourthpack = {size: "small", color: "black", "refrigerated": "yes", hazardous: "no", food: "no"};
+
     this.packagesCoords=[];
     for (var i = 0; i < 4; i++)
     {
@@ -53,24 +59,23 @@ export default class extends Phaser.State {
 	  console.log(randomX+" "+randomY);
 	  if (i==0){
 		  var packager = this.packages.create(randomX, randomY, 'pack1');
+		  packager.propertiesy = firstpack.slice;
 	  }
 	  else if (i==1){
 		  var packager = this.packages.create(randomX, randomY, 'pack2');
+		  packager.propertiesy = secondpack.slice;
 	  }
 	  else if (i==2){
 		  var packager = this.packages.create(randomX, randomY, 'pack3');
+		  packager.propertiesy = thirdpack.slice;
 	  }
 	  else if (i==3){
 		  var packager = this.packages.create(randomX, randomY, 'pack4');
+		  packager.propertiesy = fourthpack.slice;
 	  }
       
       packager.body.setRectangle(19, 19);
-      packager.propertiesy = {
-        width: 20,
-        length: 20,
-        height: 60,
-        category: 'AGD',
-      };
+
 
       this.packagesCoords.push([Math.floor(randomX / 20), Math.floor(randomY / 20)]);
 	  console.log((Math.ceil(randomX / 20))+" "+(Math.ceil(randomY / 20)));
@@ -261,10 +266,7 @@ export default class extends Phaser.State {
 	
 	var packcoordsTEMP = this.packagesCoords.slice();
 	
-	var firstpack = {size: "big", color: "red", "refrigerated": "yes", hazardous: "yes", food: "no"};
-	var secondpack = {size: "small", color: "blue", "refrigerated": "no", hazardous: "no", food: "yes"};
-	var thirdpack = {size: "big", color: "green", "refrigerated": "yes", hazardous: "no", food: "no"};
-	var fourthpack = {size: "small", color: "black", "refrigerated": "yes", hazardous: "no", food: "no"};
+
 	var toSearch = [firstpack, secondpack, thirdpack, fourthpack];
 	
 	for(i = 0; i<this.packagesCoords.length;i++)
