@@ -10,8 +10,77 @@ export default class extends Phaser.State {
   preload () {}
 
   create () {
-    this.game.physics.startSystem(Phaser.Physics.P2JS);
-	//POCZATEK KODU Z DRZEWEM
+    this.game.physics.startSystem(Phaser.Physics.P2JS);	
+	
+    this.game.physics.p2.setImpactEvents(true);
+
+    this.game.physics.p2.restitution = 0.8;
+
+    this.collidesPPS = new PlayerPackageShelfCollisionGroup({
+      playerCollisionGroup: this.game.physics.p2.createCollisionGroup(),
+      packageCollisionGroup: this.game.physics.p2.createCollisionGroup(),
+      shelfCollisionGroup: this.game.physics.p2.createCollisionGroup(),
+	  playerFullCollisionGroup: this.game.physics.p2.createCollisionGroup()
+    });
+
+    this.game.physics.p2.updateBoundsCollisionGroup();
+
+
+
+
+
+    this.packages = this.game.add.group();
+    this.packages.enableBody = true;
+    this.packages.physicsBodyType = Phaser.Physics.P2JS;
+
+    this.packagesCoords=[];
+    for (var i = 0; i < 4; i++)
+    {
+      var random = this.recursiveRandomCoordsSearch();
+	  var randomX = random[0];
+	  var randomY = random[1];
+
+	  if(randomX <= 32)
+		  randomX+=32;
+	  else if(randomX >= 768)
+		  randomX-=32;
+
+	  if(randomY <= 32)
+		  randomY+=32;
+	  else if(randomY >= 768)
+		  randomX-=32;
+
+	  console.log(randomX+" "+randomY);
+	  if (i==0){
+		  var packager = this.packages.create(randomX, randomY, 'pack1');
+	  }
+	  else if (i==1){
+		  var packager = this.packages.create(randomX, randomY, 'pack2');
+	  }
+	  else if (i==2){
+		  var packager = this.packages.create(randomX, randomY, 'pack3');
+	  }
+	  else if (i==3){
+		  var packager = this.packages.create(randomX, randomY, 'pack4');
+	  }
+      
+      packager.body.setRectangle(19, 19);
+      packager.propertiesy = {
+        width: 20,
+        length: 20,
+        height: 60,
+        category: 'AGD',
+      };
+
+      this.packagesCoords.push([Math.floor(randomX / 20), Math.floor(randomY / 20)]);
+	  console.log((Math.ceil(randomX / 20))+" "+(Math.ceil(randomY / 20)));
+      packager.body.setCollisionGroup(this.collidesPPS.packageCollisionGroup);
+
+      packager.body.collides([ this.collidesPPS.playerCollisionGroup, this.collidesPPS.shelfCollisionGroup]);
+    }
+	
+	
+		//POCZATEK KODU Z DRZEWEM
 
 	var training_data = [
 		{"size":"tiny", "color":"black", "refrigerated":"yes", "hazardous":"yes", "food":"yes", "shelf":"hazard"},
@@ -189,85 +258,61 @@ export default class extends Phaser.State {
 	var features = ["size", "color", "refrigerated","hazardous","food"];
 	
 	var dt = new DecisionTreeID3(training_data, class_name, features);
-
-	var predicted_class = dt.predict({
-		size: "small",
-		color: "no",
-		ed: "yes",
-		hazardous: "no",
-		food: "yes"
-	});
+	
+	var packcoordsTEMP = this.packagesCoords.slice();
+	
+	var firstpack = {size: "big", color: "red", "refrigerated": "yes", hazardous: "yes", food: "no"};
+	var secondpack = {size: "small", color: "blue", "refrigerated": "no", hazardous: "no", food: "yes"};
+	var thirdpack = {size: "big", color: "green", "refrigerated": "yes", hazardous: "no", food: "no"};
+	var fourthpack = {size: "small", color: "black", "refrigerated": "yes", hazardous: "no", food: "no"};
+	var toSearch = [firstpack, secondpack, thirdpack, fourthpack];
+	
+	for(i = 0; i<this.packagesCoords.length;i++)
+	{
+		console.log(this.packagesCoords[i]);
+	}
+	
+	console.log("*******************");
+	for(i=0; i<4; i++){
+		if (dt.predict(toSearch[i]) == "small"){
+			//console.log("150-200");
+			this.packagesCoords[0] = packcoordsTEMP[i];
+			//console.log("********");
+		}
+		else if (dt.predict(toSearch[i]) == "big"){
+			//console.log("550-200");
+			this.packagesCoords[1] = packcoordsTEMP[i];
+			//console.log("********");
+		}
+		else if (dt.predict(toSearch[i]) == "hazard"){
+			//console.log("150-500");
+			this.packagesCoords[2] = packcoordsTEMP[i];
+			//console.log("********");
+		}
+		else if (dt.predict(toSearch[i]) == "food"){
+			//console.log("550-500");
+			this.packagesCoords[3] = packcoordsTEMP[i];
+			//console.log("********");
+		}
+	}
+	for(i = 0; i<this.packagesCoords.length;i++)
+	{
+		console.log(this.packagesCoords[i]);
+	}
 	
 	var accuracy = dt.evaluate(test_data);
 	var treeModel = dt.toJSON();
 	
 	console.log('##############################');
 	console.log(treeModel);
-	console.log('###############################');
-	console.log(accuracy);
 	console.log('##############################');
-	console.log(predicted_class);
-	console.log('##############################');
-	//console.log(dt);
+	//console.log(predicted_class);
 	//console.log('##############################');
+	
 	
 	//KONIEC KODU Z DRZEWEM
 	
 	
-    this.game.physics.p2.setImpactEvents(true);
-
-    this.game.physics.p2.restitution = 0.8;
-
-    this.collidesPPS = new PlayerPackageShelfCollisionGroup({
-      playerCollisionGroup: this.game.physics.p2.createCollisionGroup(),
-      packageCollisionGroup: this.game.physics.p2.createCollisionGroup(),
-      shelfCollisionGroup: this.game.physics.p2.createCollisionGroup(),
-	  playerFullCollisionGroup: this.game.physics.p2.createCollisionGroup()
-    });
-
-    this.game.physics.p2.updateBoundsCollisionGroup();
-
-
-
-
-
-    this.packages = this.game.add.group();
-    this.packages.enableBody = true;
-    this.packages.physicsBodyType = Phaser.Physics.P2JS;
-
-    this.packagesCoords=[];
-    for (var i = 0; i < 4; i++)
-    {
-      var random = this.recursiveRandomCoordsSearch();
-	  var randomX = random[0];
-	  var randomY = random[1];
-
-	  if(randomX <= 32)
-		  randomX+=32;
-	  else if(randomX >= 768)
-		  randomX-=32;
-
-	  if(randomY <= 32)
-		  randomY+=32;
-	  else if(randomY >= 768)
-		  randomX-=32;
-
-	  console.log(randomX+" "+randomY);
-      var packager = this.packages.create(randomX, randomY, 'package');
-      packager.body.setRectangle(19, 19);
-      packager.propertiesy = {
-        width: 20,
-        length: 20,
-        height: 60,
-        category: 'AGD',
-      };
-
-      this.packagesCoords.push([Math.floor(randomX / 20), Math.floor(randomY / 20)]);
-	  console.log((Math.ceil(randomX / 20))+" "+(Math.ceil(randomY / 20)));
-      packager.body.setCollisionGroup(this.collidesPPS.packageCollisionGroup);
-
-      packager.body.collides([ this.collidesPPS.playerCollisionGroup, this.collidesPPS.shelfCollisionGroup]);
-    }
 	
     let shelf1 = new Shelf({
       game: this.game,
@@ -281,7 +326,7 @@ export default class extends Phaser.State {
       game: this.game,
       x: 600,
       y: 200,
-      asset: 'fridge',
+      asset: 'shelf',
       collides: this.collidesPPS
     });
 
@@ -289,7 +334,7 @@ export default class extends Phaser.State {
       game: this.game,
       x: 200,
       y: 500,
-      asset: 'hazard',
+      asset: 'shelf',
       collides: this.collidesPPS
     });
 
@@ -297,9 +342,10 @@ export default class extends Phaser.State {
       game: this.game,
       x: 600,
       y: 500,
-      asset: 'haz-fri',
+      asset: 'shelf',
       collides: this.collidesPPS
     });
+	
     this.racksCoords=[];
     this.racksCoords.push([Math.ceil(159 / 20)-1, Math.ceil(159 / 20)-1]);
     this.racksCoords.push([Math.ceil(559 / 20)-1, Math.ceil(159 / 20)-1]);
