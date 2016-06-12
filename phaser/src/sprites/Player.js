@@ -3,12 +3,14 @@ import {TEST1,TEST2,TEST3} from '../oil'
 
 export default class extends Phaser.Sprite {
 
-    constructor({game, x, y, asset, collides, packageArr, rackArr}) {
-        super(game, x, y, asset, collides, packageArr, rackArr);
+    constructor({game, x, y, asset, collides, packageArr, rackArr, decisionTree}) {
+        super(game, x, y, asset, collides, packageArr, rackArr, decisionTree);
 
         this.game = game;
         this.name = 'forklift';
         this.full = false;
+
+        this.decsionTree = decisionTree;
 
         this.packagesCoords=packageArr;
         this.racksCoords=rackArr;
@@ -654,6 +656,21 @@ export default class extends Phaser.Sprite {
             }
 
 
+        }
+        if(document.getElementById("getit").value == 1)
+        {
+            document.getElementById("getit").value=0;
+            document.getElementById("gettingit").value=1;
+            var size =document.getElementById("size").value;
+            var color =document.getElementById("color").value;
+            var refrigerated =document.getElementById("refrigerated").value;
+            var hazardous =document.getElementById("hazardous").value;
+            var food =document.getElementById("food").value;
+            var chosenpack = {size: size, color: color, "refrigerated": refrigerated, hazardous: hazardous, food: food};
+
+            var predicted_class = this.decisionTree.predict(chosenpack);
+            console.log(predicted_class);
+            document.getElementById("gettingit").value=0;
         }
     }
 

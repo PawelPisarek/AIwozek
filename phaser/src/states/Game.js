@@ -362,7 +362,8 @@ export default class extends Phaser.State {
       asset: 'forkliftEmpty',
       collides: this.collidesPPS,
       packageArr: this.packagesCoords,
-      rackArr: this.racksCoords
+      rackArr: this.racksCoords,
+	  decisionTree: dt
     });
 
     this.game.add.existing(this.player);

@@ -16,10 +16,47 @@
             padding: 0;
         }
     </style>
+    <script type="application/javascript">
+        function getIt()
+        {
+            if(document.getElementById("gettingit").value != "1")
+                document.getElementById("getit").value="1";
+            else
+                document.getElementById("error").innerHTML="ANOTHER OPERATION IS PENDING";
+        }
+    </script>
 </head>
 
 <body>
-
+    <select id="size">
+        <option value="tiny">tiny</option>
+        <option value="small">small</option>
+        <option value="big">big</option>
+        <option value="huge">huge</option>
+    </select>
+    <select id="color">
+        <option value="black">black</option>
+        <option value="red">red</option>
+        <option value="yellow">yellow</option>
+        <option value="blue">blue</option>
+        <option value="green">green</option>
+    </select>
+    <select id="refrigerated">
+        <option value="yes">yes</option>
+        <option value="no">no</option>
+    </select>
+    <select id="hazardous">
+        <option value="yes">yes</option>
+        <option value="no">no</option>
+    </select>
+    <select id="food">
+        <option value="yes">yes</option>
+        <option value="no">no</option>
+    </select>
+    <p id = "error"></p>
+    <button onClick="getIt()">Find the package</button>
+    <input id="getit" type="hidden" value="0">
+    <input id="gettingit" type="hidden" value="0">
     <div id="content"></div>
 
     <script src="lib/phaser.min.js"></script>
