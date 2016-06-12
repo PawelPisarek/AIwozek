@@ -12,7 +12,6 @@ export default class extends Phaser.State {
   create () {
     this.game.physics.startSystem(Phaser.Physics.P2JS);
 	//POCZATEK KODU Z DRZEWEM
-	var DecisionTree = require('decision-tree');
 
 	var training_data = [
 		{"size":"tiny", "color":"black", "refrigerated":"yes", "hazardous":"yes", "food":"yes", "shelf":"hazard"},
@@ -189,7 +188,7 @@ export default class extends Phaser.State {
 	var class_name = "shelf";
 	var features = ["size", "color", "refrigerated","hazardous","food"];
 	
-	var dt = new DecisionTree(training_data, class_name, features);
+	var dt = new DecisionTreeID3(training_data, class_name, features);
 
 	var predicted_class = dt.predict({
 		size: "small",
