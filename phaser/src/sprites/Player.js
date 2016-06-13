@@ -567,7 +567,7 @@ export default class extends Phaser.Sprite {
 				
 				var shelfposx = this.shelves[0].x -50;
 				var shelfposy = this.shelves[0].y;
-				if(this.shelves[0].holding.size!= null && this.shelves[0].holding.size == size && this.shelves[0].holding.food!= null && this.shelves[0].holding.food == food && this.shelves[0].holding.hazardous!= null && this.shelves[0].holding.hazardous == hazardous && this.shelves[0].holding.color!= null && this.shelves[0].holding.color == color && this.shelves[0].holding.refrigerated!= null && this.shelves[0].holding.refrigerated == refrigerated){
+				if(this.shelves[0].holding.features.size!= null && this.shelves[0].holding.features.size == size && this.shelves[0].holding.features.food!= null && this.shelves[0].holding.features.food == food && this.shelves[0].holding.features.hazardous!= null && this.shelves[0].holding.features.hazardous == hazardous && this.shelves[0].holding.features.color!= null && this.shelves[0].holding.features.color == color && this.shelves[0].holding.features.refrigerated!= null && this.shelves[0].holding.features.refrigerated == refrigerated){
 					this.body.carrying= this.shelves[0].holding;
 					this.loadTexture("forkliftFull",0);
 					document.getElementById("error").innerHTML="FOUND PACKAGE!";
@@ -580,7 +580,7 @@ export default class extends Phaser.Sprite {
 			else if(predicted_class == "hazard"){
 				var shelfposx = this.shelves[1].x-50;
 				var shelfposy = this.shelves[1].y;
-				if(this.shelves[1].holding.size!= null && this.shelves[1].holding.size == size && this.shelves[1].holding.food!= null && this.shelves[1].holding.food == food && this.shelves[1].holding.hazardous!= null && this.shelves[1].holding.hazardous == hazardous && this.shelves[1].holding.color!= null && this.shelves[1].holding.color == color && this.shelves[1].holding.refrigerated!= null && this.shelves[1].holding.refrigerated == refrigerated){
+				if(this.shelves[1].holding.features.size!= null && this.shelves[1].holding.features.size == size && this.shelves[1].holding.features.food!= null && this.shelves[1].holding.features.food == food && this.shelves[1].holding.features.hazardous!= null && this.shelves[1].holding.features.hazardous == hazardous && this.shelves[1].holding.features.color!= null && this.shelves[1].holding.features.color == color && this.shelves[1].holding.features.refrigerated!= null && this.shelves[1].holding.features.refrigerated == refrigerated){
 					this.body.carrying= this.shelves[1].holding;
 					this.loadTexture("forkliftFull",0);
 					document.getElementById("error").innerHTML="FOUND PACKAGE!";
@@ -593,7 +593,7 @@ export default class extends Phaser.Sprite {
 			else if(predicted_class == "big"){
 				var shelfposx = this.shelves[2].x-50;
 				var shelfposy = this.shelves[2].y;
-				if(this.shelves[2].holding.size!= null && this.shelves[2].holding.size == size && this.shelves[2].holding.food!= null && this.shelves[2].holding.food == food && this.shelves[2].holding.hazardous!= null && this.shelves[2].holding.hazardous == hazardous && this.shelves[2].holding.color!= null && this.shelves[2].holding.color == color && this.shelves[2].holding.refrigerated!= null && this.shelves[2].holding.refrigerated == refrigerated){
+				if(this.shelves[2].holding.features.size!= null && this.shelves[2].holding.features.size == size && this.shelves[2].holding.features.food!= null && this.shelves[2].holding.features.food == food && this.shelves[2].holding.features.hazardous!= null && this.shelves[2].holding.features.hazardous == hazardous && this.shelves[2].holding.features.color!= null && this.shelves[2].holding.features.color == color && this.shelves[2].holding.features.refrigerated!= null && this.shelves[2].holding.features.refrigerated == refrigerated){
 					this.body.carrying= this.shelves[2].holding;
 					this.loadTexture("forkliftFull",0);
 					document.getElementById("error").innerHTML="FOUND PACKAGE!";
@@ -606,7 +606,7 @@ export default class extends Phaser.Sprite {
 			else if(predicted_class == "small"){
 				var shelfposx = this.shelves[3].x -50;
 				var shelfposy = this.shelves[3].y;
-				if(this.shelves[3].holding.size!= null && this.shelves[3].holding.size == size && this.shelves[3].holding.food!= null && this.shelves[3].holding.food == food && this.shelves[3].holding.hazardous!= null && this.shelves[3].holding.hazardous == hazardous && this.shelves[3].holding.color!= null && this.shelves[3].holding.color == color && this.shelves[3].holding.refrigerated!= null && this.shelves[3].holding.refrigerated == refrigerated){
+				if(this.shelves[3].holding.features.size!= null && this.shelves[3].holding.features.size == size && this.shelves[3].holding.features.food!= null && this.shelves[3].holding.features.food == food && this.shelves[3].holding.features.hazardous!= null && this.shelves[3].holding.features.hazardous == hazardous && this.shelves[3].holding.features.color!= null && this.shelves[3].holding.features.color == color && this.shelves[3].holding.features.refrigerated!= null && this.shelves[3].holding.features.refrigerated == refrigerated){
 					this.body.carrying= this.shelves[3].holding;
 					this.loadTexture("forkliftFull",0);
 					document.getElementById("error").innerHTML="FOUND PACKAGE!";
