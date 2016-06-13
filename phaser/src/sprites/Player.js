@@ -3,8 +3,8 @@ import {TEST1,TEST2,TEST3} from '../oil'
 
 export default class extends Phaser.Sprite {
 
-    constructor({game, x, y, asset, collides, packageArr, rackArr, decisionTree}) {
-        super(game, x, y, asset, collides, packageArr, rackArr, decisionTree);
+    constructor({game, x, y, asset, collides, packageArr, rackArr, decisionTree, shelves}) {
+        super(game, x, y, asset, collides, packageArr, rackArr, decisionTree, shelves);
 
         this.game = game;
         this.name = 'forklift';
@@ -513,7 +513,7 @@ export default class extends Phaser.Sprite {
 
             iterator++;
         });
-        console.log(astarPath);
+        console.log(this.resulti);
         console.log(this.body.moveUp);
 
     }
