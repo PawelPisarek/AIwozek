@@ -12,7 +12,7 @@ export default class extends Phaser.Sprite {
         this.decisionTree = decisionTree;
 
 		this.shelves=shelves;
-		
+
         this.decsionTree = decisionTree;
 
         this.packagesCoords=packageArr;
@@ -486,6 +486,7 @@ export default class extends Phaser.Sprite {
         console.log(validatedArray);
         console.log(effectiveArray);
         var splitEffectivePath=effectiveArray.split("###")[0].split(",");
+        this.allTheShelves=[shelves[splitEffectivePath[2]-1], shelves[splitEffectivePath[4]-1], shelves[splitEffectivePath[6]-1], shelves[splitEffectivePath[8]-1]];
         var astarPath=[];
         var previous=-1;
         for(var s=1; s<splitEffectivePath.length; s++)
@@ -560,11 +561,11 @@ export default class extends Phaser.Sprite {
             var predicted_class = this.decisionTree.predict(chosenpack);
             console.log(predicted_class);
             document.getElementById("gettingit").value=0;
-			
-			
+
+
 			console.log(this.shelves);
 			if(predicted_class == "food"){
-				
+
 				var shelfposx = this.shelves[0].x -50;
 				var shelfposy = this.shelves[0].y;
 				if(this.shelves[0].holding.features.size!= null && this.shelves[0].holding.features.size == size && this.shelves[0].holding.features.food!= null && this.shelves[0].holding.features.food == food && this.shelves[0].holding.features.hazardous!= null && this.shelves[0].holding.features.hazardous == hazardous && this.shelves[0].holding.features.color!= null && this.shelves[0].holding.features.color == color && this.shelves[0].holding.features.refrigerated!= null && this.shelves[0].holding.features.refrigerated == refrigerated){
@@ -616,7 +617,7 @@ export default class extends Phaser.Sprite {
 					document.getElementById("error").innerHTML="PACKAGE NOT FOUND!";
 				}
 			}
-			
+
             console.log(shelfposx+" "+shelfposy);
             let mouse_x = Math.ceil(shelfposx / 20)-1;
             let mouse_y = Math.ceil(shelfposy / 20)-1;
@@ -736,7 +737,11 @@ export default class extends Phaser.Sprite {
 
 
         }
-        
+        if(this.game.input.keyboard.isDown(Phaser.Keyboard.Q))
+        {
+            console.log(this.shelves);
+        }
+
     }
 
     hitPackage(body1, body2) {
@@ -766,6 +771,9 @@ export default class extends Phaser.Sprite {
             this.loadTexture('forkliftEmpty', 0);
             this.full = false;
             //this.body.carrying = null;
+            this.allTheShelves[0].holding = this.carrying;
+            console.log(this.allTheShelves[0].holding);
+            this.allTheShelves.shift();
 
             this.body.setCollisionGroup(this.collides.playerCollisionGroup);
             this.body.collides(this.collides.packageCollisionGroup, this.hitPackage, this);
