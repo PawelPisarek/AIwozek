@@ -1329,7 +1329,7 @@ var myTrainer = new Trainer(myPerceptron);
 myTrainer.train(trainingData, {
   rate: 0.01, // 0.01
   iterations: 200000,
-  error: 0.005, // 0.00005
+  error: 0.05, // 0.00005
   shuffle: true,
   log: 1000,
   cost: Trainer.cost.CROSS_ENTROPY

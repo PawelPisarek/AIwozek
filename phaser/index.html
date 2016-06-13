@@ -16,17 +16,61 @@
             padding: 0;
         }
     </style>
+    <script type="application/javascript">
+        function getIt()
+        {
+            if(document.getElementById("gettingit").value != "1")
+                document.getElementById("getit").value="1";
+            else
+                document.getElementById("error").innerHTML="ANOTHER OPERATION IS PENDING";
+        }
+    </script>
 </head>
 
 <body>
-
+    Size:
+    <select id="size">
+        <option value="tiny">tiny</option>
+        <option value="small">small</option>
+        <option value="big">big</option>
+        <option value="huge">huge</option>
+    </select>
+    Color:
+    <select id="color">
+        <option value="black">black</option>
+        <option value="red">red</option>
+        <option value="yellow">yellow</option>
+        <option value="blue">blue</option>
+        <option value="green">green</option>
+    </select>
+    Refrigerated:
+    <select id="refrigerated">
+        <option value="yes">yes</option>
+        <option value="no">no</option>
+    </select>
+    Hazardous:
+    <select id="hazardous">
+        <option value="yes">yes</option>
+        <option value="no">no</option>
+    </select>
+    Food:
+    <select id="food">
+        <option value="yes">yes</option>
+        <option value="no">no</option>
+    </select>
+    <p id = "error"></p>
+    <button onClick="getIt()">Find the package</button>
+    <input id="getit" type="hidden" value="0">
+    <input id="gettingit" type="hidden" value="0">
     <div id="content"></div>
 
     <script src="lib/phaser.min.js"></script>
     <script src="dist/bundle.js"></script>
-    <script type='text/javascript' src='lib/astar.js'></script>
+    <script src="lib/lodash.js"></script>
     <script src="lib/synaptic.js"></script>
-    <script type='text/javascript' src='lib/neural_network.js'></script>
+    <script src="lib/neural_network.js"></script>
+    <script src="lib/decision-tree.js"></script>
+    <script type='text/javascript' src='lib/astar.js'></script>
     <script type='text/javascript'>
 
 //        var graphDiagonal = new Graph([

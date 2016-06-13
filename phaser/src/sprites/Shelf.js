@@ -2,8 +2,8 @@ import Phaser from 'phaser'
 
 export default class extends Phaser.Sprite {
 
-    constructor({game, x, y, asset, collides}) {
-        super(game, x, y, asset, collides);
+    constructor({game, x, y, asset, collides, holding}) {
+        super(game, x, y, asset, collides, holding);
 
         this.game = game
         this.anchor.setTo(0.5)
@@ -13,6 +13,7 @@ export default class extends Phaser.Sprite {
         this.body.static = true;
         this.body.setCollisionGroup(collides.shelfCollisionGroup);
         this.body.collides([collides.packageCollisionGroup, collides.playerCollisionGroup]);
+		this.holding = holding;
     }
 
     update() {
