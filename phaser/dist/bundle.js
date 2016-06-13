@@ -9330,39 +9330,6 @@
 				var _this2 = this;
 
 				this.game.physics.startSystem(_phaser2.default.Physics.P2JS);
-				//POCZATEK KODU Z DRZEWEM
-
-				var training_data = [{ "size": "tiny", "color": "black", "refrigerated": "yes", "hazardous": "yes", "food": "yes", "shelf": "hazard" }, { "size": "tiny", "color": "black", "refrigerated": "yes", "hazardous": "yes", "food": "no", "shelf": "hazard" }, { "size": "tiny", "color": "black", "refrigerated": "yes", "hazardous": "no", "food": "yes", "shelf": "food" }, { "size": "tiny", "color": "black", "refrigerated": "yes", "hazardous": "no", "food": "no", "shelf": "small" }, { "size": "tiny", "color": "black", "refrigerated": "no", "hazardous": "yes", "food": "yes", "shelf": "hazard" }, { "size": "tiny", "color": "black", "refrigerated": "no", "hazardous": "yes", "food": "no", "shelf": "hazard" }, { "size": "tiny", "color": "black", "refrigerated": "no", "hazardous": "no", "food": "yes", "shelf": "food" }, { "size": "tiny", "color": "black", "refrigerated": "no", "hazardous": "no", "food": "no", "shelf": "small" }, { "size": "tiny", "color": "red", "refrigerated": "yes", "hazardous": "yes", "food": "yes", "shelf": "hazard" }, { "size": "tiny", "color": "red", "refrigerated": "yes", "hazardous": "yes", "food": "no", "shelf": "hazard" }, { "size": "tiny", "color": "red", "refrigerated": "yes", "hazardous": "no", "food": "yes", "shelf": "food" }, { "size": "tiny", "color": "red", "refrigerated": "yes", "hazardous": "no", "food": "no", "shelf": "small" }, { "size": "tiny", "color": "red", "refrigerated": "no", "hazardous": "yes", "food": "yes", "shelf": "hazard" }, { "size": "tiny", "color": "red", "refrigerated": "no", "hazardous": "yes", "food": "no", "shelf": "hazard" }, { "size": "tiny", "color": "red", "refrigerated": "no", "hazardous": "no", "food": "yes", "shelf": "food" }, { "size": "tiny", "color": "red", "refrigerated": "no", "hazardous": "no", "food": "no", "shelf": "small" }, { "size": "tiny", "color": "yellow", "refrigerated": "yes", "hazardous": "yes", "food": "yes", "shelf": "hazard" }, { "size": "tiny", "color": "yellow", "refrigerated": "yes", "hazardous": "yes", "food": "no", "shelf": "hazard" }, { "size": "tiny", "color": "yellow", "refrigerated": "yes", "hazardous": "no", "food": "yes", "shelf": "food" }, { "size": "tiny", "color": "yellow", "refrigerated": "yes", "hazardous": "no", "food": "no", "shelf": "small" }, { "size": "tiny", "color": "yellow", "refrigerated": "no", "hazardous": "yes", "food": "yes", "shelf": "hazard" }, { "size": "tiny", "color": "yellow", "refrigerated": "no", "hazardous": "yes", "food": "no", "shelf": "hazard" }, { "size": "tiny", "color": "yellow", "refrigerated": "no", "hazardous": "no", "food": "yes", "shelf": "food" }, { "size": "tiny", "color": "yellow", "refrigerated": "no", "hazardous": "no", "food": "no", "shelf": "small" }, { "size": "tiny", "color": "blue", "refrigerated": "yes", "hazardous": "yes", "food": "yes", "shelf": "hazard" }, { "size": "tiny", "color": "blue", "refrigerated": "yes", "hazardous": "yes", "food": "no", "shelf": "hazard" }, { "size": "tiny", "color": "blue", "refrigerated": "yes", "hazardous": "no", "food": "yes", "shelf": "food" }, { "size": "tiny", "color": "blue", "refrigerated": "yes", "hazardous": "no", "food": "no", "shelf": "small" }, { "size": "tiny", "color": "blue", "refrigerated": "no", "hazardous": "yes", "food": "yes", "shelf": "hazard" }, { "size": "tiny", "color": "blue", "refrigerated": "no", "hazardous": "yes", "food": "no", "shelf": "hazard" }, { "size": "tiny", "color": "blue", "refrigerated": "no", "hazardous": "no", "food": "yes", "shelf": "food" }, { "size": "tiny", "color": "blue", "refrigerated": "no", "hazardous": "no", "food": "no", "shelf": "small" }, { "size": "tiny", "color": "green", "refrigerated": "yes", "hazardous": "yes", "food": "yes", "shelf": "hazard" }, { "size": "tiny", "color": "green", "refrigerated": "yes", "hazardous": "yes", "food": "no", "shelf": "hazard" }, { "size": "tiny", "color": "green", "refrigerated": "yes", "hazardous": "no", "food": "yes", "shelf": "food" }, { "size": "tiny", "color": "green", "refrigerated": "yes", "hazardous": "no", "food": "no", "shelf": "small" }, { "size": "tiny", "color": "green", "refrigerated": "no", "hazardous": "yes", "food": "yes", "shelf": "hazard" }, { "size": "tiny", "color": "green", "refrigerated": "no", "hazardous": "yes", "food": "no", "shelf": "hazard" }, { "size": "tiny", "color": "green", "refrigerated": "no", "hazardous": "no", "food": "yes", "shelf": "food" }, { "size": "tiny", "color": "green", "refrigerated": "no", "hazardous": "no", "food": "no", "shelf": "small" }, { "size": "small", "color": "black", "refrigerated": "yes", "hazardous": "yes", "food": "yes", "shelf": "hazard" }, { "size": "small", "color": "black", "refrigerated": "yes", "hazardous": "yes", "food": "no", "shelf": "hazard" }, { "size": "small", "color": "black", "refrigerated": "yes", "hazardous": "no", "food": "yes", "shelf": "food" }, { "size": "small", "color": "black", "refrigerated": "yes", "hazardous": "no", "food": "no", "shelf": "small" }, { "size": "small", "color": "black", "refrigerated": "no", "hazardous": "yes", "food": "yes", "shelf": "hazard" }, { "size": "small", "color": "black", "refrigerated": "no", "hazardous": "yes", "food": "no", "shelf": "hazard" }, { "size": "small", "color": "black", "refrigerated": "no", "hazardous": "no", "food": "yes", "shelf": "food" }, { "size": "small", "color": "black", "refrigerated": "no", "hazardous": "no", "food": "no", "shelf": "small" }, { "size": "small", "color": "red", "refrigerated": "yes", "hazardous": "yes", "food": "yes", "shelf": "hazard" }, { "size": "small", "color": "red", "refrigerated": "yes", "hazardous": "yes", "food": "no", "shelf": "hazard" }, { "size": "small", "color": "red", "refrigerated": "yes", "hazardous": "no", "food": "yes", "shelf": "food" }, { "size": "small", "color": "red", "refrigerated": "yes", "hazardous": "no", "food": "no", "shelf": "small" }, { "size": "small", "color": "red", "refrigerated": "no", "hazardous": "yes", "food": "yes", "shelf": "hazard" }, { "size": "small", "color": "red", "refrigerated": "no", "hazardous": "yes", "food": "no", "shelf": "hazard" }, { "size": "small", "color": "red", "refrigerated": "no", "hazardous": "no", "food": "yes", "shelf": "food" }, { "size": "small", "color": "red", "refrigerated": "no", "hazardous": "no", "food": "no", "shelf": "small" }, { "size": "small", "color": "yellow", "refrigerated": "yes", "hazardous": "yes", "food": "yes", "shelf": "hazard" }, { "size": "small", "color": "yellow", "refrigerated": "yes", "hazardous": "yes", "food": "no", "shelf": "hazard" }, { "size": "small", "color": "yellow", "refrigerated": "yes", "hazardous": "no", "food": "yes", "shelf": "food" }, { "size": "small", "color": "yellow", "refrigerated": "yes", "hazardous": "no", "food": "no", "shelf": "small" }, { "size": "small", "color": "yellow", "refrigerated": "no", "hazardous": "yes", "food": "yes", "shelf": "hazard" }, { "size": "small", "color": "yellow", "refrigerated": "no", "hazardous": "yes", "food": "no", "shelf": "hazard" }, { "size": "small", "color": "yellow", "refrigerated": "no", "hazardous": "no", "food": "yes", "shelf": "food" }, { "size": "small", "color": "yellow", "refrigerated": "no", "hazardous": "no", "food": "no", "shelf": "small" }, { "size": "small", "color": "blue", "refrigerated": "yes", "hazardous": "yes", "food": "yes", "shelf": "hazard" }, { "size": "small", "color": "blue", "refrigerated": "yes", "hazardous": "yes", "food": "no", "shelf": "hazard" }, { "size": "small", "color": "blue", "refrigerated": "yes", "hazardous": "no", "food": "yes", "shelf": "food" }, { "size": "small", "color": "blue", "refrigerated": "yes", "hazardous": "no", "food": "no", "shelf": "small" }, { "size": "small", "color": "blue", "refrigerated": "no", "hazardous": "yes", "food": "yes", "shelf": "hazard" }, { "size": "small", "color": "blue", "refrigerated": "no", "hazardous": "yes", "food": "no", "shelf": "hazard" }, { "size": "small", "color": "blue", "refrigerated": "no", "hazardous": "no", "food": "yes", "shelf": "food" }, { "size": "small", "color": "blue", "refrigerated": "no", "hazardous": "no", "food": "no", "shelf": "small" }, { "size": "small", "color": "green", "refrigerated": "yes", "hazardous": "yes", "food": "yes", "shelf": "hazard" }, { "size": "small", "color": "green", "refrigerated": "yes", "hazardous": "yes", "food": "no", "shelf": "hazard" }, { "size": "small", "color": "green", "refrigerated": "yes", "hazardous": "no", "food": "yes", "shelf": "food" }, { "size": "small", "color": "green", "refrigerated": "yes", "hazardous": "no", "food": "no", "shelf": "small" }, { "size": "small", "color": "green", "refrigerated": "no", "hazardous": "yes", "food": "yes", "shelf": "hazard" }, { "size": "small", "color": "green", "refrigerated": "no", "hazardous": "yes", "food": "no", "shelf": "hazard" }, { "size": "small", "color": "green", "refrigerated": "no", "hazardous": "no", "food": "yes", "shelf": "food" }, { "size": "small", "color": "green", "refrigerated": "no", "hazardous": "no", "food": "no", "shelf": "small" }, { "size": "big", "color": "black", "refrigerated": "yes", "hazardous": "yes", "food": "yes", "shelf": "hazard" }, { "size": "big", "color": "black", "refrigerated": "yes", "hazardous": "yes", "food": "no", "shelf": "hazard" }, { "size": "big", "color": "black", "refrigerated": "yes", "hazardous": "no", "food": "yes", "shelf": "food" }, { "size": "big", "color": "black", "refrigerated": "yes", "hazardous": "no", "food": "no", "shelf": "big" }, { "size": "big", "color": "black", "refrigerated": "no", "hazardous": "yes", "food": "yes", "shelf": "hazard" }, { "size": "big", "color": "black", "refrigerated": "no", "hazardous": "yes", "food": "no", "shelf": "hazard" }, { "size": "big", "color": "black", "refrigerated": "no", "hazardous": "no", "food": "yes", "shelf": "food" }, { "size": "big", "color": "black", "refrigerated": "no", "hazardous": "no", "food": "no", "shelf": "big" }, { "size": "big", "color": "red", "refrigerated": "yes", "hazardous": "yes", "food": "yes", "shelf": "hazard" }, { "size": "big", "color": "red", "refrigerated": "yes", "hazardous": "yes", "food": "no", "shelf": "hazard" }, { "size": "big", "color": "red", "refrigerated": "yes", "hazardous": "no", "food": "yes", "shelf": "food" }, { "size": "big", "color": "red", "refrigerated": "yes", "hazardous": "no", "food": "no", "shelf": "big" }, { "size": "big", "color": "red", "refrigerated": "no", "hazardous": "yes", "food": "yes", "shelf": "hazard" }, { "size": "big", "color": "red", "refrigerated": "no", "hazardous": "yes", "food": "no", "shelf": "hazard" }, { "size": "big", "color": "red", "refrigerated": "no", "hazardous": "no", "food": "yes", "shelf": "food" }, { "size": "big", "color": "red", "refrigerated": "no", "hazardous": "no", "food": "no", "shelf": "big" }, { "size": "big", "color": "yellow", "refrigerated": "yes", "hazardous": "yes", "food": "yes", "shelf": "hazard" }, { "size": "big", "color": "yellow", "refrigerated": "yes", "hazardous": "yes", "food": "no", "shelf": "hazard" }, { "size": "big", "color": "yellow", "refrigerated": "yes", "hazardous": "no", "food": "yes", "shelf": "food" }, { "size": "big", "color": "yellow", "refrigerated": "yes", "hazardous": "no", "food": "no", "shelf": "big" }, { "size": "big", "color": "yellow", "refrigerated": "no", "hazardous": "yes", "food": "yes", "shelf": "hazard" }, { "size": "big", "color": "yellow", "refrigerated": "no", "hazardous": "yes", "food": "no", "shelf": "hazard" }, { "size": "big", "color": "yellow", "refrigerated": "no", "hazardous": "no", "food": "yes", "shelf": "food" }, { "size": "big", "color": "yellow", "refrigerated": "no", "hazardous": "no", "food": "no", "shelf": "big" }, { "size": "big", "color": "blue", "refrigerated": "yes", "hazardous": "yes", "food": "yes", "shelf": "hazard" }, { "size": "big", "color": "blue", "refrigerated": "yes", "hazardous": "yes", "food": "no", "shelf": "hazard" }, { "size": "big", "color": "blue", "refrigerated": "yes", "hazardous": "no", "food": "yes", "shelf": "food" }, { "size": "big", "color": "blue", "refrigerated": "yes", "hazardous": "no", "food": "no", "shelf": "big" }, { "size": "big", "color": "blue", "refrigerated": "no", "hazardous": "yes", "food": "yes", "shelf": "hazard" }, { "size": "big", "color": "blue", "refrigerated": "no", "hazardous": "yes", "food": "no", "shelf": "hazard" }, { "size": "big", "color": "blue", "refrigerated": "no", "hazardous": "no", "food": "yes", "shelf": "food" }, { "size": "big", "color": "blue", "refrigerated": "no", "hazardous": "no", "food": "no", "shelf": "big" }, { "size": "big", "color": "green", "refrigerated": "yes", "hazardous": "yes", "food": "yes", "shelf": "hazard" }, { "size": "big", "color": "green", "refrigerated": "yes", "hazardous": "yes", "food": "no", "shelf": "hazard" }, { "size": "big", "color": "green", "refrigerated": "yes", "hazardous": "no", "food": "yes", "shelf": "food" }, { "size": "big", "color": "green", "refrigerated": "yes", "hazardous": "no", "food": "no", "shelf": "big" }, { "size": "big", "color": "green", "refrigerated": "no", "hazardous": "yes", "food": "yes", "shelf": "hazard" }, { "size": "big", "color": "green", "refrigerated": "no", "hazardous": "yes", "food": "no", "shelf": "hazard" }, { "size": "big", "color": "green", "refrigerated": "no", "hazardous": "no", "food": "yes", "shelf": "food" }, { "size": "big", "color": "green", "refrigerated": "no", "hazardous": "no", "food": "no", "shelf": "big" }, { "size": "huge", "color": "black", "refrigerated": "yes", "hazardous": "yes", "food": "yes", "shelf": "hazard" }, { "size": "huge", "color": "black", "refrigerated": "yes", "hazardous": "yes", "food": "no", "shelf": "hazard" }, { "size": "huge", "color": "black", "refrigerated": "yes", "hazardous": "no", "food": "yes", "shelf": "food" }, { "size": "huge", "color": "black", "refrigerated": "yes", "hazardous": "no", "food": "no", "shelf": "big" }, { "size": "huge", "color": "black", "refrigerated": "no", "hazardous": "yes", "food": "yes", "shelf": "hazard" }, { "size": "huge", "color": "black", "refrigerated": "no", "hazardous": "yes", "food": "no", "shelf": "hazard" }, { "size": "huge", "color": "black", "refrigerated": "no", "hazardous": "no", "food": "yes", "shelf": "food" }, { "size": "huge", "color": "black", "refrigerated": "no", "hazardous": "no", "food": "no", "shelf": "big" }, { "size": "huge", "color": "red", "refrigerated": "yes", "hazardous": "yes", "food": "yes", "shelf": "hazard" }, { "size": "huge", "color": "red", "refrigerated": "yes", "hazardous": "yes", "food": "no", "shelf": "hazard" }, { "size": "huge", "color": "red", "refrigerated": "yes", "hazardous": "no", "food": "yes", "shelf": "food" }, { "size": "huge", "color": "red", "refrigerated": "yes", "hazardous": "no", "food": "no", "shelf": "big" }, { "size": "huge", "color": "red", "refrigerated": "no", "hazardous": "yes", "food": "yes", "shelf": "hazard" }, { "size": "huge", "color": "red", "refrigerated": "no", "hazardous": "yes", "food": "no", "shelf": "hazard" }, { "size": "huge", "color": "red", "refrigerated": "no", "hazardous": "no", "food": "yes", "shelf": "food" }, { "size": "huge", "color": "red", "refrigerated": "no", "hazardous": "no", "food": "no", "shelf": "big" }, { "size": "huge", "color": "yellow", "refrigerated": "yes", "hazardous": "yes", "food": "yes", "shelf": "hazard" }, { "size": "huge", "color": "yellow", "refrigerated": "yes", "hazardous": "yes", "food": "no", "shelf": "hazard" }, { "size": "huge", "color": "yellow", "refrigerated": "yes", "hazardous": "no", "food": "yes", "shelf": "food" }, { "size": "huge", "color": "yellow", "refrigerated": "yes", "hazardous": "no", "food": "no", "shelf": "big" }, { "size": "huge", "color": "yellow", "refrigerated": "no", "hazardous": "yes", "food": "yes", "shelf": "hazard" }, { "size": "huge", "color": "yellow", "refrigerated": "no", "hazardous": "yes", "food": "no", "shelf": "hazard" }, { "size": "huge", "color": "yellow", "refrigerated": "no", "hazardous": "no", "food": "yes", "shelf": "food" }, { "size": "huge", "color": "yellow", "refrigerated": "no", "hazardous": "no", "food": "no", "shelf": "big" }, { "size": "huge", "color": "blue", "refrigerated": "yes", "hazardous": "yes", "food": "yes", "shelf": "hazard" }, { "size": "huge", "color": "blue", "refrigerated": "yes", "hazardous": "yes", "food": "no", "shelf": "hazard" }, { "size": "huge", "color": "blue", "refrigerated": "yes", "hazardous": "no", "food": "yes", "shelf": "food" }, { "size": "huge", "color": "blue", "refrigerated": "yes", "hazardous": "no", "food": "no", "shelf": "big" }, { "size": "huge", "color": "blue", "refrigerated": "no", "hazardous": "yes", "food": "yes", "shelf": "hazard" }, { "size": "huge", "color": "blue", "refrigerated": "no", "hazardous": "yes", "food": "no", "shelf": "hazard" }, { "size": "huge", "color": "blue", "refrigerated": "no", "hazardous": "no", "food": "yes", "shelf": "food" }, { "size": "huge", "color": "blue", "refrigerated": "no", "hazardous": "no", "food": "no", "shelf": "big" }, { "size": "huge", "color": "green", "refrigerated": "yes", "hazardous": "yes", "food": "yes", "shelf": "hazard" }, { "size": "huge", "color": "green", "refrigerated": "yes", "hazardous": "yes", "food": "no", "shelf": "hazard" }, { "size": "huge", "color": "green", "refrigerated": "yes", "hazardous": "no", "food": "yes", "shelf": "food" }, { "size": "huge", "color": "green", "refrigerated": "yes", "hazardous": "no", "food": "no", "shelf": "big" }, { "size": "huge", "color": "green", "refrigerated": "no", "hazardous": "yes", "food": "yes", "shelf": "hazard" }, { "size": "huge", "color": "green", "refrigerated": "no", "hazardous": "yes", "food": "no", "shelf": "hazard" }, { "size": "huge", "color": "green", "refrigerated": "no", "hazardous": "no", "food": "yes", "shelf": "food" }, { "size": "huge", "color": "green", "refrigerated": "no", "hazardous": "no", "food": "no", "shelf": "big" }];
-
-				var test_data = [{ "size": "tiny", "color": "red", "refrigerated": "yes", "hazardous": "no", "food": "no", "shelf": "small" }, { "size": "huge", "color": "blue", "refrigerated": "no", "hazardous": "no", "food": "no", "shelf": "big" }, { "size": "tiny", "color": "green", "refrigerated": "no", "hazardous": "yes", "food": "no", "shelf": "hazard" }, { "size": "small", "color": "black", "refrigerated": "no", "hazardous": "no", "food": "yes", "shelf": "food" }];
-
-				var class_name = "shelf";
-				var features = ["size", "color", "refrigerated", "hazardous", "food"];
-
-				var dt = new DecisionTreeID3(training_data, class_name, features);
-
-				var predicted_class = dt.predict({
-					size: "small",
-					color: "no",
-					ed: "yes",
-					hazardous: "no",
-					food: "yes"
-				});
-
-				var accuracy = dt.evaluate(test_data);
-				var treeModel = dt.toJSON();
-
-				console.log('##############################');
-				console.log(treeModel);
-				console.log('###############################');
-				console.log(accuracy);
-				console.log('##############################');
-				console.log(predicted_class);
-				console.log('##############################');
-				//console.log(dt);
-				//console.log('##############################');
-
-				//KONIEC KODU Z DRZEWEM
 
 				this.game.physics.p2.setImpactEvents(true);
 
@@ -9392,12 +9359,21 @@
 					if (randomY <= 32) randomY += 32;else if (randomY >= 768) randomX -= 32;
 
 					console.log(randomX + " " + randomY);
-					var packager = this.packages.create(randomX, randomY, 'package');
+					if (i == 0) {
+						var packager = this.packages.create(randomX, randomY, 'pack1');
+					} else if (i == 1) {
+						var packager = this.packages.create(randomX, randomY, 'pack2');
+					} else if (i == 2) {
+						var packager = this.packages.create(randomX, randomY, 'pack3');
+					} else if (i == 3) {
+						var packager = this.packages.create(randomX, randomY, 'pack4');
+					}
+
 					packager.body.setRectangle(19, 19);
 					packager.propertiesy = {
-						width: 20,
-						length: 20,
-						height: 60,
+						width: Math.random() * 9 + 1,
+						length: Math.random() * 9 + 1,
+						height: Math.random() * 9 + 1,
 						category: 'AGD'
 					};
 
@@ -9407,6 +9383,86 @@
 
 					packager.body.collides([this.collidesPPS.playerCollisionGroup, this.collidesPPS.shelfCollisionGroup]);
 				}
+
+				//POCZATEK KODU Z DRZEWEM
+
+				var training_data = [{ "size": "tiny", "color": "black", "refrigerated": "yes", "hazardous": "yes", "food": "yes", "shelf": "hazard" }, { "size": "tiny", "color": "black", "refrigerated": "yes", "hazardous": "yes", "food": "no", "shelf": "hazard" }, { "size": "tiny", "color": "black", "refrigerated": "yes", "hazardous": "no", "food": "yes", "shelf": "food" }, { "size": "tiny", "color": "black", "refrigerated": "yes", "hazardous": "no", "food": "no", "shelf": "small" }, { "size": "tiny", "color": "black", "refrigerated": "no", "hazardous": "yes", "food": "yes", "shelf": "hazard" }, { "size": "tiny", "color": "black", "refrigerated": "no", "hazardous": "yes", "food": "no", "shelf": "hazard" }, { "size": "tiny", "color": "black", "refrigerated": "no", "hazardous": "no", "food": "yes", "shelf": "food" }, { "size": "tiny", "color": "black", "refrigerated": "no", "hazardous": "no", "food": "no", "shelf": "small" }, { "size": "tiny", "color": "red", "refrigerated": "yes", "hazardous": "yes", "food": "yes", "shelf": "hazard" }, { "size": "tiny", "color": "red", "refrigerated": "yes", "hazardous": "yes", "food": "no", "shelf": "hazard" }, { "size": "tiny", "color": "red", "refrigerated": "yes", "hazardous": "no", "food": "yes", "shelf": "food" }, { "size": "tiny", "color": "red", "refrigerated": "yes", "hazardous": "no", "food": "no", "shelf": "small" }, { "size": "tiny", "color": "red", "refrigerated": "no", "hazardous": "yes", "food": "yes", "shelf": "hazard" }, { "size": "tiny", "color": "red", "refrigerated": "no", "hazardous": "yes", "food": "no", "shelf": "hazard" }, { "size": "tiny", "color": "red", "refrigerated": "no", "hazardous": "no", "food": "yes", "shelf": "food" }, { "size": "tiny", "color": "red", "refrigerated": "no", "hazardous": "no", "food": "no", "shelf": "small" }, { "size": "tiny", "color": "yellow", "refrigerated": "yes", "hazardous": "yes", "food": "yes", "shelf": "hazard" }, { "size": "tiny", "color": "yellow", "refrigerated": "yes", "hazardous": "yes", "food": "no", "shelf": "hazard" }, { "size": "tiny", "color": "yellow", "refrigerated": "yes", "hazardous": "no", "food": "yes", "shelf": "food" }, { "size": "tiny", "color": "yellow", "refrigerated": "yes", "hazardous": "no", "food": "no", "shelf": "small" }, { "size": "tiny", "color": "yellow", "refrigerated": "no", "hazardous": "yes", "food": "yes", "shelf": "hazard" }, { "size": "tiny", "color": "yellow", "refrigerated": "no", "hazardous": "yes", "food": "no", "shelf": "hazard" }, { "size": "tiny", "color": "yellow", "refrigerated": "no", "hazardous": "no", "food": "yes", "shelf": "food" }, { "size": "tiny", "color": "yellow", "refrigerated": "no", "hazardous": "no", "food": "no", "shelf": "small" }, { "size": "tiny", "color": "blue", "refrigerated": "yes", "hazardous": "yes", "food": "yes", "shelf": "hazard" }, { "size": "tiny", "color": "blue", "refrigerated": "yes", "hazardous": "yes", "food": "no", "shelf": "hazard" }, { "size": "tiny", "color": "blue", "refrigerated": "yes", "hazardous": "no", "food": "yes", "shelf": "food" }, { "size": "tiny", "color": "blue", "refrigerated": "yes", "hazardous": "no", "food": "no", "shelf": "small" }, { "size": "tiny", "color": "blue", "refrigerated": "no", "hazardous": "yes", "food": "yes", "shelf": "hazard" }, { "size": "tiny", "color": "blue", "refrigerated": "no", "hazardous": "yes", "food": "no", "shelf": "hazard" }, { "size": "tiny", "color": "blue", "refrigerated": "no", "hazardous": "no", "food": "yes", "shelf": "food" }, { "size": "tiny", "color": "blue", "refrigerated": "no", "hazardous": "no", "food": "no", "shelf": "small" }, { "size": "tiny", "color": "green", "refrigerated": "yes", "hazardous": "yes", "food": "yes", "shelf": "hazard" }, { "size": "tiny", "color": "green", "refrigerated": "yes", "hazardous": "yes", "food": "no", "shelf": "hazard" }, { "size": "tiny", "color": "green", "refrigerated": "yes", "hazardous": "no", "food": "yes", "shelf": "food" }, { "size": "tiny", "color": "green", "refrigerated": "yes", "hazardous": "no", "food": "no", "shelf": "small" }, { "size": "tiny", "color": "green", "refrigerated": "no", "hazardous": "yes", "food": "yes", "shelf": "hazard" }, { "size": "tiny", "color": "green", "refrigerated": "no", "hazardous": "yes", "food": "no", "shelf": "hazard" }, { "size": "tiny", "color": "green", "refrigerated": "no", "hazardous": "no", "food": "yes", "shelf": "food" }, { "size": "tiny", "color": "green", "refrigerated": "no", "hazardous": "no", "food": "no", "shelf": "small" }, { "size": "small", "color": "black", "refrigerated": "yes", "hazardous": "yes", "food": "yes", "shelf": "hazard" }, { "size": "small", "color": "black", "refrigerated": "yes", "hazardous": "yes", "food": "no", "shelf": "hazard" }, { "size": "small", "color": "black", "refrigerated": "yes", "hazardous": "no", "food": "yes", "shelf": "food" }, { "size": "small", "color": "black", "refrigerated": "yes", "hazardous": "no", "food": "no", "shelf": "small" }, { "size": "small", "color": "black", "refrigerated": "no", "hazardous": "yes", "food": "yes", "shelf": "hazard" }, { "size": "small", "color": "black", "refrigerated": "no", "hazardous": "yes", "food": "no", "shelf": "hazard" }, { "size": "small", "color": "black", "refrigerated": "no", "hazardous": "no", "food": "yes", "shelf": "food" }, { "size": "small", "color": "black", "refrigerated": "no", "hazardous": "no", "food": "no", "shelf": "small" }, { "size": "small", "color": "red", "refrigerated": "yes", "hazardous": "yes", "food": "yes", "shelf": "hazard" }, { "size": "small", "color": "red", "refrigerated": "yes", "hazardous": "yes", "food": "no", "shelf": "hazard" }, { "size": "small", "color": "red", "refrigerated": "yes", "hazardous": "no", "food": "yes", "shelf": "food" }, { "size": "small", "color": "red", "refrigerated": "yes", "hazardous": "no", "food": "no", "shelf": "small" }, { "size": "small", "color": "red", "refrigerated": "no", "hazardous": "yes", "food": "yes", "shelf": "hazard" }, { "size": "small", "color": "red", "refrigerated": "no", "hazardous": "yes", "food": "no", "shelf": "hazard" }, { "size": "small", "color": "red", "refrigerated": "no", "hazardous": "no", "food": "yes", "shelf": "food" }, { "size": "small", "color": "red", "refrigerated": "no", "hazardous": "no", "food": "no", "shelf": "small" }, { "size": "small", "color": "yellow", "refrigerated": "yes", "hazardous": "yes", "food": "yes", "shelf": "hazard" }, { "size": "small", "color": "yellow", "refrigerated": "yes", "hazardous": "yes", "food": "no", "shelf": "hazard" }, { "size": "small", "color": "yellow", "refrigerated": "yes", "hazardous": "no", "food": "yes", "shelf": "food" }, { "size": "small", "color": "yellow", "refrigerated": "yes", "hazardous": "no", "food": "no", "shelf": "small" }, { "size": "small", "color": "yellow", "refrigerated": "no", "hazardous": "yes", "food": "yes", "shelf": "hazard" }, { "size": "small", "color": "yellow", "refrigerated": "no", "hazardous": "yes", "food": "no", "shelf": "hazard" }, { "size": "small", "color": "yellow", "refrigerated": "no", "hazardous": "no", "food": "yes", "shelf": "food" }, { "size": "small", "color": "yellow", "refrigerated": "no", "hazardous": "no", "food": "no", "shelf": "small" }, { "size": "small", "color": "blue", "refrigerated": "yes", "hazardous": "yes", "food": "yes", "shelf": "hazard" }, { "size": "small", "color": "blue", "refrigerated": "yes", "hazardous": "yes", "food": "no", "shelf": "hazard" }, { "size": "small", "color": "blue", "refrigerated": "yes", "hazardous": "no", "food": "yes", "shelf": "food" }, { "size": "small", "color": "blue", "refrigerated": "yes", "hazardous": "no", "food": "no", "shelf": "small" }, { "size": "small", "color": "blue", "refrigerated": "no", "hazardous": "yes", "food": "yes", "shelf": "hazard" }, { "size": "small", "color": "blue", "refrigerated": "no", "hazardous": "yes", "food": "no", "shelf": "hazard" }, { "size": "small", "color": "blue", "refrigerated": "no", "hazardous": "no", "food": "yes", "shelf": "food" }, { "size": "small", "color": "blue", "refrigerated": "no", "hazardous": "no", "food": "no", "shelf": "small" }, { "size": "small", "color": "green", "refrigerated": "yes", "hazardous": "yes", "food": "yes", "shelf": "hazard" }, { "size": "small", "color": "green", "refrigerated": "yes", "hazardous": "yes", "food": "no", "shelf": "hazard" }, { "size": "small", "color": "green", "refrigerated": "yes", "hazardous": "no", "food": "yes", "shelf": "food" }, { "size": "small", "color": "green", "refrigerated": "yes", "hazardous": "no", "food": "no", "shelf": "small" }, { "size": "small", "color": "green", "refrigerated": "no", "hazardous": "yes", "food": "yes", "shelf": "hazard" }, { "size": "small", "color": "green", "refrigerated": "no", "hazardous": "yes", "food": "no", "shelf": "hazard" }, { "size": "small", "color": "green", "refrigerated": "no", "hazardous": "no", "food": "yes", "shelf": "food" }, { "size": "small", "color": "green", "refrigerated": "no", "hazardous": "no", "food": "no", "shelf": "small" }, { "size": "big", "color": "black", "refrigerated": "yes", "hazardous": "yes", "food": "yes", "shelf": "hazard" }, { "size": "big", "color": "black", "refrigerated": "yes", "hazardous": "yes", "food": "no", "shelf": "hazard" }, { "size": "big", "color": "black", "refrigerated": "yes", "hazardous": "no", "food": "yes", "shelf": "food" }, { "size": "big", "color": "black", "refrigerated": "yes", "hazardous": "no", "food": "no", "shelf": "big" }, { "size": "big", "color": "black", "refrigerated": "no", "hazardous": "yes", "food": "yes", "shelf": "hazard" }, { "size": "big", "color": "black", "refrigerated": "no", "hazardous": "yes", "food": "no", "shelf": "hazard" }, { "size": "big", "color": "black", "refrigerated": "no", "hazardous": "no", "food": "yes", "shelf": "food" }, { "size": "big", "color": "black", "refrigerated": "no", "hazardous": "no", "food": "no", "shelf": "big" }, { "size": "big", "color": "red", "refrigerated": "yes", "hazardous": "yes", "food": "yes", "shelf": "hazard" }, { "size": "big", "color": "red", "refrigerated": "yes", "hazardous": "yes", "food": "no", "shelf": "hazard" }, { "size": "big", "color": "red", "refrigerated": "yes", "hazardous": "no", "food": "yes", "shelf": "food" }, { "size": "big", "color": "red", "refrigerated": "yes", "hazardous": "no", "food": "no", "shelf": "big" }, { "size": "big", "color": "red", "refrigerated": "no", "hazardous": "yes", "food": "yes", "shelf": "hazard" }, { "size": "big", "color": "red", "refrigerated": "no", "hazardous": "yes", "food": "no", "shelf": "hazard" }, { "size": "big", "color": "red", "refrigerated": "no", "hazardous": "no", "food": "yes", "shelf": "food" }, { "size": "big", "color": "red", "refrigerated": "no", "hazardous": "no", "food": "no", "shelf": "big" }, { "size": "big", "color": "yellow", "refrigerated": "yes", "hazardous": "yes", "food": "yes", "shelf": "hazard" }, { "size": "big", "color": "yellow", "refrigerated": "yes", "hazardous": "yes", "food": "no", "shelf": "hazard" }, { "size": "big", "color": "yellow", "refrigerated": "yes", "hazardous": "no", "food": "yes", "shelf": "food" }, { "size": "big", "color": "yellow", "refrigerated": "yes", "hazardous": "no", "food": "no", "shelf": "big" }, { "size": "big", "color": "yellow", "refrigerated": "no", "hazardous": "yes", "food": "yes", "shelf": "hazard" }, { "size": "big", "color": "yellow", "refrigerated": "no", "hazardous": "yes", "food": "no", "shelf": "hazard" }, { "size": "big", "color": "yellow", "refrigerated": "no", "hazardous": "no", "food": "yes", "shelf": "food" }, { "size": "big", "color": "yellow", "refrigerated": "no", "hazardous": "no", "food": "no", "shelf": "big" }, { "size": "big", "color": "blue", "refrigerated": "yes", "hazardous": "yes", "food": "yes", "shelf": "hazard" }, { "size": "big", "color": "blue", "refrigerated": "yes", "hazardous": "yes", "food": "no", "shelf": "hazard" }, { "size": "big", "color": "blue", "refrigerated": "yes", "hazardous": "no", "food": "yes", "shelf": "food" }, { "size": "big", "color": "blue", "refrigerated": "yes", "hazardous": "no", "food": "no", "shelf": "big" }, { "size": "big", "color": "blue", "refrigerated": "no", "hazardous": "yes", "food": "yes", "shelf": "hazard" }, { "size": "big", "color": "blue", "refrigerated": "no", "hazardous": "yes", "food": "no", "shelf": "hazard" }, { "size": "big", "color": "blue", "refrigerated": "no", "hazardous": "no", "food": "yes", "shelf": "food" }, { "size": "big", "color": "blue", "refrigerated": "no", "hazardous": "no", "food": "no", "shelf": "big" }, { "size": "big", "color": "green", "refrigerated": "yes", "hazardous": "yes", "food": "yes", "shelf": "hazard" }, { "size": "big", "color": "green", "refrigerated": "yes", "hazardous": "yes", "food": "no", "shelf": "hazard" }, { "size": "big", "color": "green", "refrigerated": "yes", "hazardous": "no", "food": "yes", "shelf": "food" }, { "size": "big", "color": "green", "refrigerated": "yes", "hazardous": "no", "food": "no", "shelf": "big" }, { "size": "big", "color": "green", "refrigerated": "no", "hazardous": "yes", "food": "yes", "shelf": "hazard" }, { "size": "big", "color": "green", "refrigerated": "no", "hazardous": "yes", "food": "no", "shelf": "hazard" }, { "size": "big", "color": "green", "refrigerated": "no", "hazardous": "no", "food": "yes", "shelf": "food" }, { "size": "big", "color": "green", "refrigerated": "no", "hazardous": "no", "food": "no", "shelf": "big" }, { "size": "huge", "color": "black", "refrigerated": "yes", "hazardous": "yes", "food": "yes", "shelf": "hazard" }, { "size": "huge", "color": "black", "refrigerated": "yes", "hazardous": "yes", "food": "no", "shelf": "hazard" }, { "size": "huge", "color": "black", "refrigerated": "yes", "hazardous": "no", "food": "yes", "shelf": "food" }, { "size": "huge", "color": "black", "refrigerated": "yes", "hazardous": "no", "food": "no", "shelf": "big" }, { "size": "huge", "color": "black", "refrigerated": "no", "hazardous": "yes", "food": "yes", "shelf": "hazard" }, { "size": "huge", "color": "black", "refrigerated": "no", "hazardous": "yes", "food": "no", "shelf": "hazard" }, { "size": "huge", "color": "black", "refrigerated": "no", "hazardous": "no", "food": "yes", "shelf": "food" }, { "size": "huge", "color": "black", "refrigerated": "no", "hazardous": "no", "food": "no", "shelf": "big" }, { "size": "huge", "color": "red", "refrigerated": "yes", "hazardous": "yes", "food": "yes", "shelf": "hazard" }, { "size": "huge", "color": "red", "refrigerated": "yes", "hazardous": "yes", "food": "no", "shelf": "hazard" }, { "size": "huge", "color": "red", "refrigerated": "yes", "hazardous": "no", "food": "yes", "shelf": "food" }, { "size": "huge", "color": "red", "refrigerated": "yes", "hazardous": "no", "food": "no", "shelf": "big" }, { "size": "huge", "color": "red", "refrigerated": "no", "hazardous": "yes", "food": "yes", "shelf": "hazard" }, { "size": "huge", "color": "red", "refrigerated": "no", "hazardous": "yes", "food": "no", "shelf": "hazard" }, { "size": "huge", "color": "red", "refrigerated": "no", "hazardous": "no", "food": "yes", "shelf": "food" }, { "size": "huge", "color": "red", "refrigerated": "no", "hazardous": "no", "food": "no", "shelf": "big" }, { "size": "huge", "color": "yellow", "refrigerated": "yes", "hazardous": "yes", "food": "yes", "shelf": "hazard" }, { "size": "huge", "color": "yellow", "refrigerated": "yes", "hazardous": "yes", "food": "no", "shelf": "hazard" }, { "size": "huge", "color": "yellow", "refrigerated": "yes", "hazardous": "no", "food": "yes", "shelf": "food" }, { "size": "huge", "color": "yellow", "refrigerated": "yes", "hazardous": "no", "food": "no", "shelf": "big" }, { "size": "huge", "color": "yellow", "refrigerated": "no", "hazardous": "yes", "food": "yes", "shelf": "hazard" }, { "size": "huge", "color": "yellow", "refrigerated": "no", "hazardous": "yes", "food": "no", "shelf": "hazard" }, { "size": "huge", "color": "yellow", "refrigerated": "no", "hazardous": "no", "food": "yes", "shelf": "food" }, { "size": "huge", "color": "yellow", "refrigerated": "no", "hazardous": "no", "food": "no", "shelf": "big" }, { "size": "huge", "color": "blue", "refrigerated": "yes", "hazardous": "yes", "food": "yes", "shelf": "hazard" }, { "size": "huge", "color": "blue", "refrigerated": "yes", "hazardous": "yes", "food": "no", "shelf": "hazard" }, { "size": "huge", "color": "blue", "refrigerated": "yes", "hazardous": "no", "food": "yes", "shelf": "food" }, { "size": "huge", "color": "blue", "refrigerated": "yes", "hazardous": "no", "food": "no", "shelf": "big" }, { "size": "huge", "color": "blue", "refrigerated": "no", "hazardous": "yes", "food": "yes", "shelf": "hazard" }, { "size": "huge", "color": "blue", "refrigerated": "no", "hazardous": "yes", "food": "no", "shelf": "hazard" }, { "size": "huge", "color": "blue", "refrigerated": "no", "hazardous": "no", "food": "yes", "shelf": "food" }, { "size": "huge", "color": "blue", "refrigerated": "no", "hazardous": "no", "food": "no", "shelf": "big" }, { "size": "huge", "color": "green", "refrigerated": "yes", "hazardous": "yes", "food": "yes", "shelf": "hazard" }, { "size": "huge", "color": "green", "refrigerated": "yes", "hazardous": "yes", "food": "no", "shelf": "hazard" }, { "size": "huge", "color": "green", "refrigerated": "yes", "hazardous": "no", "food": "yes", "shelf": "food" }, { "size": "huge", "color": "green", "refrigerated": "yes", "hazardous": "no", "food": "no", "shelf": "big" }, { "size": "huge", "color": "green", "refrigerated": "no", "hazardous": "yes", "food": "yes", "shelf": "hazard" }, { "size": "huge", "color": "green", "refrigerated": "no", "hazardous": "yes", "food": "no", "shelf": "hazard" }, { "size": "huge", "color": "green", "refrigerated": "no", "hazardous": "no", "food": "yes", "shelf": "food" }, { "size": "huge", "color": "green", "refrigerated": "no", "hazardous": "no", "food": "no", "shelf": "big" }];
+
+				var test_data = [{ "size": "tiny", "color": "red", "refrigerated": "yes", "hazardous": "no", "food": "no", "shelf": "small" }, { "size": "huge", "color": "blue", "refrigerated": "no", "hazardous": "no", "food": "no", "shelf": "big" }, { "size": "tiny", "color": "green", "refrigerated": "no", "hazardous": "yes", "food": "no", "shelf": "hazard" }, { "size": "small", "color": "black", "refrigerated": "no", "hazardous": "no", "food": "yes", "shelf": "food" }];
+
+				var class_name = "shelf";
+				var features = ["size", "color", "refrigerated", "hazardous", "food"];
+
+				var dt = new DecisionTreeID3(training_data, class_name, features);
+
+				var packcoordsTEMP = this.packagesCoords.slice();
+
+				var toSearch = [];
+
+				for (var i = 0; i < this.packages.length; i++) {
+					var colors = ["red", "blue", "green", "black", "yellow"];
+					var color = colors[(Math.random() * 100).toFixed() % 4];
+					var refrigerated = ["yes", "no"][(Math.random() * 100).toFixed() % 2];
+					var hazardous = ["yes", "no"][(Math.random() * 100).toFixed() % 2];
+					var food = ["yes", "no"][(Math.random() * 100).toFixed() % 2];
+					var packageProperties = this.packages.getAt(i).propertiesy;
+					var size = myPerceptron.activate([packageProperties.width, packageProperties.height, packageProperties.length])[0];
+					if (size <= 0.25) {
+						size = "tiny";
+					} else if (size <= 0.5) {
+						size = "small";
+					} else if (size <= 0.75) {
+						size = "big";
+					} else {
+						size = "huge";
+					}
+					var packageFeatures = { size: size, color: color, hazardous: hazardous, food: food };
+					toSearch.push(packageFeatures);
+					this.packages.getAt(i).propertiesy.features = packageFeatures;
+				}
+
+				for (i = 0; i < this.packagesCoords.length; i++) {
+					console.log(this.packagesCoords[i]);
+				}
+
+				console.log("*******************");
+				for (i = 0; i < 4; i++) {
+					if (dt.predict(toSearch[i]) == "small") {
+						//console.log("150-200");
+						this.packagesCoords[0] = packcoordsTEMP[i];
+						this.packages.getAt(i).propertiesy.destinedShelf = "small";
+						//console.log("********");
+					} else if (dt.predict(toSearch[i]) == "big") {
+							//console.log("550-200");
+							this.packagesCoords[1] = packcoordsTEMP[i];
+							this.packages.getAt(i).propertiesy.destinedShelf = "big";
+							//console.log("********");
+						} else if (dt.predict(toSearch[i]) == "hazard") {
+								//console.log("150-500");
+								this.packagesCoords[2] = packcoordsTEMP[i];
+								this.packages.getAt(i).propertiesy.destinedShelf = "hazard";
+								//console.log("********");
+							} else if (dt.predict(toSearch[i]) == "food") {
+									//console.log("550-500");
+									this.packagesCoords[3] = packcoordsTEMP[i];
+									this.packages.getAt(i).propertiesy.destinedShelf = "food";
+									//console.log("********");
+								}
+				}
+				for (i = 0; i < this.packagesCoords.length; i++) {
+					console.log(this.packagesCoords[i]);
+				}
+
+				var accuracy = dt.evaluate(test_data);
+				var treeModel = dt.toJSON();
+
+				console.log('##############################');
+				console.log(treeModel);
+				console.log('##############################');
+				//console.log(predicted_class);
+				//console.log('##############################');
+
+				//KONIEC KODU Z DRZEWEM
 
 				var shelf1 = new _Shelf2.default({
 					game: this.game,
@@ -9420,7 +9476,7 @@
 					game: this.game,
 					x: 600,
 					y: 200,
-					asset: 'fridge',
+					asset: 'shelf',
 					collides: this.collidesPPS
 				});
 
@@ -9428,7 +9484,7 @@
 					game: this.game,
 					x: 200,
 					y: 500,
-					asset: 'hazard',
+					asset: 'shelf',
 					collides: this.collidesPPS
 				});
 
@@ -9436,9 +9492,10 @@
 					game: this.game,
 					x: 600,
 					y: 500,
-					asset: 'haz-fri',
+					asset: 'shelf',
 					collides: this.collidesPPS
 				});
+
 				this.racksCoords = [];
 				this.racksCoords.push([Math.ceil(159 / 20) - 1, Math.ceil(159 / 20) - 1]);
 				this.racksCoords.push([Math.ceil(559 / 20) - 1, Math.ceil(159 / 20) - 1]);
@@ -9478,7 +9535,9 @@
 					var newPackager = this.packages.create(this.player.position.x + 60, this.player.position.y, 'package');
 					newPackager.body.setRectangle(32, 32);
 					newPackager.propertiesy = this.player.carrying;
+					console.log('package properties: ', newPackager.propertiesy);
 					console.log('zrzucono paczke: width: ' + newPackager.propertiesy['width'] + ' length: ' + newPackager.propertiesy['length'] + ' height: ' + newPackager.propertiesy['height'] + ' category: ' + newPackager.propertiesy['category']);
+					console.log('paczka powinna być w magazynie: ', newPackager.propertiesy.destinedShelf);
 					newPackager.body.setCollisionGroup(this.collidesPPS.packageCollisionGroup);
 					newPackager.body.collides([this.collidesPPS.packageCollisionGroup, this.collidesPPS.playerCollisionGroup, this.collidesPPS.shelfCollisionGroup]);
 					this.player.loadTexture('forkliftEmpty', 0);
@@ -9664,14 +9723,16 @@
 	        var collides = _ref.collides;
 	        var packageArr = _ref.packageArr;
 	        var rackArr = _ref.rackArr;
+	        var decisionTree = _ref.decisionTree;
 
 	        _classCallCheck(this, _class);
 
-	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(_class).call(this, game, x, y, asset, collides, packageArr, rackArr));
+	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(_class).call(this, game, x, y, asset, collides, packageArr, rackArr, decisionTree));
 
 	        _this.game = game;
 	        _this.name = 'forklift';
 	        _this.full = false;
+	        _this.decisionTree = decisionTree;
 
 	        _this.packagesCoords = packageArr;
 	        _this.racksCoords = rackArr;
@@ -10097,6 +10158,11 @@
 	                if (this.scale.x == 1) {
 	                    this.scale.x = -1;
 	                }
+	            } else if (this.game.input.keyboard.isDown(_phaser2.default.Keyboard.RIGHT)) {
+	                this.body.moveRight(200);
+	                if (this.scale.x == -1) {
+	                    this.scale.x = 1;
+	                }
 	            }
 
 	            if (this.game.input.keyboard.isDown(_phaser2.default.Keyboard.UP)) {
@@ -10225,6 +10291,7 @@
 	                this.carrying = body2.sprite.propertiesy;
 	                //console.log('zabrano paczke: width: ' + body2.sprite.propertiesy['width'] + ' length: ' + body2.sprite.propertiesy['length'] + ' height: ' + body2.sprite.propertiesy['height'] + ' category: ' + body2.sprite.propertiesy['category']);
 	                console.log("zabrano paczke: " + body2.x + " " + body2.y + " | " + (Math.ceil(body2.x / 20) - 1) + " " + (Math.ceil(body2.y / 20) - 1));
+	                console.log("package properties: ", body2.sprite.propertiesy);
 	                body2.sprite.alpha = 0;
 	                body2.destroy();
 	                //body1.setCollisionGroup(this.collides.playerFullCollisionGroup);

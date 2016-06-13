@@ -33,52 +33,47 @@ export default class extends Phaser.State {
     this.packages.enableBody = true;
     this.packages.physicsBodyType = Phaser.Physics.P2JS;
 
-
-	var firstpack = {size: "big", color: "red", "refrigerated": "yes", hazardous: "yes", food: "no"};
-	var secondpack = {size: "small", color: "blue", "refrigerated": "no", hazardous: "no", food: "yes"};
-	var thirdpack = {size: "big", color: "green", "refrigerated": "yes", hazardous: "no", food: "no"};
-	var fourthpack = {size: "small", color: "black", "refrigerated": "yes", hazardous: "no", food: "no"};
-
     this.packagesCoords=[];
     for (var i = 0; i < 4; i++)
     {
       var random = this.recursiveRandomCoordsSearch();
-	  var randomX = random[0];
-	  var randomY = random[1];
+		  var randomX = random[0];
+		  var randomY = random[1];
 
-	  if(randomX <= 32)
-		  randomX+=32;
-	  else if(randomX >= 768)
-		  randomX-=32;
+		  if(randomX <= 32)
+			  randomX+=32;
+		  else if(randomX >= 768)
+			  randomX-=32;
 
-	  if(randomY <= 32)
-		  randomY+=32;
-	  else if(randomY >= 768)
-		  randomX-=32;
+		  if(randomY <= 32)
+			  randomY+=32;
+		  else if(randomY >= 768)
+			  randomX-=32;
 
-	  console.log(randomX+" "+randomY);
-	  if (i==0){
-		  var packager = this.packages.create(randomX, randomY, 'pack1');
-		  packager.propertiesy = firstpack.slice;
-	  }
-	  else if (i==1){
-		  var packager = this.packages.create(randomX, randomY, 'pack2');
-		  packager.propertiesy = secondpack.slice;
-	  }
-	  else if (i==2){
-		  var packager = this.packages.create(randomX, randomY, 'pack3');
-		  packager.propertiesy = thirdpack.slice;
-	  }
-	  else if (i==3){
-		  var packager = this.packages.create(randomX, randomY, 'pack4');
-		  packager.propertiesy = fourthpack.slice;
-	  }
-      
-      packager.body.setRectangle(19, 19);
+		  console.log(randomX+" "+randomY);
+		  if (i==0){
+			  var packager = this.packages.create(randomX, randomY, 'pack1');
+		  }
+		  else if (i==1){
+			  var packager = this.packages.create(randomX, randomY, 'pack2');
+		  }
+		  else if (i==2){
+			  var packager = this.packages.create(randomX, randomY, 'pack3');
+		  }
+		  else if (i==3){
+			  var packager = this.packages.create(randomX, randomY, 'pack4');
+		  }
+	      
+	    packager.body.setRectangle(19, 19);
+	    packager.propertiesy = {
+	      width: Math.random() * 9 + 1,
+	      length: Math.random() * 9 + 1,
+	      height: Math.random() * 9 + 1,
+	      category: 'AGD',
+	    };
 
-
-      this.packagesCoords.push([Math.floor(randomX / 20), Math.floor(randomY / 20)]);
-	  console.log((Math.ceil(randomX / 20))+" "+(Math.ceil(randomY / 20)));
+	    this.packagesCoords.push([Math.floor(randomX / 20), Math.floor(randomY / 20)]);
+		  console.log((Math.ceil(randomX / 20))+" "+(Math.ceil(randomY / 20)));
       packager.body.setCollisionGroup(this.collidesPPS.packageCollisionGroup);
 
       packager.body.collides([ this.collidesPPS.playerCollisionGroup, this.collidesPPS.shelfCollisionGroup]);
@@ -265,9 +260,30 @@ export default class extends Phaser.State {
 	var dt = new DecisionTreeID3(training_data, class_name, features);
 	
 	var packcoordsTEMP = this.packagesCoords.slice();
-	
 
-	var toSearch = [firstpack, secondpack, thirdpack, fourthpack];
+	var toSearch = [];
+
+	for (var i = 0; i < this.packages.length; i++) {
+		var colors = ["red", "blue", "green", "black", "yellow", ]
+		var color = colors[(Math.random() * 100).toFixed() % 4];
+		var refrigerated = ["yes", "no"][(Math.random() * 100).toFixed() % 2];
+		var hazardous = ["yes", "no"][(Math.random() * 100).toFixed() % 2];
+		var food = ["yes", "no"][(Math.random() * 100).toFixed() % 2];
+		var packageProperties = this.packages.getAt(i).propertiesy;
+		var size = myPerceptron.activate([packageProperties.width, packageProperties.height, packageProperties.length])[0];
+		if (size <= 0.25) {
+			size = "tiny";
+		} else if (size <= 0.5) {
+			size = "small";
+		} else if (size <= 0.75) {
+			size = "big";
+		} else {
+			size = "huge";
+		}
+		var packageFeatures = { size: size, color: color, hazardous: hazardous, food: food };
+		toSearch.push(packageFeatures);
+		this.packages.getAt(i).propertiesy.features = packageFeatures;
+	}
 	
 	for(i = 0; i<this.packagesCoords.length;i++)
 	{
@@ -279,21 +295,25 @@ export default class extends Phaser.State {
 		if (dt.predict(toSearch[i]) == "small"){
 			//console.log("150-200");
 			this.packagesCoords[0] = packcoordsTEMP[i];
+			this.packages.getAt(i).propertiesy.destinedShelf = "small";
 			//console.log("********");
 		}
 		else if (dt.predict(toSearch[i]) == "big"){
 			//console.log("550-200");
 			this.packagesCoords[1] = packcoordsTEMP[i];
+			this.packages.getAt(i).propertiesy.destinedShelf = "big";
 			//console.log("********");
 		}
 		else if (dt.predict(toSearch[i]) == "hazard"){
 			//console.log("150-500");
 			this.packagesCoords[2] = packcoordsTEMP[i];
+			this.packages.getAt(i).propertiesy.destinedShelf = "hazard";
 			//console.log("********");
 		}
 		else if (dt.predict(toSearch[i]) == "food"){
 			//console.log("550-500");
 			this.packagesCoords[3] = packcoordsTEMP[i];
+			this.packages.getAt(i).propertiesy.destinedShelf = "food";
 			//console.log("********");
 		}
 	}
@@ -391,7 +411,9 @@ export default class extends Phaser.State {
       let newPackager = this.packages.create(this.player.position.x+60, this.player.position.y, 'package');
       newPackager.body.setRectangle(32, 32);
       newPackager.propertiesy = this.player.carrying;
+      console.log('package properties: ', newPackager.propertiesy);
       console.log('zrzucono paczke: width: '+newPackager.propertiesy['width']+' length: '+newPackager.propertiesy['length']+' height: '+newPackager.propertiesy['height']+' category: '+newPackager.propertiesy['category']);
+      console.log('paczka powinna być w magazynie: ', newPackager.propertiesy.destinedShelf);
       newPackager.body.setCollisionGroup(this.collidesPPS.packageCollisionGroup);
       newPackager.body.collides([this.collidesPPS.packageCollisionGroup, this.collidesPPS.playerCollisionGroup, this.collidesPPS.shelfCollisionGroup]);
       this.player.loadTexture('forkliftEmpty', 0);

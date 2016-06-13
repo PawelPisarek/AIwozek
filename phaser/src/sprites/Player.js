@@ -9,6 +9,7 @@ export default class extends Phaser.Sprite {
         this.game = game;
         this.name = 'forklift';
         this.full = false;
+        this.decisionTree = decisionTree;
 
         this.decsionTree = decisionTree;
 
@@ -527,6 +528,12 @@ export default class extends Phaser.Sprite {
                 this.scale.x = -1;
             }
         }
+        else if (this.game.input.keyboard.isDown(Phaser.Keyboard.RIGHT)) {
+            this.body.moveRight(200);
+            if (this.scale.x == -1) {
+                this.scale.x = 1;
+            }
+        }
 
 
         if (this.game.input.keyboard.isDown(Phaser.Keyboard.UP))
@@ -681,6 +688,7 @@ export default class extends Phaser.Sprite {
             this.carrying = body2.sprite.propertiesy;
             //console.log('zabrano paczke: width: ' + body2.sprite.propertiesy['width'] + ' length: ' + body2.sprite.propertiesy['length'] + ' height: ' + body2.sprite.propertiesy['height'] + ' category: ' + body2.sprite.propertiesy['category']);
             console.log("zabrano paczke: "+body2.x+" "+body2.y+" | "+(Math.ceil(body2.x / 20)-1)+" "+(Math.ceil(body2.y / 20)-1));
+            console.log("package properties: ", body2.sprite.propertiesy);
             body2.sprite.alpha = 0;
             body2.destroy();
             //body1.setCollisionGroup(this.collides.playerFullCollisionGroup);
