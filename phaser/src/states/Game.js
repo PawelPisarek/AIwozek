@@ -390,7 +390,8 @@ export default class extends Phaser.State {
       x: 200,
       y: 200,
       asset: 'shelf',
-      collides: this.collidesPPS
+      collides: this.collidesPPS,
+	  holidng: {}
     });
 
     let shelf2 = new Shelf({
@@ -398,7 +399,8 @@ export default class extends Phaser.State {
       x: 600,
       y: 200,
       asset: 'shelf',
-      collides: this.collidesPPS
+      collides: this.collidesPPS,
+	  holding: {}
     });
 
     let shelf3 = new Shelf({
@@ -406,7 +408,8 @@ export default class extends Phaser.State {
       x: 200,
       y: 500,
       asset: 'shelf',
-      collides: this.collidesPPS
+      collides: this.collidesPPS,
+	  holding:{}
     });
 
     let shelf4 = new Shelf({
@@ -414,7 +417,8 @@ export default class extends Phaser.State {
       x: 600,
       y: 500,
       asset: 'shelf',
-      collides: this.collidesPPS
+      collides: this.collidesPPS,
+	  holding: {}
     });
 	
     this.racksCoords=[];
@@ -424,7 +428,7 @@ export default class extends Phaser.State {
     this.racksCoords.push([Math.ceil(559 / 20)-1, Math.ceil(459 / 20)-1]);
 
     [shelf1, shelf2, shelf3, shelf4].forEach((shelf)=>this.game.add.existing(shelf));
-
+	this.shelves=[shelf1, shelf2, shelf3, shelf4];
 
     this.player = new Player({
       game: this.game,
@@ -434,7 +438,8 @@ export default class extends Phaser.State {
       collides: this.collidesPPS,
       packageArr: this.packagesCoords,
       rackArr: this.racksCoords,
-	  decisionTree: dt
+	  decisionTree: dt,
+	  shelves: this.shelves
     });
 
     this.game.add.existing(this.player);
