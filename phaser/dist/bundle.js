@@ -9517,8 +9517,6 @@
 				console.log('##############################');
 				console.log(treeModel);
 				console.log('##############################');
-				//console.log(predicted_class);
-				//console.log('##############################');
 
 				//KONIEC KODU Z DRZEWEM
 
@@ -9527,7 +9525,8 @@
 					x: 200,
 					y: 200,
 					asset: 'shelf',
-					collides: this.collidesPPS
+					collides: this.collidesPPS,
+					holidng: {}
 				});
 
 				var shelf2 = new _Shelf2.default({
@@ -9535,7 +9534,8 @@
 					x: 600,
 					y: 200,
 					asset: 'shelf',
-					collides: this.collidesPPS
+					collides: this.collidesPPS,
+					holding: {}
 				});
 
 				var shelf3 = new _Shelf2.default({
@@ -9543,7 +9543,8 @@
 					x: 200,
 					y: 500,
 					asset: 'shelf',
-					collides: this.collidesPPS
+					collides: this.collidesPPS,
+					holding: {}
 				});
 
 				var shelf4 = new _Shelf2.default({
@@ -9551,7 +9552,8 @@
 					x: 600,
 					y: 500,
 					asset: 'shelf',
-					collides: this.collidesPPS
+					collides: this.collidesPPS,
+					holding: {}
 				});
 
 				this.racksCoords = [];
@@ -9563,6 +9565,7 @@
 				[shelf1, shelf2, shelf3, shelf4].forEach(function (shelf) {
 					return _this2.game.add.existing(shelf);
 				});
+				this.shelves = [shelf1, shelf2, shelf3, shelf4];
 
 				this.player = new _Player2.default({
 					game: this.game,
@@ -9572,7 +9575,8 @@
 					collides: this.collidesPPS,
 					packageArr: this.packagesCoords,
 					rackArr: this.racksCoords,
-					decisionTree: dt
+					decisionTree: dt,
+					shelves: this.shelves
 				});
 
 				this.game.add.existing(this.player);
@@ -9670,10 +9674,11 @@
 	        var y = _ref.y;
 	        var asset = _ref.asset;
 	        var collides = _ref.collides;
+	        var holding = _ref.holding;
 
 	        _classCallCheck(this, _class);
 
-	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(_class).call(this, game, x, y, asset, collides));
+	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(_class).call(this, game, x, y, asset, collides, holding));
 
 	        _this.game = game;
 	        _this.anchor.setTo(0.5);
@@ -9683,6 +9688,7 @@
 	        _this.body.static = true;
 	        _this.body.setCollisionGroup(collides.shelfCollisionGroup);
 	        _this.body.collides([collides.packageCollisionGroup, collides.playerCollisionGroup]);
+	        _this.holding = holding;
 	        return _this;
 	    }
 
@@ -9783,15 +9789,18 @@
 	        var packageArr = _ref.packageArr;
 	        var rackArr = _ref.rackArr;
 	        var decisionTree = _ref.decisionTree;
+	        var shelves = _ref.shelves;
 
 	        _classCallCheck(this, _class);
 
-	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(_class).call(this, game, x, y, asset, collides, packageArr, rackArr, decisionTree));
+	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(_class).call(this, game, x, y, asset, collides, packageArr, rackArr, decisionTree, shelves));
 
 	        _this.game = game;
 	        _this.name = 'forklift';
 	        _this.full = false;
 	        _this.decisionTree = decisionTree;
+
+	        _this.shelves = shelves;
 
 	        _this.decsionTree = decisionTree;
 
@@ -10201,7 +10210,7 @@
 
 	            iterator++;
 	        });
-	        console.log(astarPath);
+	        console.log(_this.resulti);
 	        console.log(_this.body.moveUp);
 
 	        return _this;
@@ -10210,6 +10219,7 @@
 	    _createClass(_class, [{
 	        key: 'update',
 	        value: function update() {
+	            var _this2 = this;
 
 	            this.body.setZeroVelocity();
 
@@ -10231,97 +10241,146 @@
 	                this.body.moveDown(200);
 	            }
 	            if (document.getElementById("getit").value == 1) {
-	                document.getElementById("getit").value = 0;
-	                document.getElementById("gettingit").value = 1;
-	                var size = document.getElementById("size").value;
-	                var color = document.getElementById("color").value;
-	                var refrigerated = document.getElementById("refrigerated").value;
-	                var hazardous = document.getElementById("hazardous").value;
-	                var food = document.getElementById("food").value;
-	                var chosenpack = { size: size, color: color, "refrigerated": refrigerated, hazardous: hazardous, food: food };
+	                var size;
+	                var color;
+	                var refrigerated;
+	                var hazardous;
+	                var food;
+	                var chosenpack;
+	                var predicted_class;
+	                var shelfposx;
+	                var shelfposy;
+	                var shelfposx;
+	                var shelfposy;
+	                var shelfposx;
+	                var shelfposy;
+	                var shelfposx;
+	                var shelfposy;
 
-	                var predicted_class = this.decisionTree.predict(chosenpack);
-	                console.log(predicted_class);
-	                document.getElementById("gettingit").value = 0;
-	                /*
-	                if(predicted_class == "food"){
-	                	shelfposx = ;
-	                	shelfposy = ;
-	                }
-	                else if(predicted_class == "hazardous"){
-	                	shelfposx = ;
-	                	shelfposy = ;
-	                }
-	                else if(predicted_class == "big"){
-	                	shelfposx = ;
-	                	shelfposy = ;
-	                }
-	                else if(predicted_class == "small"){
-	                	shelfposx = ;
-	                	shelfposy = ;
-	                }
-	                
-	                         console.log(shelfposx+" "+shelfposy);
-	                         let mouse_x = Math.ceil(shelfposx / 20)-1;
-	                         let mouse_y = Math.ceil(shelfposy / 20)-1;
-	                         let forklift_x = Math.ceil(this.body.x / 20)-1;
-	                         let forklift_y = Math.ceil(this.body.y / 20)-1;
-	                         console.log("start: " + forklift_x + " " + forklift_y + " | end: " + mouse_x + " " + mouse_y);
-	                         let start = this.graph.grid[forklift_x][forklift_y];
-	                         let end = this.graph.grid[mouse_x][mouse_y]; //40-46
-	                         this.result = astar.search(this.graph, start, end);
-	                         // console.log(this.result);
-	                         let path = {x: forklift_x, y: forklift_y};
-	                         let result = [];
-	                           this.result.forEach((graph) => {
-	                             if (graph.y > path.x) {
-	                                 path.x = graph.y;
-	                                 path.y = graph.x;
-	                                 result.push('dol '+graph.weight);
-	                             }
-	                             if (graph.x > path.y) {
-	                                 path.x = graph.y;
-	                                 path.y = graph.x;
-	                                 result.push('prawo '+graph.weight);
-	                             }
-	                             if (graph.y < path.x) {
-	                                 path.x = graph.y;
-	                                 path.y = graph.x;
-	                                 result.push('gora '+graph.weight);
-	                             }
-	                             if (graph.x < path.y) {
-	                                 path.x = graph.y;
-	                                 path.y = graph.x;
-	                                 result.push('lewo '+graph.weight);
-	                             }
-	                         });
-	                         result.shift();
-	                         console.log(result);*/
+	                (function () {
+	                    document.getElementById("getit").value = 0;
+	                    document.getElementById("gettingit").value = 1;
+	                    size = document.getElementById("size").value;
+	                    color = document.getElementById("color").value;
+	                    refrigerated = document.getElementById("refrigerated").value;
+	                    hazardous = document.getElementById("hazardous").value;
+	                    food = document.getElementById("food").value;
+	                    chosenpack = { size: size, color: color, "refrigerated": refrigerated, hazardous: hazardous, food: food };
+	                    predicted_class = _this2.decisionTree.predict(chosenpack);
+
+	                    console.log(predicted_class);
+	                    document.getElementById("gettingit").value = 0;
+
+	                    console.log(_this2.shelves);
+	                    if (predicted_class == "food") {
+	                        shelfposx = _this2.shelves[0].x - 50;
+	                        shelfposy = _this2.shelves[0].y;
+
+	                        if (_this2.shelves[0].holding.size != null && _this2.shelves[0].holding.size == size && _this2.shelves[0].holding.food != null && _this2.shelves[0].holding.food == food && _this2.shelves[0].holding.hazardous != null && _this2.shelves[0].holding.hazardous == hazardous && _this2.shelves[0].holding.color != null && _this2.shelves[0].holding.color == color && _this2.shelves[0].holding.refrigerated != null && _this2.shelves[0].holding.refrigerated == refrigerated) {
+	                            _this2.body.carrying = _this2.shelves[0].holding;
+	                            _this2.loadTexture("forkliftFull", 0);
+	                            document.getElementById("error").innerHTML = "FOUND PACKAGE!";
+	                        } else {
+	                            document.getElementById("error").innerHTML = "PACKAGE NOT FOUND!";
+	                        }
+	                    } else if (predicted_class == "hazard") {
+	                        shelfposx = _this2.shelves[1].x - 50;
+	                        shelfposy = _this2.shelves[1].y;
+
+	                        if (_this2.shelves[1].holding.size != null && _this2.shelves[1].holding.size == size && _this2.shelves[1].holding.food != null && _this2.shelves[1].holding.food == food && _this2.shelves[1].holding.hazardous != null && _this2.shelves[1].holding.hazardous == hazardous && _this2.shelves[1].holding.color != null && _this2.shelves[1].holding.color == color && _this2.shelves[1].holding.refrigerated != null && _this2.shelves[1].holding.refrigerated == refrigerated) {
+	                            _this2.body.carrying = _this2.shelves[1].holding;
+	                            _this2.loadTexture("forkliftFull", 0);
+	                            document.getElementById("error").innerHTML = "FOUND PACKAGE!";
+	                        } else {
+	                            document.getElementById("error").innerHTML = "PACKAGE NOT FOUND!";
+	                        }
+	                    } else if (predicted_class == "big") {
+	                        shelfposx = _this2.shelves[2].x - 50;
+	                        shelfposy = _this2.shelves[2].y;
+
+	                        if (_this2.shelves[2].holding.size != null && _this2.shelves[2].holding.size == size && _this2.shelves[2].holding.food != null && _this2.shelves[2].holding.food == food && _this2.shelves[2].holding.hazardous != null && _this2.shelves[2].holding.hazardous == hazardous && _this2.shelves[2].holding.color != null && _this2.shelves[2].holding.color == color && _this2.shelves[2].holding.refrigerated != null && _this2.shelves[2].holding.refrigerated == refrigerated) {
+	                            _this2.body.carrying = _this2.shelves[2].holding;
+	                            _this2.loadTexture("forkliftFull", 0);
+	                            document.getElementById("error").innerHTML = "FOUND PACKAGE!";
+	                        } else {
+	                            document.getElementById("error").innerHTML = "PACKAGE NOT FOUND!";
+	                        }
+	                    } else if (predicted_class == "small") {
+	                        shelfposx = _this2.shelves[3].x - 50;
+	                        shelfposy = _this2.shelves[3].y;
+
+	                        if (_this2.shelves[3].holding.size != null && _this2.shelves[3].holding.size == size && _this2.shelves[3].holding.food != null && _this2.shelves[3].holding.food == food && _this2.shelves[3].holding.hazardous != null && _this2.shelves[3].holding.hazardous == hazardous && _this2.shelves[3].holding.color != null && _this2.shelves[3].holding.color == color && _this2.shelves[3].holding.refrigerated != null && _this2.shelves[3].holding.refrigerated == refrigerated) {
+	                            _this2.body.carrying = _this2.shelves[3].holding;
+	                            _this2.loadTexture("forkliftFull", 0);
+	                            document.getElementById("error").innerHTML = "FOUND PACKAGE!";
+	                        } else {
+	                            document.getElementById("error").innerHTML = "PACKAGE NOT FOUND!";
+	                        }
+	                    }
+
+	                    console.log(shelfposx + " " + shelfposy);
+	                    var mouse_x = Math.ceil(shelfposx / 20) - 1;
+	                    var mouse_y = Math.ceil(shelfposy / 20) - 1;
+	                    var forklift_x = Math.ceil(_this2.body.x / 20) - 1;
+	                    var forklift_y = Math.ceil(_this2.body.y / 20) - 1;
+	                    console.log("start: " + forklift_x + " " + forklift_y + " | end: " + mouse_x + " " + mouse_y);
+	                    var start = _this2.graph.grid[forklift_x][forklift_y];
+	                    var end = _this2.graph.grid[mouse_x][mouse_y]; //40-46
+	                    _this2.result = astar.search(_this2.graph, start, end);
+	                    // console.log(this.result);
+	                    var path = { x: forklift_x, y: forklift_y };
+	                    var result = [];
+
+	                    _this2.result.forEach(function (graph) {
+	                        if (graph.y > path.x) {
+	                            path.x = graph.y;
+	                            path.y = graph.x;
+	                            result.push('dol ' + graph.weight);
+	                        }
+	                        if (graph.x > path.y) {
+	                            path.x = graph.y;
+	                            path.y = graph.x;
+	                            result.push('prawo ' + graph.weight);
+	                        }
+	                        if (graph.y < path.x) {
+	                            path.x = graph.y;
+	                            path.y = graph.x;
+	                            result.push('gora ' + graph.weight);
+	                        }
+	                        if (graph.x < path.y) {
+	                            path.x = graph.y;
+	                            path.y = graph.x;
+	                            result.push('lewo ' + graph.weight);
+	                        }
+	                    });
+	                    result.shift();
+	                    console.log(result);
+	                })();
 	            }
 
 	            if (this.game.input.keyboard.isDown(_phaser2.default.Keyboard.P)) {
 	                var punkt = this.result.shift();
 
 	                if (punkt != null) {
-	                    var forklift_y = Math.ceil(this.body.x / 20) - 1;
-	                    var forklift_x = Math.ceil(this.body.y / 20) - 1;
+	                    var _forklift_y = Math.ceil(this.body.x / 20) - 1;
+	                    var _forklift_x = Math.ceil(this.body.y / 20) - 1;
 	                    // console.log("punkt x: "+punkt.x+" y: "+punkt.y+" wozek: "+forklift_x+" "+forklift_y);
-	                    if (punkt.y > forklift_x) {
+	                    if (punkt.y > _forklift_x) {
 	                        this.body.moveDown(1139);
 	                        // console.log('dol');
 	                    }
-	                    if (punkt.x > forklift_y) {
+	                    if (punkt.x > _forklift_y) {
 	                        this.body.moveRight(999);
 	                        // console.log('prawo');
 	                        if (this.scale.x == -1) {
 	                            this.scale.x = 1;
 	                        }
 	                    }
-	                    if (punkt.y < forklift_x) {
+	                    if (punkt.y < _forklift_x) {
 	                        this.body.moveUp(1139);
 	                        // console.log('gora');
 	                    }
-	                    if (punkt.x < forklift_y) {
+	                    if (punkt.x < _forklift_y) {
 	                        this.body.moveLeft(999);
 	                        // console.log('lewo');
 	                        if (this.scale.x == 1) {
@@ -10340,25 +10399,25 @@
 	                    if (_punkt == "#") {
 	                        this.dropPackage();
 	                    } else {
-	                        var _forklift_y = Math.ceil(this.body.x / 20) - 1;
-	                        var _forklift_x = Math.ceil(this.body.y / 20) - 1;
+	                        var _forklift_y2 = Math.ceil(this.body.x / 20) - 1;
+	                        var _forklift_x2 = Math.ceil(this.body.y / 20) - 1;
 	                        // console.log("punkt x: "+punkt.x+" y: "+punkt.y+" wozek: "+forklift_x+" "+forklift_y);
-	                        if (_punkt.y > _forklift_x) {
+	                        if (_punkt.y > _forklift_x2) {
 	                            this.body.moveDown(1205);
 	                            //console.log('dol');
 	                        }
-	                        if (_punkt.x > _forklift_y) {
+	                        if (_punkt.x > _forklift_y2) {
 	                            this.body.moveRight(1202);
 	                            //console.log('prawo');
 	                            if (this.scale.x == -1) {
 	                                this.scale.x = 1;
 	                            }
 	                        }
-	                        if (_punkt.y < _forklift_x) {
+	                        if (_punkt.y < _forklift_x2) {
 	                            this.body.moveUp(1205);
 	                            //console.log('gora');
 	                        }
-	                        if (_punkt.x < _forklift_y) {
+	                        if (_punkt.x < _forklift_y2) {
 	                            this.body.moveLeft(1202);
 	                            //console.log('lewo');
 	                            if (this.scale.x == 1) {

@@ -377,9 +377,6 @@ export default class extends Phaser.State {
 	console.log('##############################');
 	console.log(treeModel);
 	console.log('##############################');
-	//console.log(predicted_class);
-	//console.log('##############################');
-	
 	
 	//KONIEC KODU Z DRZEWEM
 	
