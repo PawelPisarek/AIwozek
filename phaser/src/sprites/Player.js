@@ -563,8 +563,8 @@ export default class extends Phaser.Sprite {
             document.getElementById("gettingit").value=0;
 
 
-			console.log(this.shelves);
-			if(predicted_class == "food"){
+			console.log((this.shelves[2].holding.features.size!= null) +" "+( this.shelves[2].holding.features.size == size )+" "+( this.shelves[2].holding.features.food!= null )+" "+ (this.shelves[2].holding.features.food == food )+" "+ (this.shelves[2].holding.features.hazardous!= null) +" "+ (this.shelves[2].holding.features.hazardous == hazardous) +" "+ (this.shelves[2].holding.features.color!= null) +" "+ (this.shelves[2].holding.features.color == color));
+			if(predicted_class == "small"){
 
 				var shelfposx = this.shelves[0].x -50;
 				var shelfposy = this.shelves[0].y;
@@ -578,7 +578,7 @@ export default class extends Phaser.Sprite {
 					document.getElementById("error").innerHTML="PACKAGE NOT FOUND!";
 				}
 			}
-			else if(predicted_class == "hazard"){
+			else if(predicted_class == "big"){
 				var shelfposx = this.shelves[1].x-50;
 				var shelfposy = this.shelves[1].y;
 				if(this.shelves[1].holding.features.size!= null && this.shelves[1].holding.features.size == size && this.shelves[1].holding.features.food!= null && this.shelves[1].holding.features.food == food && this.shelves[1].holding.features.hazardous!= null && this.shelves[1].holding.features.hazardous == hazardous && this.shelves[1].holding.features.color!= null && this.shelves[1].holding.features.color == color){
@@ -591,7 +591,7 @@ export default class extends Phaser.Sprite {
 					document.getElementById("error").innerHTML="PACKAGE NOT FOUND!";
 				}
 			}
-			else if(predicted_class == "big"){
+			else if(predicted_class == "hazard"){
 				var shelfposx = this.shelves[2].x-50;
 				var shelfposy = this.shelves[2].y;
 				if(this.shelves[2].holding.features.size!= null && this.shelves[2].holding.features.size == size && this.shelves[2].holding.features.food!= null && this.shelves[2].holding.features.food == food && this.shelves[2].holding.features.hazardous!= null && this.shelves[2].holding.features.hazardous == hazardous && this.shelves[2].holding.features.color!= null && this.shelves[2].holding.features.color == color){
@@ -604,7 +604,7 @@ export default class extends Phaser.Sprite {
 					document.getElementById("error").innerHTML="PACKAGE NOT FOUND!";
 				}
 			}
-			else if(predicted_class == "small"){
+			else if(predicted_class == "food"){
 				var shelfposx = this.shelves[3].x -50;
 				var shelfposy = this.shelves[3].y;
 				if(this.shelves[3].holding.features.size!= null && this.shelves[3].holding.features.size == size && this.shelves[3].holding.features.food!= null && this.shelves[3].holding.features.food == food && this.shelves[3].holding.features.hazardous!= null && this.shelves[3].holding.features.hazardous == hazardous && this.shelves[3].holding.features.color!= null && this.shelves[3].holding.features.color == color){
