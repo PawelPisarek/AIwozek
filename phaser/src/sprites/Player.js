@@ -544,10 +544,41 @@ export default class extends Phaser.Sprite {
         {
             this.body.moveDown(200);
         }
-        if (this.game.input.activePointer.isDown) {
-            console.log(this.game.input.mousePointer.x+" "+this.game.input.mousePointer.y);
-            let mouse_x = Math.ceil(this.game.input.mousePointer.x / 20)-1;
-            let mouse_y = Math.ceil(this.game.input.mousePointer.y / 20)-1;
+		if(document.getElementById("getit").value == 1)
+        {
+            document.getElementById("getit").value=0;
+            document.getElementById("gettingit").value=1;
+            var size =document.getElementById("size").value;
+            var color =document.getElementById("color").value;
+            var refrigerated =document.getElementById("refrigerated").value;
+            var hazardous =document.getElementById("hazardous").value;
+            var food =document.getElementById("food").value;
+            var chosenpack = {size: size, color: color, "refrigerated": refrigerated, hazardous: hazardous, food: food};
+
+            var predicted_class = this.decisionTree.predict(chosenpack);
+            console.log(predicted_class);
+            document.getElementById("gettingit").value=0;
+			/*
+			if(predicted_class == "food"){
+				shelfposx = ;
+				shelfposy = ;
+			}
+			else if(predicted_class == "hazardous"){
+				shelfposx = ;
+				shelfposy = ;
+			}
+			else if(predicted_class == "big"){
+				shelfposx = ;
+				shelfposy = ;
+			}
+			else if(predicted_class == "small"){
+				shelfposx = ;
+				shelfposy = ;
+			}
+			
+            console.log(shelfposx+" "+shelfposy);
+            let mouse_x = Math.ceil(shelfposx / 20)-1;
+            let mouse_y = Math.ceil(shelfposy / 20)-1;
             let forklift_x = Math.ceil(this.body.x / 20)-1;
             let forklift_y = Math.ceil(this.body.y / 20)-1;
             console.log("start: " + forklift_x + " " + forklift_y + " | end: " + mouse_x + " " + mouse_y);
@@ -581,7 +612,7 @@ export default class extends Phaser.Sprite {
                 }
             });
             result.shift();
-            console.log(result);
+            console.log(result);*/
         }
 
         if(this.game.input.keyboard.isDown(Phaser.Keyboard.P))
@@ -664,21 +695,7 @@ export default class extends Phaser.Sprite {
 
 
         }
-        if(document.getElementById("getit").value == 1)
-        {
-            document.getElementById("getit").value=0;
-            document.getElementById("gettingit").value=1;
-            var size =document.getElementById("size").value;
-            var color =document.getElementById("color").value;
-            var refrigerated =document.getElementById("refrigerated").value;
-            var hazardous =document.getElementById("hazardous").value;
-            var food =document.getElementById("food").value;
-            var chosenpack = {size: size, color: color, "refrigerated": refrigerated, hazardous: hazardous, food: food};
-
-            var predicted_class = this.decisionTree.predict(chosenpack);
-            console.log(predicted_class);
-            document.getElementById("gettingit").value=0;
-        }
+        
     }
 
     hitPackage(body1, body2) {

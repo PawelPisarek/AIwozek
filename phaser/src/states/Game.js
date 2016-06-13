@@ -32,6 +32,36 @@ export default class extends Phaser.State {
     this.packages = this.game.add.group();
     this.packages.enableBody = true;
     this.packages.physicsBodyType = Phaser.Physics.P2JS;
+	
+		var packageSizes={};
+		packageSizes['packageSize0']=	{
+	      width: 0.01,
+	      length: 0.01,
+	      height: 0.01,
+	      category: 'AGD',
+	    };
+		
+		packageSizes['packageSize1']=	{
+	      width: 9.5,
+	      length: 9.5,
+	      height: 9.5,
+	      category: 'AGD',
+	    };
+		
+		packageSizes['packageSize2']=	{
+	      width: 2.3,
+	      length: 2.3,
+	      height: 2.3,
+	      category: 'AGD',
+	    };
+		
+		packageSizes['packageSize3']=	{
+	      width: 7.0,
+	      length: 7.0,
+	      height: 7.0,
+	      category: 'AGD',
+	    };
+	
 
     this.packagesCoords=[];
     for (var i = 0; i < 4; i++)
@@ -65,12 +95,7 @@ export default class extends Phaser.State {
 		  }
 	      
 	    packager.body.setRectangle(19, 19);
-	    packager.propertiesy = {
-	      width: Math.random() * 9 + 1,
-	      length: Math.random() * 9 + 1,
-	      height: Math.random() * 9 + 1,
-	      category: 'AGD',
-	    };
+	    packager.propertiesy = packageSizes['packageSize'+i];
 
 	    this.packagesCoords.push([Math.floor(randomX / 20), Math.floor(randomY / 20)]);
 		  console.log((Math.ceil(randomX / 20))+" "+(Math.ceil(randomY / 20)));
@@ -262,23 +287,47 @@ export default class extends Phaser.State {
 	var packcoordsTEMP = this.packagesCoords.slice();
 
 	var toSearch = [];
-
+	
+	var hazardousPicked=false;
+	var foodPicked=false;
 	for (var i = 0; i < this.packages.length; i++) {
 		var colors = ["red", "blue", "green", "black", "yellow", ]
 		var color = colors[(Math.random() * 100).toFixed() % 4];
 		var refrigerated = ["yes", "no"][(Math.random() * 100).toFixed() % 2];
-		var hazardous = ["yes", "no"][(Math.random() * 100).toFixed() % 2];
-		var food = ["yes", "no"][(Math.random() * 100).toFixed() % 2];
+		if(hazardousPicked == false)
+		{
+			var hazardous = 'yes';
+			var food= 'no';
+			hazardousPicked = true;
+		}
+		else if(foodPicked == false)
+		{
+			var hazardous ='no';
+			var food = 'yes';
+			foodPicked=true;
+		}
+		else
+		{
+			var food='no';
+			var hazardous='no';
+		}
+			
+		
 		var packageProperties = this.packages.getAt(i).propertiesy;
 		var size = myPerceptron.activate([packageProperties.width, packageProperties.height, packageProperties.length])[0];
+		console.log(size);
 		if (size <= 0.25) {
 			size = "tiny";
+			console.log("tiny");
 		} else if (size <= 0.5) {
+			console.log("small");
 			size = "small";
 		} else if (size <= 0.75) {
+			console.log("big");
 			size = "big";
 		} else {
 			size = "huge";
+			console.log("huge");
 		}
 		var packageFeatures = { size: size, color: color, hazardous: hazardous, food: food };
 		toSearch.push(packageFeatures);
