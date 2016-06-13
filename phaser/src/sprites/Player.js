@@ -659,7 +659,11 @@ export default class extends Phaser.Sprite {
 
         if(this.game.input.keyboard.isDown(Phaser.Keyboard.P))
         {
-            let punkt = this.result.shift();
+            let punkt = null;
+            if (this.result) {
+                 punkt = this.result.shift();
+            }
+            
 
             if(punkt != null)
             {

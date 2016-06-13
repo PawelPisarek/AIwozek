@@ -10344,7 +10344,10 @@
 	            }
 
 	            if (this.game.input.keyboard.isDown(_phaser2.default.Keyboard.P)) {
-	                var punkt = this.result.shift();
+	                var punkt = null;
+	                if (this.result) {
+	                    punkt = this.result.shift();
+	                }
 
 	                if (punkt != null) {
 	                    var _forklift_y = Math.ceil(this.body.x / 20) - 1;
