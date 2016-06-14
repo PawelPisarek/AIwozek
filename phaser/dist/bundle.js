@@ -9806,6 +9806,7 @@
 
 	        _this.packagesCoords = packageArr;
 	        _this.racksCoords = rackArr;
+	        _this.destinationReached = false;
 
 	        _this.game.physics.p2.enable(_this, false);
 	        _this.collides = collides;
@@ -10187,6 +10188,7 @@
 	        console.log(validatedArray);
 	        console.log(effectiveArray);
 	        var splitEffectivePath = effectiveArray.split("###")[0].split(",");
+	        _this.allTheShelves = [shelves[splitEffectivePath[2] - 1], shelves[splitEffectivePath[4] - 1], shelves[splitEffectivePath[6] - 1], shelves[splitEffectivePath[8] - 1]];
 	        var astarPath = [];
 	        var previous = -1;
 	        for (var s = 1; s < splitEffectivePath.length; s++) {
@@ -10270,46 +10272,47 @@
 
 	                    console.log(predicted_class);
 	                    document.getElementById("gettingit").value = 0;
+	                    _this2.destinationReached = false;
 
-	                    console.log(_this2.shelves);
-	                    if (predicted_class == "food") {
+	                    console.log((_this2.shelves[2].holding.features.size != null) + " " + (_this2.shelves[2].holding.features.size == size) + " " + (_this2.shelves[2].holding.features.food != null) + " " + (_this2.shelves[2].holding.features.food == food) + " " + (_this2.shelves[2].holding.features.hazardous != null) + " " + (_this2.shelves[2].holding.features.hazardous == hazardous) + " " + (_this2.shelves[2].holding.features.color != null) + " " + (_this2.shelves[2].holding.features.color == color));
+	                    if (predicted_class == "small") {
 	                        shelfposx = _this2.shelves[0].x - 50;
 	                        shelfposy = _this2.shelves[0].y;
 
-	                        if (_this2.shelves[0].holding.size != null && _this2.shelves[0].holding.size == size && _this2.shelves[0].holding.food != null && _this2.shelves[0].holding.food == food && _this2.shelves[0].holding.hazardous != null && _this2.shelves[0].holding.hazardous == hazardous && _this2.shelves[0].holding.color != null && _this2.shelves[0].holding.color == color && _this2.shelves[0].holding.refrigerated != null && _this2.shelves[0].holding.refrigerated == refrigerated) {
+	                        if (_this2.shelves[0].holding.features.size != null && _this2.shelves[0].holding.features.size == size && _this2.shelves[0].holding.features.food != null && _this2.shelves[0].holding.features.food == food && _this2.shelves[0].holding.features.hazardous != null && _this2.shelves[0].holding.features.hazardous == hazardous && _this2.shelves[0].holding.features.color != null && _this2.shelves[0].holding.features.color == color) {
 	                            _this2.body.carrying = _this2.shelves[0].holding;
 	                            _this2.loadTexture("forkliftFull", 0);
 	                            document.getElementById("error").innerHTML = "FOUND PACKAGE!";
 	                        } else {
 	                            document.getElementById("error").innerHTML = "PACKAGE NOT FOUND!";
 	                        }
-	                    } else if (predicted_class == "hazard") {
+	                    } else if (predicted_class == "big") {
 	                        shelfposx = _this2.shelves[1].x - 50;
 	                        shelfposy = _this2.shelves[1].y;
 
-	                        if (_this2.shelves[1].holding.size != null && _this2.shelves[1].holding.size == size && _this2.shelves[1].holding.food != null && _this2.shelves[1].holding.food == food && _this2.shelves[1].holding.hazardous != null && _this2.shelves[1].holding.hazardous == hazardous && _this2.shelves[1].holding.color != null && _this2.shelves[1].holding.color == color && _this2.shelves[1].holding.refrigerated != null && _this2.shelves[1].holding.refrigerated == refrigerated) {
+	                        if (_this2.shelves[1].holding.features.size != null && _this2.shelves[1].holding.features.size == size && _this2.shelves[1].holding.features.food != null && _this2.shelves[1].holding.features.food == food && _this2.shelves[1].holding.features.hazardous != null && _this2.shelves[1].holding.features.hazardous == hazardous && _this2.shelves[1].holding.features.color != null && _this2.shelves[1].holding.features.color == color) {
 	                            _this2.body.carrying = _this2.shelves[1].holding;
 	                            _this2.loadTexture("forkliftFull", 0);
 	                            document.getElementById("error").innerHTML = "FOUND PACKAGE!";
 	                        } else {
 	                            document.getElementById("error").innerHTML = "PACKAGE NOT FOUND!";
 	                        }
-	                    } else if (predicted_class == "big") {
+	                    } else if (predicted_class == "hazard") {
 	                        shelfposx = _this2.shelves[2].x - 50;
 	                        shelfposy = _this2.shelves[2].y;
 
-	                        if (_this2.shelves[2].holding.size != null && _this2.shelves[2].holding.size == size && _this2.shelves[2].holding.food != null && _this2.shelves[2].holding.food == food && _this2.shelves[2].holding.hazardous != null && _this2.shelves[2].holding.hazardous == hazardous && _this2.shelves[2].holding.color != null && _this2.shelves[2].holding.color == color && _this2.shelves[2].holding.refrigerated != null && _this2.shelves[2].holding.refrigerated == refrigerated) {
+	                        if (_this2.shelves[2].holding.features.size != null && _this2.shelves[2].holding.features.size == size && _this2.shelves[2].holding.features.food != null && _this2.shelves[2].holding.features.food == food && _this2.shelves[2].holding.features.hazardous != null && _this2.shelves[2].holding.features.hazardous == hazardous && _this2.shelves[2].holding.features.color != null && _this2.shelves[2].holding.features.color == color) {
 	                            _this2.body.carrying = _this2.shelves[2].holding;
 	                            _this2.loadTexture("forkliftFull", 0);
 	                            document.getElementById("error").innerHTML = "FOUND PACKAGE!";
 	                        } else {
 	                            document.getElementById("error").innerHTML = "PACKAGE NOT FOUND!";
 	                        }
-	                    } else if (predicted_class == "small") {
+	                    } else if (predicted_class == "food") {
 	                        shelfposx = _this2.shelves[3].x - 50;
 	                        shelfposy = _this2.shelves[3].y;
 
-	                        if (_this2.shelves[3].holding.size != null && _this2.shelves[3].holding.size == size && _this2.shelves[3].holding.food != null && _this2.shelves[3].holding.food == food && _this2.shelves[3].holding.hazardous != null && _this2.shelves[3].holding.hazardous == hazardous && _this2.shelves[3].holding.color != null && _this2.shelves[3].holding.color == color && _this2.shelves[3].holding.refrigerated != null && _this2.shelves[3].holding.refrigerated == refrigerated) {
+	                        if (_this2.shelves[3].holding.features.size != null && _this2.shelves[3].holding.features.size == size && _this2.shelves[3].holding.features.food != null && _this2.shelves[3].holding.features.food == food && _this2.shelves[3].holding.features.hazardous != null && _this2.shelves[3].holding.features.hazardous == hazardous && _this2.shelves[3].holding.features.color != null && _this2.shelves[3].holding.features.color == color) {
 	                            _this2.body.carrying = _this2.shelves[3].holding;
 	                            _this2.loadTexture("forkliftFull", 0);
 	                            document.getElementById("error").innerHTML = "FOUND PACKAGE!";
@@ -10365,6 +10368,10 @@
 	                    var _forklift_y = Math.ceil(this.body.x / 20) - 1;
 	                    var _forklift_x = Math.ceil(this.body.y / 20) - 1;
 	                    // console.log("punkt x: "+punkt.x+" y: "+punkt.y+" wozek: "+forklift_x+" "+forklift_y);
+	                    if (punkt.y == _forklift_x && punkt.x == _forklift_y) {
+	                        this.destinationReached = true;
+	                    }
+
 	                    if (punkt.y > _forklift_x) {
 	                        this.body.moveDown(1139);
 	                        // console.log('dol');
@@ -10387,6 +10394,17 @@
 	                            this.scale.x = -1;
 	                        }
 	                    }
+	                } else {
+	                    var punkti = {};
+	                    punkti.x = Math.ceil(700 / 20) - 1;
+	                    punkti.y = Math.ceil(150 / 20) - 1;
+	                    var _end = this.graph.grid[punkti.x][punkti.y];
+	                    console.log("jestem");
+	                    var _forklift_x2 = Math.ceil(this.body.x / 20) - 1;
+	                    var _forklift_y2 = Math.ceil(this.body.y / 20) - 1;
+	                    var _start = this.graph.grid[_forklift_x2][_forklift_y2];
+	                    this.result = astar.search(this.graph, _start, _end);
+	                    punkt = this.result.shift();
 	                }
 	            }
 
@@ -10399,25 +10417,25 @@
 	                    if (_punkt == "#") {
 	                        this.dropPackage();
 	                    } else {
-	                        var _forklift_y2 = Math.ceil(this.body.x / 20) - 1;
-	                        var _forklift_x2 = Math.ceil(this.body.y / 20) - 1;
+	                        var _forklift_y3 = Math.ceil(this.body.x / 20) - 1;
+	                        var _forklift_x3 = Math.ceil(this.body.y / 20) - 1;
 	                        // console.log("punkt x: "+punkt.x+" y: "+punkt.y+" wozek: "+forklift_x+" "+forklift_y);
-	                        if (_punkt.y > _forklift_x2) {
+	                        if (_punkt.y > _forklift_x3) {
 	                            this.body.moveDown(1205);
 	                            //console.log('dol');
 	                        }
-	                        if (_punkt.x > _forklift_y2) {
+	                        if (_punkt.x > _forklift_y3) {
 	                            this.body.moveRight(1202);
 	                            //console.log('prawo');
 	                            if (this.scale.x == -1) {
 	                                this.scale.x = 1;
 	                            }
 	                        }
-	                        if (_punkt.y < _forklift_x2) {
+	                        if (_punkt.y < _forklift_x3) {
 	                            this.body.moveUp(1205);
 	                            //console.log('gora');
 	                        }
-	                        if (_punkt.x < _forklift_y2) {
+	                        if (_punkt.x < _forklift_y3) {
 	                            this.body.moveLeft(1202);
 	                            //console.log('lewo');
 	                            if (this.scale.x == 1) {
@@ -10426,6 +10444,9 @@
 	                        }
 	                    }
 	                }
+	            }
+	            if (this.game.input.keyboard.isDown(_phaser2.default.Keyboard.Q)) {
+	                console.log(this.shelves);
 	            }
 	        }
 	    }, {
@@ -10457,6 +10478,9 @@
 	            this.loadTexture('forkliftEmpty', 0);
 	            this.full = false;
 	            //this.body.carrying = null;
+	            this.allTheShelves[0].holding = this.carrying;
+	            console.log(this.allTheShelves[0].holding);
+	            this.allTheShelves.shift();
 
 	            this.body.setCollisionGroup(this.collides.playerCollisionGroup);
 	            this.body.collides(this.collides.packageCollisionGroup, this.hitPackage, this);

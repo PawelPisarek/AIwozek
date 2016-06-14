@@ -17,6 +17,7 @@ export default class extends Phaser.Sprite {
 
         this.packagesCoords=packageArr;
         this.racksCoords=rackArr;
+		this.destinationReached = false;
 
         this.game.physics.p2.enable(this, false);
         this.collides = collides;
@@ -520,10 +521,10 @@ export default class extends Phaser.Sprite {
         console.log(this.body.moveUp);
 
     }
-
     update(){
 
         this.body.setZeroVelocity();
+		
 
         if (this.game.input.keyboard.isDown(Phaser.Keyboard.LEFT)) {
             this.body.moveLeft(200);
@@ -561,7 +562,7 @@ export default class extends Phaser.Sprite {
             var predicted_class = this.decisionTree.predict(chosenpack);
             console.log(predicted_class);
             document.getElementById("gettingit").value=0;
-
+			this.destinationReached = false
 
 			console.log((this.shelves[2].holding.features.size!= null) +" "+( this.shelves[2].holding.features.size == size )+" "+( this.shelves[2].holding.features.food!= null )+" "+ (this.shelves[2].holding.features.food == food )+" "+ (this.shelves[2].holding.features.hazardous!= null) +" "+ (this.shelves[2].holding.features.hazardous == hazardous) +" "+ (this.shelves[2].holding.features.color!= null) +" "+ (this.shelves[2].holding.features.color == color));
 			if(predicted_class == "small"){
@@ -659,13 +660,20 @@ export default class extends Phaser.Sprite {
 
         if(this.game.input.keyboard.isDown(Phaser.Keyboard.P))
         {
-            let punkt = this.result.shift();
+			let punkt = this.result.shift();
+
+            
 
             if(punkt != null)
             {
                 let forklift_y = Math.ceil(this.body.x / 20)-1;
                 let forklift_x = Math.ceil(this.body.y / 20)-1;
                 // console.log("punkt x: "+punkt.x+" y: "+punkt.y+" wozek: "+forklift_x+" "+forklift_y);
+				if (punkt.y == forklift_x && punkt.x == forklift_y) {
+					this.destinationReached = true;
+
+                }
+
                 if (punkt.y > forklift_x) {
                     this.body.moveDown(1139);
                     // console.log('dol');
@@ -690,6 +698,19 @@ export default class extends Phaser.Sprite {
                 }
 
             }
+			else
+			{
+					let punkti ={};
+					punkti.x = Math.ceil(700 / 20)-1;
+					punkti.y = Math.ceil(150 / 20)-1;
+					let end = this.graph.grid[punkti.x][punkti.y];
+					console.log("jestem");
+					let forklift_x = Math.ceil(this.body.x / 20)-1;
+					let forklift_y = Math.ceil(this.body.y / 20)-1;
+					let start = this.graph.grid[forklift_x][forklift_y];
+					this.result = astar.search(this.graph, start, end);
+					punkt=this.result.shift();
+			}
 
 
         }
