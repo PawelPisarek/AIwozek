@@ -561,6 +561,8 @@ export default class extends Phaser.Sprite {
 
             var predicted_class = this.decisionTree.predict(chosenpack);
             console.log(predicted_class);
+            console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+            console.log("beeeeeeeeeee");
             document.getElementById("gettingit").value=0;
 			this.destinationReached = false
 
