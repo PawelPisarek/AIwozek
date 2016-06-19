@@ -2,109 +2,45 @@ export class CandidateElimination {
 
     constructor() {
         this.numberOfProperties = 3;
-        // let properties = ["red", "labelled", "middleweight", "solid"];
-        // let hazardBigFridgeArea = ["?", "labelled", "?", "?"];
-        // let hazardSmallFridge = ["brown", "wooden", "?", "?"];
-        // if (this.hypothesisDoesCover(properties, hazardBigFridgeArea)) {
-        //     console.log("Brown");
-        // }
-        // if (this.hypothesisDoesCover(properties, hazardSmallFridge)) {
-        //     console.log("Red");
-        // }
         let bigAreaLearningSet = [
 
-            {key:   ["big", "no", "no"], value: true},
-            {key:   ["big", "no", "true"], value: false}
+            {key:   ["big", "no", "no"], value: true}
         ];
 
-        let prepareBigFridgeAreaLearningSet = [
-            {key: ["big", "yes", "no"], value: true},
-            {key: ["big", "no", "no"], value: false}
+        let smallAreaLearningSet = [
+            {key:  ["small", "no", "no"], value: true}
         ];
 
-        let prepareHazardBigLearningSet = [
-            {key: ["big", "no", "yes"], value: true},
-            {key: ["big", "no", "no"], value: false}
+        let foodAreaLearningSet = [
+
+            {key: ["small", "no", "yes"], value: true}
         ];
 
-        let prepareSmallFridgeAreaLearningSet = [
-            {key:  ["small", "yes", "no"], value: true},
-            {key:  ["small", "yes", "yes"], value: false}
+        let hazardLearningSet = [
+            {key:  ["small", "yes", "no"], value: true}
         ];
 
-        let prepareSmallAreaLearningSet = [
-            {key:  ["small", "no", "no"], value: true},
-            {key:   ["big", "no", "no"], value: false}
-        ];
-
-        let hazardBigFridgeAreaLearningSet = [
-            {key: ["big", "yes", "yes"], value: true},
-            {key: ["small", "yes", "yes"], value: false}
-        ];
-
-
-        let hazardSmallAreaLearningSet = [
-
-            {key: ["small", "no", "yes"], value: true},
-            {key: ["big", "no", "yes"], value: false}
-        ];
-
-
-        let hazardSmallFridgeAreaLearningSet = [
-
-            {key: ["small", "yes", "yes"], value: true},
-            {key: ["big", "yes", "yes"], value: false}
-        ];
-
-        // console.log(this.lookup(prepareBlackAreaLearningSet, ["gray", "metal", "heavy", "solid"]));
-
-
-        // let bigArea = this.learnArea(prepareBlackAreaLearningSet);
-        // console.log("Black area ", bigArea);
         this.bigArea = this.learnArea(bigAreaLearningSet);
-        this.hazardBigFridgeArea = this.learnArea(hazardBigFridgeAreaLearningSet);
-        this.bigFridgeArea = this.learnArea(prepareBigFridgeAreaLearningSet);
-        this.smallFridgeArea = this.learnArea(prepareSmallFridgeAreaLearningSet);
-        this.smallArea = this.learnArea(prepareSmallAreaLearningSet);
-        this.hazardBigArea= this.learnArea(prepareHazardBigLearningSet);
-        this.hazardSmallFridge = this.learnArea(hazardSmallFridgeAreaLearningSet);
-        this.hazardSmallArea = this.learnArea(hazardSmallAreaLearningSet);
+        this.smallArea = this.learnArea(smallAreaLearningSet);
+        this.foodArea = this.learnArea(foodAreaLearningSet);
+        this.hazardArea = this.learnArea(hazardLearningSet);
+
 
 
         console.log("big area ", this.bigArea);
-        console.log("hazard-big-fridge area ", this.hazardBigFridgeArea);
-        console.log("bigFridgeArea area ", this.bigFridgeArea);
-        console.log("smallFridgeArea area ", this.smallFridgeArea);
         console.log("smallArea area ", this.smallArea);
-        console.log("hazardBigArea area ", this.hazardBigArea);
-        console.log("hazardSmallFridge area ", this.hazardSmallFridge);
-        console.log("hazardSmallArea area ", this.hazardSmallArea);
-
-
-        var training_data = [
-            {"size":"big", "fridge":"yes", "hazard":"no", "shelf":"big-fridge"},
-            {"size":"big", "fridge":"no", "hazard":"no", "shelf":"big"},
-            {"size":"small", "fridge":"yes", "hazard":"no", "shelf":"small-fridge"},
-            {"size":"small", "fridge":"no", "hazard":"no", "shelf":"small"},
-            {"size":"big", "fridge":"yes", "hazard":"yes","shelf":"hazard-big-fridge"},
-            {"size":"big", "fridge":"no", "hazard":"yes", "shelf":"hazard-big"},
-            {"size":"small", "fridge":"yes", "hazard":"yes", "shelf":"hazard-small-fridge"},
-            {"size":"small", "fridge":"no", "hazard":"yes", "shelf":"hazard-small"}
-        ];
+        console.log("foodArea area ", this.foodArea);
+        console.log("hazardArea area ", this.hazardArea);
 
 
 
-
-        let big = ["big", "no", "no"];
-        let hazardbigfridge = ["big", "yes", "yes"];
-        let bigFridge = ["big", "yes", "no"];
-        let smallFridge = ["small", "yes", "no"];
+        let food = ["small", "no", "yes"];
         let small = ["small", "no", "no"];
-        let hazardBig = ["big", "no", "yes"];
-        let hazardSmallFridge = ["small", "yes", "yes"];
-        let hazardSmall = ["small", "no", "yes"];
+        let big = ["big", "no", "no"];
+        let hazard = ["small", "yes", "no"];
 
-        this.findDestinationPlace(hazardSmall);
+
+        this.findDestinationPlace( hazard);
 
 
     }
@@ -112,14 +48,10 @@ export class CandidateElimination {
     findDestinationPlace(properties) {
         console.log("Current case properties: " + properties);
 
-        if (this.hypothesisDoesCover(properties, this.bigArea)) console.log("big");
-        if (this.hypothesisDoesCover(properties, this.hazardBigFridgeArea)) console.log("hazard-big-fridge");
-        if (this.hypothesisDoesCover(properties, this.bigFridgeArea)) console.log("bigFridge");
-        if (this.hypothesisDoesCover(properties, this.smallFridgeArea)) console.log("smallFridge");
+        if (this.hypothesisDoesCover(properties, this.foodArea)) console.log("food");
         if (this.hypothesisDoesCover(properties, this.smallArea)) console.log("small");
-        if (this.hypothesisDoesCover(properties, this.hazardBigArea)) console.log("hazardBig");
-        if (this.hypothesisDoesCover(properties, this.hazardSmallFridge)) console.log("hazardSmallFridge");
-        if (this.hypothesisDoesCover(properties, this.hazardSmallArea)) console.log("hazardSmall");
+        if (this.hypothesisDoesCover(properties, this.bigArea)) console.log("big");
+        if (this.hypothesisDoesCover(properties, this.hazardArea)) console.log("hazard");
     }
 
 
