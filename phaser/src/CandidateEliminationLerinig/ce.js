@@ -4,20 +4,36 @@ export class CandidateElimination {
         this.numberOfProperties = 4;
         let bigAreaLearningSet = [
 
-            {key: ["blue", "yes", "no", "huge"], value: true}
+            {key: ["blue", "yes", "no", "huge"], value: true},
+            {key: ["black", "yes", "yes", "huge"], value: true},
+            {key: ["green", "yes", "no", "huge"], value: true},
+            {key: ["green", "no", "no", "small"], value: false},
+            {key: ["green", "no", "no", "tiny"], value: false}
         ];
 
         let smallAreaLearningSet = [
-            {key: ["blue", "no", "no", "tiny"], value: true}
+            {key: ["green", "yes", "no", "tiny"], value: true},
+            {key: ["blue", "no", "no", "tiny"], value: true},
+            {key: ["black", "yes", "no", "tiny"], value: true},
+            {key: ["green", "no", "no", "small"], value: false},
+            {key: ["black", "yes", "no", "huge"], value: false},
         ];
 
         let foodAreaLearningSet = [
 
-            {key: ["blue", "no", "no", "huge"], value: true}
+            {key: ["black", "no", "yes", "huge"], value: true},
+            {key: ["green", "no", "yes", "huge"], value: true},
+            {key: ["blue", "no", "no", "huge"], value: true},
+            {key: ["green", "yes", "no", "small"], value: false},
+            {key: ["black", "yes", "yes", "tiny"], value: false}
         ];
 
         let hazardLearningSet = [
-            {key: ["red", "no", "yes", "tiny"], value: true}
+            {key: ["red", "no", "yes", "huge"], value: true},
+            {key: ["red", "no", "no", "small"], value: true},
+            {key: ["blue", "no", "yes", "tiny"], value: false},
+            {key: ["green", "no", "yes", "tiny"], value: false},
+            {key: ["black", "no", "yes", "tiny"], value: false} 
         ];
 
         this.bigArea = this.learnArea(bigAreaLearningSet);
@@ -38,7 +54,7 @@ export class CandidateElimination {
         let hazard = ["red", "no", "yes", "tiny"];
 
 
-        this.findDestinationPlace( big);
+        this.findDestinationPlace( hazard);
 
 
     }

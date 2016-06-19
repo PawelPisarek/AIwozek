@@ -9271,13 +9271,13 @@
 	        _classCallCheck(this, CandidateElimination);
 
 	        this.numberOfProperties = 4;
-	        var bigAreaLearningSet = [{ key: ["blue", "yes", "no", "huge"], value: true }];
+	        var bigAreaLearningSet = [{ key: ["blue", "yes", "no", "huge"], value: true }, { key: ["black", "yes", "yes", "huge"], value: true }, { key: ["green", "yes", "no", "huge"], value: true }, { key: ["green", "no", "no", "small"], value: false }, { key: ["green", "no", "no", "tiny"], value: false }];
 
-	        var smallAreaLearningSet = [{ key: ["blue", "no", "no", "tiny"], value: true }];
+	        var smallAreaLearningSet = [{ key: ["green", "yes", "no", "tiny"], value: true }, { key: ["blue", "no", "no", "tiny"], value: true }, { key: ["black", "yes", "no", "tiny"], value: true }, { key: ["green", "no", "no", "small"], value: false }, { key: ["black", "yes", "no", "huge"], value: false }];
 
-	        var foodAreaLearningSet = [{ key: ["blue", "no", "no", "huge"], value: true }];
+	        var foodAreaLearningSet = [{ key: ["black", "no", "yes", "huge"], value: true }, { key: ["green", "no", "yes", "huge"], value: true }, { key: ["blue", "no", "no", "huge"], value: true }, { key: ["green", "yes", "no", "small"], value: false }, { key: ["black", "yes", "yes", "tiny"], value: false }];
 
-	        var hazardLearningSet = [{ key: ["red", "no", "yes", "tiny"], value: true }];
+	        var hazardLearningSet = [{ key: ["red", "no", "yes", "huge"], value: true }, { key: ["red", "no", "no", "small"], value: true }, { key: ["blue", "no", "yes", "tiny"], value: false }, { key: ["green", "no", "yes", "tiny"], value: false }, { key: ["black", "no", "yes", "tiny"], value: false }];
 
 	        this.bigArea = this.learnArea(bigAreaLearningSet);
 	        this.smallArea = this.learnArea(smallAreaLearningSet);
@@ -9294,7 +9294,7 @@
 	        var food = ["blue", "no", "no", "huge"];
 	        var hazard = ["red", "no", "yes", "tiny"];
 
-	        this.findDestinationPlace(big);
+	        this.findDestinationPlace(hazard);
 	    }
 
 	    _createClass(CandidateElimination, [{
