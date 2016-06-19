@@ -9270,14 +9270,14 @@
 	    function CandidateElimination() {
 	        _classCallCheck(this, CandidateElimination);
 
-	        this.numberOfProperties = 3;
-	        var bigAreaLearningSet = [{ key: ["big", "no", "no"], value: true }];
+	        this.numberOfProperties = 4;
+	        var bigAreaLearningSet = [{ key: ["blue", "yes", "no", "huge"], value: true }];
 
-	        var smallAreaLearningSet = [{ key: ["small", "no", "no"], value: true }];
+	        var smallAreaLearningSet = [{ key: ["blue", "no", "no", "tiny"], value: true }];
 
-	        var foodAreaLearningSet = [{ key: ["small", "no", "yes"], value: true }];
+	        var foodAreaLearningSet = [{ key: ["blue", "no", "no", "huge"], value: true }];
 
-	        var hazardLearningSet = [{ key: ["small", "yes", "no"], value: true }];
+	        var hazardLearningSet = [{ key: ["red", "no", "yes", "tiny"], value: true }];
 
 	        this.bigArea = this.learnArea(bigAreaLearningSet);
 	        this.smallArea = this.learnArea(smallAreaLearningSet);
@@ -9289,12 +9289,12 @@
 	        console.log("foodArea area ", this.foodArea);
 	        console.log("hazardArea area ", this.hazardArea);
 
-	        var food = ["small", "no", "yes"];
-	        var small = ["small", "no", "no"];
-	        var big = ["big", "no", "no"];
-	        var hazard = ["small", "yes", "no"];
+	        var big = ["blue", "yes", "no", "huge"];
+	        var small = ["blue", "no", "no", "tiny"];
+	        var food = ["blue", "no", "no", "huge"];
+	        var hazard = ["red", "no", "yes", "tiny"];
 
-	        this.findDestinationPlace(hazard);
+	        this.findDestinationPlace(big);
 	    }
 
 	    _createClass(CandidateElimination, [{

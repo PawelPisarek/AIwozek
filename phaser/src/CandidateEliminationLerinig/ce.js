@@ -1,23 +1,23 @@
 export class CandidateElimination {
 
     constructor() {
-        this.numberOfProperties = 3;
+        this.numberOfProperties = 4;
         let bigAreaLearningSet = [
 
-            {key:   ["big", "no", "no"], value: true}
+            {key: ["blue", "yes", "no", "huge"], value: true}
         ];
 
         let smallAreaLearningSet = [
-            {key:  ["small", "no", "no"], value: true}
+            {key: ["blue", "no", "no", "tiny"], value: true}
         ];
 
         let foodAreaLearningSet = [
 
-            {key: ["small", "no", "yes"], value: true}
+            {key: ["blue", "no", "no", "huge"], value: true}
         ];
 
         let hazardLearningSet = [
-            {key:  ["small", "yes", "no"], value: true}
+            {key: ["red", "no", "yes", "tiny"], value: true}
         ];
 
         this.bigArea = this.learnArea(bigAreaLearningSet);
@@ -26,21 +26,19 @@ export class CandidateElimination {
         this.hazardArea = this.learnArea(hazardLearningSet);
 
 
-
         console.log("big area ", this.bigArea);
         console.log("smallArea area ", this.smallArea);
         console.log("foodArea area ", this.foodArea);
         console.log("hazardArea area ", this.hazardArea);
 
 
+        let big = ["blue", "yes", "no", "huge"];
+        let small = ["blue", "no", "no", "tiny"];
+        let food = ["blue", "no", "no", "huge"];
+        let hazard = ["red", "no", "yes", "tiny"];
 
-        let food = ["small", "no", "yes"];
-        let small = ["small", "no", "no"];
-        let big = ["big", "no", "no"];
-        let hazard = ["small", "yes", "no"];
 
-
-        this.findDestinationPlace( hazard);
+        this.findDestinationPlace( big);
 
 
     }
