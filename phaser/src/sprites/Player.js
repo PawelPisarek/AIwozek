@@ -134,7 +134,7 @@ export default class extends Phaser.Sprite {
         graph[8][6]=0;
         graph[8][7]=0;
         graph[8][8]=0;
-        let ce = new CandidateElimination();
+
 
         var minPath=[];
         minPath.push(0);
@@ -562,9 +562,8 @@ export default class extends Phaser.Sprite {
             var chosenpack = {size: size, color: color, "refrigerated": refrigerated, hazardous: hazardous, food: food};
 
             var predicted_class = this.decisionTree.predict(chosenpack);
+            let ce = new CandidateElimination();
             console.log(predicted_class);
-            console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
-            console.log("beeeeeeeeeee");
             document.getElementById("gettingit").value=0;
 			this.destinationReached = false
 
