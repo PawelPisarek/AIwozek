@@ -560,12 +560,24 @@ export default class extends Phaser.Sprite {
             var hazardous =document.getElementById("hazardous").value;
             var food =document.getElementById("food").value;
             var chosenpack = {size: size, color: color, "refrigerated": refrigerated, hazardous: hazardous, food: food};
+            var chosenpack2 = {size: size, color: color, "refrigerated": refrigerated, hazardous: hazardous, food: food};
 
             var predicted_class = this.decisionTree.predict(chosenpack);
+            var predicted_class2 = this.decisionTree.predict(chosenpack2);
+            var ch = [color, hazardous, food, size];
+
             let ce = new CandidateElimination();
-            console.log(predicted_class);
+            // console.log(ch,"dawne chosenpack");
+            // var predicted_class = ce.findDestinationPlace(ch);
+            var predicted_class3 = ce.findDestinationPlace(ch);
+            // console.log(chosenpack,predicted_class);
+            // console.log(ch,chosenpack2);
+            console.log(predicted_class3, predicted_class2, "jeśli te dwa słowa się różnią to nie są te same drzewa");
+
+
+            // console.log(predicted_class);
             document.getElementById("gettingit").value=0;
-			this.destinationReached = false
+            this.destinationReached = false
 
 			console.log((this.shelves[2].holding.features.size!= null) +" "+( this.shelves[2].holding.features.size == size )+" "+( this.shelves[2].holding.features.food!= null )+" "+ (this.shelves[2].holding.features.food == food )+" "+ (this.shelves[2].holding.features.hazardous!= null) +" "+ (this.shelves[2].holding.features.hazardous == hazardous) +" "+ (this.shelves[2].holding.features.color!= null) +" "+ (this.shelves[2].holding.features.color == color));
 			if(predicted_class == "small"){

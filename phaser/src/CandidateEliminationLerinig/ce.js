@@ -4,16 +4,16 @@ export class CandidateElimination {
         this.numberOfProperties = 4;
         let bigAreaLearningSet = [
 
-            {key: ["blue", "yes", "no", "huge"], value: true},
-            {key: ["black", "yes", "yes", "huge"], value: true},
             {key: ["green", "yes", "no", "huge"], value: true},
-            {key: ["green", "no", "no", "small"], value: false},
-            {key: ["green", "no", "no", "tiny"], value: false}
+            {key: ["green", "yes", "yes", "huge"], value: true},
+            {key: ["green", "yes", "no", "huge"], value: true},
+            {key: ["black", "no", "no", "small"], value: false},
+            {key: ["blue", "no", "no", "tiny"], value: false}
         ];
 
         let smallAreaLearningSet = [
-            {key: ["green", "yes", "no", "tiny"], value: true},
-            {key: ["blue", "no", "no", "tiny"], value: true},
+            {key: ["black", "yes", "no", "tiny"], value: true},
+            {key: ["black", "no", "no", "tiny"], value: true},
             {key: ["black", "yes", "no", "tiny"], value: true},
             {key: ["green", "no", "no", "small"], value: false},
             {key: ["black", "yes", "no", "huge"], value: false},
@@ -54,7 +54,7 @@ export class CandidateElimination {
         let hazard = ["red", "no", "yes", "tiny"];
 
 
-        this.findDestinationPlace( hazard);
+        // this.findDestinationPlace( hazard);
 
 
     }
@@ -62,10 +62,22 @@ export class CandidateElimination {
     findDestinationPlace(properties) {
         console.log("Current case properties: " + properties);
 
-        if (this.hypothesisDoesCover(properties, this.foodArea)) console.log("food");
-        if (this.hypothesisDoesCover(properties, this.smallArea)) console.log("small");
-        if (this.hypothesisDoesCover(properties, this.bigArea)) console.log("big");
-        if (this.hypothesisDoesCover(properties, this.hazardArea)) console.log("hazard");
+        if (this.hypothesisDoesCover(properties, this.foodArea)) {
+            console.log("food",properties);
+            return "food";
+        }
+        if (this.hypothesisDoesCover(properties, this.smallArea)) {
+            console.log("small",properties);
+            return "small";
+        }
+        if (this.hypothesisDoesCover(properties, this.bigArea)) {
+            console.log("big",properties);
+            return "big";
+        }
+        if (this.hypothesisDoesCover(properties, this.hazardArea)) {
+            console.log("hazard",properties);
+            return "hazard";
+        }
     }
 
 

@@ -9725,7 +9725,11 @@
 	                var hazardous;
 	                var food;
 	                var chosenpack;
+	                var chosenpack2;
 	                var predicted_class;
+	                var predicted_class2;
+	                var ch;
+	                var predicted_class3;
 	                var shelfposx;
 	                var shelfposy;
 	                var shelfposx;
@@ -9744,10 +9748,22 @@
 	                    hazardous = document.getElementById("hazardous").value;
 	                    food = document.getElementById("food").value;
 	                    chosenpack = { size: size, color: color, "refrigerated": refrigerated, hazardous: hazardous, food: food };
+	                    chosenpack2 = { size: size, color: color, "refrigerated": refrigerated, hazardous: hazardous, food: food };
 	                    predicted_class = _this2.decisionTree.predict(chosenpack);
+	                    predicted_class2 = _this2.decisionTree.predict(chosenpack2);
+	                    ch = [color, hazardous, food, size];
+
 
 	                    var ce = new _ce.CandidateElimination();
-	                    console.log(predicted_class);
+	                    // console.log(ch,"dawne chosenpack");
+	                    // var predicted_class = ce.findDestinationPlace(ch);
+	                    predicted_class3 = ce.findDestinationPlace(ch);
+	                    // console.log(chosenpack,predicted_class);
+	                    // console.log(ch,chosenpack2);
+
+	                    console.log(predicted_class3, predicted_class2, "jeśli te dwa słowa się różnią to nie są te same drzewa");
+
+	                    // console.log(predicted_class);
 	                    document.getElementById("gettingit").value = 0;
 	                    _this2.destinationReached = false;
 
@@ -10010,9 +10026,9 @@
 	        _classCallCheck(this, CandidateElimination);
 
 	        this.numberOfProperties = 4;
-	        var bigAreaLearningSet = [{ key: ["blue", "yes", "no", "huge"], value: true }, { key: ["black", "yes", "yes", "huge"], value: true }, { key: ["green", "yes", "no", "huge"], value: true }, { key: ["green", "no", "no", "small"], value: false }, { key: ["green", "no", "no", "tiny"], value: false }];
+	        var bigAreaLearningSet = [{ key: ["green", "yes", "no", "huge"], value: true }, { key: ["green", "yes", "yes", "huge"], value: true }, { key: ["green", "yes", "no", "huge"], value: true }, { key: ["black", "no", "no", "small"], value: false }, { key: ["blue", "no", "no", "tiny"], value: false }];
 
-	        var smallAreaLearningSet = [{ key: ["green", "yes", "no", "tiny"], value: true }, { key: ["blue", "no", "no", "tiny"], value: true }, { key: ["black", "yes", "no", "tiny"], value: true }, { key: ["green", "no", "no", "small"], value: false }, { key: ["black", "yes", "no", "huge"], value: false }];
+	        var smallAreaLearningSet = [{ key: ["black", "yes", "no", "tiny"], value: true }, { key: ["black", "no", "no", "tiny"], value: true }, { key: ["black", "yes", "no", "tiny"], value: true }, { key: ["green", "no", "no", "small"], value: false }, { key: ["black", "yes", "no", "huge"], value: false }];
 
 	        var foodAreaLearningSet = [{ key: ["black", "no", "yes", "huge"], value: true }, { key: ["green", "no", "yes", "huge"], value: true }, { key: ["blue", "no", "no", "huge"], value: true }, { key: ["green", "yes", "no", "small"], value: false }, { key: ["black", "yes", "yes", "tiny"], value: false }];
 
@@ -10033,7 +10049,7 @@
 	        var food = ["blue", "no", "no", "huge"];
 	        var hazard = ["red", "no", "yes", "tiny"];
 
-	        this.findDestinationPlace(hazard);
+	        // this.findDestinationPlace( hazard);
 	    }
 
 	    _createClass(CandidateElimination, [{
@@ -10041,10 +10057,22 @@
 	        value: function findDestinationPlace(properties) {
 	            console.log("Current case properties: " + properties);
 
-	            if (this.hypothesisDoesCover(properties, this.foodArea)) console.log("food");
-	            if (this.hypothesisDoesCover(properties, this.smallArea)) console.log("small");
-	            if (this.hypothesisDoesCover(properties, this.bigArea)) console.log("big");
-	            if (this.hypothesisDoesCover(properties, this.hazardArea)) console.log("hazard");
+	            if (this.hypothesisDoesCover(properties, this.foodArea)) {
+	                console.log("food", properties);
+	                return "food";
+	            }
+	            if (this.hypothesisDoesCover(properties, this.smallArea)) {
+	                console.log("small", properties);
+	                return "small";
+	            }
+	            if (this.hypothesisDoesCover(properties, this.bigArea)) {
+	                console.log("big", properties);
+	                return "big";
+	            }
+	            if (this.hypothesisDoesCover(properties, this.hazardArea)) {
+	                console.log("hazard", properties);
+	                return "hazard";
+	            }
 	        }
 	    }, {
 	        key: "lookup",
